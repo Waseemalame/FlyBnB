@@ -1,0 +1,107 @@
+.host-form{
+  display: flex;
+  flex-direction: column;
+  margin: 20px 150px;
+  text-align: center;
+  /* overflow-y: scroll; */
+  /* max-height: fit-content; */
+
+  /* float: right; */
+  position: absolute;
+  width: 25vw;
+  left: 50vw;
+
+}
+.host-form label{
+  display: flex;
+  flex-direction: column;
+  /* place-content: center; */
+  margin-top: 25px;
+}
+.all-amenities{
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 10px;
+  justify-content: center;
+}
+
+.amenity-div{
+  width: 90px;
+  height: 60px;
+  border: gray solid 1px;
+  border-radius: 5px;
+  text-align: center;
+  padding: 5px;
+  margin: 5px;
+  line-height: 10px;
+  transition-duration: 400ms;
+  transition-timing-function: ease;
+  /* animation: forwards; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: space-between; */
+  position: relative;
+}
+#amenity-string{
+  /* position: absolute; */
+  /* bottom: 3px; */
+  margin-top: 8px;
+}
+.amenity-div:hover{
+  outline: 1px solid gold;
+  /* outline: 1px solid rgb(25, 25, 166); */
+  /* margin-bottom: 5px; */
+
+  padding: 8px;
+  /* transition-delay: 1s; */
+  /* transform: rotate(); */
+  /* background: linear-gradient(-25deg, rgb(25, 25, 166), rgba(218, 28, 60, 0.977)); */
+
+}
+
+.selected{
+  /* background-color: blue; */
+  /* background-image: linear-gradient(50deg, rgba(35, 35, 150, 0.26), rgba(233, 47, 78, 0.092)); */
+  /* color: white; */
+  outline: 1px solid gold;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+
+  /* margin: 1000px; */
+}
+
+.image-input{
+  margin-top: 20px;
+}
+form > label{
+  font-weight: 600;
+}
+form > label > input, select {
+  margin-top: 10px;
+}
+form > button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  transition-duration: 500ms;
+  width: 70px;
+  height: 50px;
+  margin: 20px auto;
+  border-radius: 10px;
+  background-image: linear-gradient(to right, #e22d2d, #4d4b51);
+  color: white;
+}
+form > button:hover{
+  color: gold;
+}
+
+.amenities-label{
+  padding-top: 100px;
+}
+.price-label{
+  padding-top: 100px;
+}
+.images-label{
+  padding-top: 100px;
+}

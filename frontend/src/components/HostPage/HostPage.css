@@ -1,0 +1,33 @@
+.pages{
+  display: flex;
+  position: relative;
+  min-height: fit-content;
+}
+.left-page{
+  background: linear-gradient(-25deg, rgb(25, 25, 166), rgba(218, 28, 60, 0.977));
+  width: 50vw;
+  height: 100vh;
+  /* position: static; */
+  /* bottom: 10; */
+  position: fixed;
+
+  z-index: -1000;
+
+}
+.right-page{
+  /* background-color: blue; */
+
+
+  width: 50vw;
+  height: 290vh;
+  /* min-height: fit-content; */
+  /* position: absolute; */
+  /* left: 50vw; */
+  /* overflow: scroll; */
+
+}
+.host-btns{
+  position: absolute;
+  top: 105vh;
+  left: 90vw;
+}
