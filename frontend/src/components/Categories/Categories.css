@@ -1,7 +1,7 @@
 .categories-container{
   position: sticky;
   top: 80px;
-  z-index: 500;
+  z-index: 10;
   background-color: white;
   margin: 0px;
   height: 80px;

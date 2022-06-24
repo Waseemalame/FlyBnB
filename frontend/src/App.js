@@ -13,6 +13,7 @@ import * as sessionActions from "./store/session";
 import { getListingsThunk } from "./store/listing";
 import { getCategoriesThunk } from "./store/category";
 import FilteredListings from "./components/FilteredListings";
+import UserListingsPage from "./components/UserListingsPage";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -67,6 +68,10 @@ function App() {
       <Route path="/hosting">
         <Navigation user={sessionUser} />
         <HostPage categories={categories} />
+      </Route>
+      <Route path="/:username/listings">
+        <Navigation user={sessionUser} />
+        <UserListingsPage />
       </Route>
 
     </Switch>

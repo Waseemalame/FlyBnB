@@ -4,11 +4,15 @@ import ProfileButton from '../ProfileButton';
 import './Navigation.css'
 import * as sessionActions from '../../store/session'
 import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
 function Navigation({ user }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const profileClick = () => {
+  const [hamburgerDropDown, setHamburgerDropDown] = useState(false)
+
+  const logoutClick = () => {
     // <Redirect to="/login" />
+
     if(user){
       dispatch(sessionActions.logout());
       history.push('/login')
@@ -26,6 +30,26 @@ function Navigation({ user }) {
       return;
     }
     history.push('/hosting')
+  }
+  const menuClick = () => {
+    if(hamburgerDropDown === false){
+      setHamburgerDropDown(true)
+      return;
+    }
+    setHamburgerDropDown(false)
+  }
+  const onMouseLeave = () => {
+    // setTimeout(() => {
+    //   setHamburgerDropDown(false)
+
+    // }, 700)
+    // setHamburgerDropDown(false)
+  }
+  const logoutclick = () => {
+
+  }
+  const manageListings = () => {
+    history.push(`/${user.username}/listings`)
   }
   return (
     <>
@@ -51,8 +75,15 @@ function Navigation({ user }) {
           </div>
           {/* <div cl><img src="https://img.icons8.com/ios/20/undefined/geography.png" alt="language" /></div> */}
           <div className='profile-menu-icons'>
-            <img className='hamburger-menu' src="https://img.icons8.com/material-outlined/24/undefined/menu--v1.png" alt="menu" />
-            <div className='profile-button' onClick={profileClick}>
+            <img className='hamburger-menu' onClick={menuClick} src="https://img.icons8.com/material-outlined/24/undefined/menu--v1.png" alt="menu" />
+            <div className='profile-button' onClick={menuClick}>
+              {hamburgerDropDown && (
+                <div className='menu-dropdown-container' onMouseLeave={() => onMouseLeave()}>
+                  <div onClick={manageListings} className='btn-container'><button className='btn-options'>Manage Listings</button></div>
+                  <div className='btn-container'><button className='btn-options'>Trips</button></div>
+                  <div className='btn-container'><button className='btn-options' onClick={logoutClick}>Logout</button></div>
+                </div>
+              )}
               <ProfileButton />
             </div>
           </div>
