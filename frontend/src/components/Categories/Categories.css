@@ -1,22 +1,25 @@
 .categories-container{
   position: sticky;
   top: 80px;
-  z-index: 500;
+  z-index: 15;
   background-color: white;
-  margin: 0px;
+  /* margin-left: 70px; */
+  /* margin-right: 70px; */
   height: 80px;
   display: flex;
   align-items: center;
+  width: 100%;
   /* border: 5px solid black; */
-  transition-duration: 1000ms;
+  transition-duration: 300ms;
 }
 .categories-list{
   display: flex;
   overflow: hidden;
+
   /* margin: 0; */
   /* margin-top: 40px; */
-  margin-left: 70px;
-  margin-right: 70px;
+  margin-left: 140px;
+  margin-right: 140px;
   overflow-x: scroll;
   scrollbar-width: 0px;
   /* scroll-behavior: smooth; */
@@ -66,6 +69,7 @@
 
 }
 .categories-right{
+  margin-right: 70px;
   position: absolute;
   right: 40px;
   box-shadow: none;
@@ -81,6 +85,7 @@
   /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
 }
 .categories-left{
+  margin-left: 70px;
   position: absolute;
   left: 40px;
   top: 25px;
@@ -92,7 +97,7 @@
   /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
   /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
   box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
-  display: none;
+  /* display: none; */
   font-size: 30px;
 }
 .categories-left:hover{

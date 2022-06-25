@@ -40,8 +40,12 @@ function CardDetails() {
     <div className="card-details-container">
       <div className='listing-title'>{listing?.title}</div>
       <div className="listing-location">
-        <div className="listing-city">{listing?.city}</div>,
-        <div className="listing-state">{listing?.state}</div>,
+        {listing.city && (
+          <div className="listing-city">{listing?.city},</div>
+        )}
+        {listing.state && (
+          <div className="listing-state">{listing?.state},</div>
+        )}
         <div className="listing-country">{listing?.country}</div>
       </div>
       <div className='image-section'>

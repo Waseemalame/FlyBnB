@@ -35,7 +35,7 @@ function Categories({ categories }) {
     const slideLeft = () => {
     document.querySelector('.categories-right').style.display = 'block';
     if(slider.scrollLeft < 600){
-      document.querySelector('.categories-left').style.display = 'none';
+      // document.querySelector('.categories-left').style.display = 'none';
     }
     slider.scrollLeft -= 990;
   }
@@ -44,7 +44,7 @@ function Categories({ categories }) {
     document.querySelector('.categories-left').style.display = 'block';
 
     if(slider.scrollLeft >= 800){
-      document.querySelector('.categories-right').style.display = 'none';
+      // document.querySelector('.categories-right').style.display = 'none';
     }
   }
 

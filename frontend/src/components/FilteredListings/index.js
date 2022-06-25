@@ -12,6 +12,9 @@ const FilteredListings = ({ listings }) => {
   console.log(newListings)
   return (
     <div className='listing-container'>
+      {newListings.length < 1 && (
+        <h2>No listings under this category have been created</h2>
+      )}
       {newListings.map(listing => (
         <Card listing={listing}/>
       ))}

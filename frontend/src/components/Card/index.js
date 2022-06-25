@@ -25,7 +25,18 @@ const Card = ({ listing }) => {
 
       <div className='full-card' onMouseOver={mouseOver} onMouseLeave={mouseOut}>
         <ImageSlider listing={listing} setHoveredOver={setHoveredOver} hoveredOver={hoveredOver}/>
-        <div className='card-location'>{listing.city + ', ' + listing.state}</div>
+        <div className='card-location'>
+
+        {listing.city && (
+          <div>{listing.city}</div>
+          )}
+          {listing.state ? (
+            <div>, {listing.state}</div>
+          ) : (
+            <div>, {listing.country}</div>
+          )}
+          </div>
+        {/* {listing.city + ', ' + listing.state} */}
         <div className="description-container">
           <div className='card-description'>{'$' + listing.price}</div>
           <div className='night-text'>night</div>
