@@ -1,0 +1,102 @@
+// npm packages //
+npm install bcryptjs cookie-parser cors csurf dotenv express express-async-handler express-validator helmet jsonwebtoken morgan per-env pg sequelize sequelize-cli
+npm install -D dotenv-cli nodemon
+// npm packages //
+
+
+// Sequelize commands //
+npx sequelize init
+
+psql -c "create user <userName_app> password '<password>' createdb"
+
+
+
+npx dotenv sequelize db:create
+npx dotenv sequelize db:drop
+
+
+// Sequelize commands //
+
+// Sequelize DATABASE commands //
+
+sudo service postgresql restart
+
+npx dotenv sequelize db:seed:undo:all
+npx dotenv sequelize db:migrate:undo
+npx dotenv sequelize db:migrate
+npx dotenv sequelize db:seed:all
+
+alternatively:
+    npx sequelize db:drop
+    npx sequelize db:create
+    npx sequelize db:migrate
+    npx sequelize db:seed:all
+
+
+npx sequelize model:generate --name User --attributes username:string,email:string,firstName:string,lastName:string,linkedIn:string,hashedPassword:string
+npx sequelize model:generate --name Listing --attributes userId:integer,title:string,city:string,state:string,country:string,categoryId:string,type:string,guests:integer,beds:integer,bedrooms:integer,baths:integer,amenities:string,price:numeric,cleaningFee:integer,serviceFee:integer
+npx sequelize model:generate --name Category --attributes name:string
+npx sequelize model:generate --name Image --attributes listingId:integer,url:string
+npx sequelize model:generate --name Booking --attributes listingId:integer,userId:integer,startDate:date,endDate:date,finalPrice:integer
+
+
+
+
+npx sequelize seed:generate --name demo-users
+npx sequelize seed:generate --name demo-listings
+npx sequelize seed:generate --name demo-categories
+npx sequelize seed:generate --name demo-images
+
+
+psql whyBnB_db -c '\d "Users"' ---> to check the Users table schema in Postgres
+psql whyBnB_db -c 'SELECT * FROM "Users"' ---> to check if users have been successfully created
+// Sequelize DATABASE commands //
+
+
+// HEROKU COMMANDS //
+heroku restart && heroku pg:reset DATABASE --confirm fly-bnb && heroku run npm run sequelize db:migrate && heroku run npm run sequelize db:seed:all
+
+heroku run npm run sequelize db:migrate
+heroku run npm run sequelize db:seed:all
+
+
+
+
+
+// Git commands //
+git push --set-upstream origin main
+// Git commands //
+
+
+
+
+// Generate JWT //
+openssl rand -base64 10
+// Generate JWT//
+
+
+
+
+
+// REACT - REDUX CREATE //
+
+npx create-react-app . --template @appacademy/react-v17 --use-npm
+
+// REACT - REDUX CREATE //
+
+
+
+// dummy create users
+react@react.com
+reactdev
+John
+Johnson
+https://cdn2.vectorstock.com/i/1000x1000/20/76/man-avatar-profile-vector-21372076.jpg
+https://www.linkedin.com/in/waseemalame/
+password
+
+// demo user //
+demo@user.io
+Demo-lition
+https://image.shutterstock.com/image-vector/person-icon-flat-symbol-design-600w-424612276.jpg
+password
