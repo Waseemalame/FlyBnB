@@ -75,7 +75,8 @@
   box-shadow: none;
   top: 25px;
   z-index: 1000;
-  transition-duration: 1400ms;
+  transition-duration: 1000ms;
+
   /* display: none; */
   font-size: 30px;
   color: lightgray;
@@ -92,7 +93,7 @@
   z-index: 1000;
   color: lightgray;
   box-shadow: none;
-  transition-duration: 1400ms;
+  transition-duration: 1000ms;
   /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; */
   /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
   /* box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px; */
@@ -101,12 +102,12 @@
   font-size: 30px;
 }
 .categories-left:hover{
-  left: 29px;
+  left: 35px;
   color: darkcyan;
 
 }
 .categories-right:hover{
-  right: 29px;
+  right: 35px;
   color: darkcyan;
-  box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px;
+  /* box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 25px -6px; */
 }
