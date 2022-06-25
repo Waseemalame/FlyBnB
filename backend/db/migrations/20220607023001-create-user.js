@@ -30,6 +30,7 @@ module.exports = {
       },
       profileImg: {
         type: Sequelize.STRING,
+        defaultValue: "https://img.icons8.com/external-kiranshastry-solid-kiranshastry/40/undefined/external-user-interface-kiranshastry-solid-kiranshastry.png",
       },
       hashedPassword: {
         allowNull: false,

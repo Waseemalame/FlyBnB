@@ -200,16 +200,49 @@ module.exports = {
       createdAt: new Date(),
       updatedAt: new Date()
    },
+     {
+      userId: 2,
+      title: "The Half, A Metro-Accessible Designer Tiny House",
+      city: "Los Angeles",
+      state: "California",
+      country: "United States",
+      categoryId: 6,
+      type: "Tiny Home",
+      guests: 4,
+      beds: 1,
+      bedrooms: 1,
+      baths: 1,
+      amenities: ['Hot tub', 'Patio', 'Fire pit', 'wifi', 'Outdoor dining area', 'TV'],
+      price: 150,
+      cleaningFee: 80,
+      serviceFee: 115,
+      createdAt: new Date(),
+      updatedAt: new Date()
+   },
+     {
+      userId: 2,
+      title: "Rustic, Modern Log Cabin Cozy 3 Bedroom Retreat",
+      city: "Frazier Park",
+      state: "California",
+      country: "United States",
+      categoryId: 3,
+      type: "Entire Cabin",
+      guests: 6,
+      beds: 3,
+      bedrooms: 3,
+      baths: 2,
+      amenities: ['Hot tub', 'Patio', 'Fire pit', 'wifi', 'Outdoor dining area', 'TV'],
+      price: 250,
+      cleaningFee: 150,
+      serviceFee: 150,
+      createdAt: new Date(),
+      updatedAt: new Date()
+   },
   ], {});
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
 
-      Example:
-      */
    return queryInterface.bulkDelete('Listings', null, {});
   }
 };

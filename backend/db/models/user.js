@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     profileImg: {
       type: DataTypes.STRING,
       isUrl: true,
+      defaultValue: "https://img.icons8.com/external-kiranshastry-solid-kiranshastry/40/undefined/external-user-interface-kiranshastry-solid-kiranshastry.png",
     },
     hashedPassword: {
       type: DataTypes.STRING,
