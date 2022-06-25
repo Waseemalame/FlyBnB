@@ -31,11 +31,7 @@ function CardDetails() {
       }
     })
   })
-  console.log(listing.amenities)
-  console.log('NEW AMENITITERS!!!!!!!!!!!!!!!')
-  console.log('NEW AMENITITERS!!!!!!!!!!!!!!!')
-  console.log('NEW AMENITITERS!!!!!!!!!!!!!!!')
-  console.log('NEW AMENITITERS!!!!!!!!!!!!!!!')
+
   const newAmenitiesArr = Object.values(newAmenities)
   console.log(newAmenitiesArr)
 
