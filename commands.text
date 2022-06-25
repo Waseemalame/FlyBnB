@@ -11,8 +11,8 @@ psql -c "create user <userName_app> password '<password>' createdb"
 
 
 
-npx dotenv sequelize db:create
 npx dotenv sequelize db:drop
+npx dotenv sequelize db:create
 
 
 // Sequelize commands //
@@ -48,8 +48,8 @@ npx sequelize seed:generate --name demo-categories
 npx sequelize seed:generate --name demo-images
 
 
-psql whyBnB_db -c '\d "Users"' ---> to check the Users table schema in Postgres
-psql whyBnB_db -c 'SELECT * FROM "Users"' ---> to check if users have been successfully created
+psql flybnb_db -c '\d "Users"' ---> to check the Users table schema in Postgres
+psql flybnb_db -c 'SELECT * FROM "Users"' ---> to check if users have been successfully created
 // Sequelize DATABASE commands //
 
 

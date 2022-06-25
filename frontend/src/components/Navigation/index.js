@@ -85,7 +85,7 @@ function Navigation({ user }) {
                   {/* <div className='close-menu'>✖</div> */}
                 </div>
               )}
-              <ProfileButton />
+              <ProfileButton user={user}/>
             </div>
           </div>
 
