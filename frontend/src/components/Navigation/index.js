@@ -38,7 +38,7 @@ function Navigation({ user }) {
     }
     setHamburgerDropDown(false)
   }
-  const onMouseLeave = () => {
+  const mouseLeave = () => {
     // setTimeout(() => {
     //   setHamburgerDropDown(false)
 
@@ -78,10 +78,11 @@ function Navigation({ user }) {
             <img className='hamburger-menu' onClick={menuClick} src="https://img.icons8.com/material-outlined/24/undefined/menu--v1.png" alt="menu" />
             <div className='profile-button' onClick={menuClick}>
               {hamburgerDropDown && (
-                <div className='menu-dropdown-container' onMouseLeave={() => onMouseLeave()}>
+                <div className='menu-dropdown-container' onMouseLeave={() => mouseLeave()}>
                   <div onClick={manageListings} className='btn-container'><button className='btn-options'>Manage Listings</button></div>
                   <div className='btn-container'><button className='btn-options'>Trips</button></div>
                   <div className='btn-container'><button className='btn-options' onClick={logoutClick}>Logout</button></div>
+                  {/* <div className='close-menu'>✖</div> */}
                 </div>
               )}
               <ProfileButton />
