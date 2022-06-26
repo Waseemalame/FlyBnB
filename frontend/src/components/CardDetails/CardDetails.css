@@ -2,9 +2,13 @@
   font-size: 30px;
 }
 .card-details-container{
-  padding-left: 80px;
-  padding-right: 80px;
+  /* padding-right: 80px; */
   padding-top: 20px;
+  padding-left: 110px;
+  /* padding-right: 110px; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
 }
 
 .listing-location{
@@ -29,23 +33,14 @@
   grid-template-rows: 150px 150px;
   gap: 10px;
 }
-/* .image-section:not(:first-child){
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-} */
 .sub-imgs{
   width: 267px;
   height: 150px;
-  /* grid-column-start: 2; */
-  /* grid-column-end: 4; */
   object-fit: cover;
 
 }
 
 .first-img{
-  /* background-position: center; */
-  /* object-fit: cover; */
   width: 550px;
   height: 310px;
   background-size: 550px;
@@ -93,33 +88,15 @@
   line-height: 10px;
   transition-duration: 400ms;
   transition-timing-function: ease;
-  /* animation: forwards; */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* justify-content: space-between; */
   position: relative;
-  /* outline: 1px solid gold; */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
-.amenities-box:hover{
 
-}
-/* .amenities-box{
-  display: flex;
-  margin-top: 20px;
-  border: 1px solid black;
-  width: 100px;
-  height: 100px;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 5px;
-} */
-.amenity-name{
-  /* margin-left: 20px; */
-}
+
 .amenity-icon{
-  /* object-fit: contain; */
   margin-bottom: 10px;
 
 }
@@ -133,4 +110,25 @@
   border-bottom: 1px solid lightgray;
   padding-bottom: 20px;
   width: 643px;
+}
+
+.edit-listing-btn{
+  border: none;
+  background-color: rgba(119, 0, 255, 0.19);
+  border-radius: 10px;
+  width: 80px;
+  height: 40px;
+  cursor: pointer;
+  position: absolute;
+  top: 85vh;
+  right: 12vw;
+  transition-duration: 500ms;
+}
+.edit-listing-btn:hover{
+  /* color: blue; */
+  background-color: bisque;
+  margin-bottom: 10px;
+  top: 84vh;
+  /* top: 90%; */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }

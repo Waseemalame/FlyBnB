@@ -8,7 +8,7 @@ import './Card.css'
 import ImageSlider from '../ImageSlider';
 
 
-const Card = ({ listing }) => {
+const Card = ({ listing, cname, userListingRendered }) => {
   const [hoveredOver, setHoveredOver] = useState(false)
   const history = useHistory();
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ const Card = ({ listing }) => {
   return (
 
       <div className='full-card' onMouseOver={mouseOver} onMouseLeave={mouseOut}>
-        <ImageSlider listing={listing} setHoveredOver={setHoveredOver} hoveredOver={hoveredOver}/>
+        <ImageSlider userListingRendered={userListingRendered} cname={cname} listing={listing} setHoveredOver={setHoveredOver} hoveredOver={hoveredOver}/>
         <div className='card-location'>
 
         {listing.city && (

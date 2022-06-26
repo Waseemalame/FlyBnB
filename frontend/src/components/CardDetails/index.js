@@ -77,6 +77,12 @@ function CardDetails() {
             {listing.type} hosted by {sessionUser.username}
           </h2>
           <p className='listing-details'>{listing.guests} guests · {listing.beds} beds · {listing.baths} baths</p>
+          {sessionUser.id === listing.userId ? (
+            <button className='edit-listing-btn'>Edit Listing</button>
+
+          ) : (
+            ''
+          )}
         </div>
         <h2>What this place has to offer:</h2>
         <div className="amenities-section">
