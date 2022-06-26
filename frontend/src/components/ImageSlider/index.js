@@ -4,7 +4,7 @@ import {IoIosArrowDroprightCircle, IoIosArrowDropleftCircle } from "react-icons/
 import { Link, Redirect, useHistory } from 'react-router-dom';
 
 import './ImageSlider.css'
-const ImageSlider = ({ listing, hoveredOver}) => {
+const ImageSlider = ({ listing, hoveredOver, cname, userListingRendered}) => {
 
   const [currentSlide, setCurrentSlide] = useState(0)
   const length = listing.Images.length
@@ -27,11 +27,11 @@ const ImageSlider = ({ listing, hoveredOver}) => {
     // return (<Redirect to={`/api/listings/${listing.id}`} />)
   }
   return (
-    <div className='single-listing-container'>
+    <div className={'single-listing-container'}>
       {hoveredOver && (
         <>
-          <IoIosArrowDropleftCircle className='left-arrow' onClick={previousSlide} />
-          <IoIosArrowDroprightCircle className='right-arrow' onClick={nextSlide} />
+          <IoIosArrowDropleftCircle className={userListingRendered ? 'left-arrow-user-listing' : 'left-arrow'} onClick={previousSlide} />
+          <IoIosArrowDroprightCircle className={userListingRendered ? 'right-arrow-user-listing' : 'right-arrow'} onClick={nextSlide} />
         </>
       )}
       {listing.Images.map((slide, index) => {
@@ -39,7 +39,7 @@ const ImageSlider = ({ listing, hoveredOver}) => {
           <div className={index === currentSlide ? 'slide active' : 'slide'} key={index}>
             {index === currentSlide && (
             <div className='single-listing'>
-              <Link to={`/listings/${listing.id}`}><img className='card-img' src={slide.url} alt="Listing"  /></Link>
+              <Link to={`/listings/${listing.id}`}><img className={userListingRendered ? `card-img-user-listing` : 'card-img'} src={slide.url} alt="Listing"  /></Link>
 
             </div>
 
