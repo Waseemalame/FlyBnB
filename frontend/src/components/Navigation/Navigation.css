@@ -33,7 +33,7 @@
   border-radius: 999px;
   padding: 20px;
   border: 1px solid lightgray;
-  position: fixed;
+  position: absolute;
   left: 0%;
   right: 0%;
   margin: 0 auto;
@@ -44,6 +44,7 @@
   outline: 0;
   /* width: 250px; */
   width: 100%;
+  /* position: static; */
 }
 
 .nav-right{
