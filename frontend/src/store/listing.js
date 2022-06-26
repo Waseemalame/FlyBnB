@@ -45,13 +45,11 @@ export const getOneListingThunk = (id) => async dispatch => {
 }
 
 export const addListingThunk = (data) => async dispatch => {
-  console.log('INSIDE ADD LISTING THUNK')
   const res = await csrfFetch('/api/listings', {
     method: 'POST',
     body: JSON.stringify(data)
   })
 
-  console.log(res, 'RES in listing thunk')
   dispatch(addListing(data))
   return res;
 
@@ -66,28 +64,18 @@ const listingsReducer = (state = initialState, action) => {
     case GET_LISTINGS:
       let newState = {};
       action.listings.forEach(listing => {
-        console.log(typeof listing.id, 'TYPEOFTYPEOF IN REDUCER')
         newState[listing.id] = listing;
       })
 
       return {
         ...newState,
-        // ...state,
 
       };
       case ADD_LISTING:
-        console.log('INSIDE ADD LISTING REDUCER CASE')
-        console.log(state, 'state in reducer')
-        console.log(action, 'action in reducer')
         return {
           ...state
         };
-        // case GET_ONE_LISTING:
-        // console.log(state, 'INSIDE GET ONE THIS TIME BROOO')
-        //   return {
-        //     ...state,
-        //     listing: action.listing
-        //   }
+
       default:
         return state;
   }

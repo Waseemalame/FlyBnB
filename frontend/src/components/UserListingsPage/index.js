@@ -7,7 +7,6 @@ const UserListingsPage = ({ listings, user }) => {
   const [cname, setCname] = useState('')
   const [userListingRendered, setUserListingRendered] = useState(true)
   const userListings = listings.filter(listing => listing.userId === user.id)
-  console.log(userListings)
 
   const editListing = () => {
 

@@ -6,12 +6,7 @@ const load = (images, listingId) => ({
   images,
   listingId
 });
-// const getImages = (images) => {
-//   return {
-//     type: GET_IMAGES,
-//     images
-//   }
-// }
+
 export const getImages = (listingId) => async (dispatch) => {
   const response = await fetch(`/api/listings/${listingId}/images`);
 

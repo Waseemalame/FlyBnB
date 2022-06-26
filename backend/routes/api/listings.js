@@ -67,7 +67,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
       country,
       images
      } = req.body
-    console.log(req.body)
+
     const newListing = await Listing.create({
       userId,
       title,

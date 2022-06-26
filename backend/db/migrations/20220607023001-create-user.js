@@ -18,11 +18,9 @@ module.exports = {
         unique: true,
       },
       firstName: {
-        // allowNull: false,
         type: Sequelize.STRING(20)
       },
       lastName: {
-        // allowNull: false,
         type: Sequelize.STRING(20)
       },
       linkedIn: {

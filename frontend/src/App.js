@@ -17,7 +17,6 @@ import UserListingsPage from "./components/UserListingsPage";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
-  // const listing = useSelector(state => console.log(state.listings, '!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!'))
   const history = useHistory();
   const listings = useSelector(state => Object.values(state.listings))
   const sessionUser = useSelector(state => state.session.user);

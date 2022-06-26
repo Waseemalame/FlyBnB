@@ -11,7 +11,7 @@ function Navigation({ user }) {
   const [hamburgerDropDown, setHamburgerDropDown] = useState(false)
 
   const logoutClick = () => {
-    // <Redirect to="/login" />
+
 
     if(user){
       dispatch(sessionActions.logout());
@@ -21,9 +21,6 @@ function Navigation({ user }) {
 
   }
 
-  // const handleLogoClick = () => {
-  //   history.push('/')
-  // }
   const hostPageClick = () => {
     if(!user){
       history.push('/login')
@@ -39,11 +36,7 @@ function Navigation({ user }) {
     setHamburgerDropDown(false)
   }
   const mouseLeave = () => {
-    // setTimeout(() => {
-    //   setHamburgerDropDown(false)
 
-    // }, 700)
-    // setHamburgerDropDown(false)
   }
   const logoutclick = () => {
 
@@ -73,7 +66,6 @@ function Navigation({ user }) {
           <div className='nav-right-text'>
             <p onClick={hostPageClick}>Become a Host</p>
           </div>
-          {/* <div cl><img src="https://img.icons8.com/ios/20/undefined/geography.png" alt="language" /></div> */}
           <div className='profile-menu-icons'>
             <img className='hamburger-menu' onClick={menuClick} src="https://img.icons8.com/material-outlined/24/undefined/menu--v1.png" alt="menu" />
             <div className='profile-button' onClick={menuClick}>
@@ -82,7 +74,6 @@ function Navigation({ user }) {
                   <div onClick={manageListings} className='btn-container'><button className='btn-options'>Manage Listings</button></div>
                   <div className='btn-container'><button className='btn-options'>Trips</button></div>
                   <div className='btn-container'><button className='btn-options' onClick={logoutClick}>Logout</button></div>
-                  {/* <div className='close-menu'>✖</div> */}
                 </div>
               )}
               <ProfileButton user={user}/>

@@ -13,15 +13,11 @@ function CardDetails() {
   const listing = useSelector(state => state.listings[id])
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(getOneListingThunk(id))
-  // }, [dispatch, id]);
+
   const sessionUser = useSelector(state => state.session.user)
   const newAmenities = {};
-  // console.log(Object.values(amenitiesObj, 'AMENITITES OBJ HERE!!!!!!!!!!!!!'))
   const amenitiesValues = Object.values(amenitiesObj)
   amenitiesValues.forEach(val => {
-    console.log(val.name)
     listing.amenities.forEach(amenity => {
       if(amenity === val.name){
         newAmenities[amenity] = {
@@ -33,7 +29,6 @@ function CardDetails() {
   })
 
   const newAmenitiesArr = Object.values(newAmenities)
-  console.log(newAmenitiesArr)
 
   return (
 
@@ -54,7 +49,6 @@ function CardDetails() {
         {listing?.Images.map((image, index) => {
           if(index === 0){
             return (
-                // <img className='first-img' src={image.url} alt="" />
                 <div
                 style={{backgroundImage: `url(${image.url})`}}
                 className="first-img"></div>
@@ -63,7 +57,6 @@ function CardDetails() {
           }
           if(index > 4) return '';
           return (
-                  // <img id={`sub-img-${index}`} className='sub-imgs' src={image.url} alt="" />
                   <div id={`sub-img-${index}`} style={{backgroundImage: `url(${image.url})`}}>
 
                   </div>

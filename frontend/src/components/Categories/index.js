@@ -20,7 +20,6 @@ function Categories({ categories }) {
   const catScroll = () => {
 
     const catContainer = document.querySelector('.categories-container')
-    // console.dir(catContainer)
     if(window.scrollY > 22.7){
       catContainer.style.boxShadow = 'rgba(0, 0, 0, 0.08) 0px 4px 12px';
     }
@@ -35,7 +34,6 @@ function Categories({ categories }) {
     const slideLeft = () => {
     document.querySelector('.categories-right').style.display = 'block';
     if(slider.scrollLeft < 600){
-      // document.querySelector('.categories-left').style.display = 'none';
     }
     slider.scrollLeft -= 990;
   }
@@ -44,7 +42,6 @@ function Categories({ categories }) {
     document.querySelector('.categories-left').style.display = 'block';
 
     if(slider.scrollLeft >= 800){
-      // document.querySelector('.categories-right').style.display = 'none';
     }
   }
 

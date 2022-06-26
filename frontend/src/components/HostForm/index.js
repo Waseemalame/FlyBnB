@@ -55,13 +55,11 @@ const HostForm = ({ categories }) => {
 
   const user = useSelector(state => state.session.user)
 
-  // const arr = Object.values(categories)
 
   const history = useHistory()
 
 
   const changeBg = (index) => {
-    console.log(index)
     const amenityDiv = document.getElementById(`amenity-${index - 1}`);
     if(amenityDiv.classList.contains('selected')){
       amenityDiv.classList.remove('selected')
@@ -69,10 +67,8 @@ const HostForm = ({ categories }) => {
     }
     amenityDiv.classList.add("selected")
     amenitiesArray.push(amenityDiv.innerText)
-    // console.log(amenitiesArray)
   }
   let selectedAmenities = document.querySelectorAll('.selected')
-  let imageNodes = document.querySelectorAll('.image-input');
 
 
   const types = [ 'Entire home', 'Entire cabin', 'Cabin', 'Entire villa','Tiny Home', 'Bungalow', 'Private room in resort', 'Luxury stay' ]
@@ -81,7 +77,6 @@ const HostForm = ({ categories }) => {
     for(let el of selectedAmenities){
       amenitiesArray.push(el.innerText)
     }
-    console.log(categoryId)
   }, [amenitiesArray, selectedAmenities, categoryId])
 
 
@@ -138,7 +133,6 @@ const HostForm = ({ categories }) => {
   }
   const someArr = Object.entries(categories)
   someArr.forEach(arr => {
-    // console.log(arr[1].name)
 
   })
   return (
@@ -183,7 +177,6 @@ const HostForm = ({ categories }) => {
         <input
         onChange={updateGuests}
         value={guests}
-        // placeholder='number of guests'
         min="0"
         type="number" />
       </label>
@@ -220,10 +213,8 @@ const HostForm = ({ categories }) => {
             className="amenity-div"
             onClick={() => changeBg(index + 1)}
             >
-              {/* <div> */}
                 <img src={AmenitiesIcons[index]} alt="icon" />
                 <div id='amenity-string'>{amenity}</div>
-              {/* </div> */}
             </div>
             </>
             ))}
@@ -286,42 +277,36 @@ const HostForm = ({ categories }) => {
         <input
         value={image1}
         onChange={(e) => setImage1(e.target.value)}
-        // onClick={(e) => setImagesFunc(e)}
         className='image-input'
         placeholder='image url'
         type="text" />
         <input
         value={image2}
         onChange={(e) => setImage2(e.target.value)}
-        // onClick={(e) => setImagesFunc(e)}
         className='image-input'
         placeholder='image url'
         type="text" />
         <input
         value={image3}
         onChange={(e) => setImage3(e.target.value)}
-        // onClick={(e) => setImagesFunc(e)}
         className='image-input'
         placeholder='image url'
         type="text" />
         <input
         value={image4}
         onChange={(e) => setImage4(e.target.value)}
-        // onClick={(e) => setImagesFunc(e)}
         className='image-input'
         placeholder='image url'
         type="text" />
         <input
         value={image5}
         onChange={(e) => setImage5(e.target.value)}
-        // onClick={(e) => setImagesFunc(e)}
         className='image-input'
         placeholder='image url'
         type="text" />
         <input
         value={image6}
         onChange={(e) => setImage6(e.target.value)}
-        // onClick={(e) => setImagesFunc(e)}
         className='image-input'
         placeholder='image url'
         type="text" />

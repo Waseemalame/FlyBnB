@@ -12,7 +12,6 @@ const ImageSlider = ({ listing, hoveredOver, cname, userListingRendered}) => {
 
   const nextSlide = () => {
      setCurrentSlide(currentSlide === length - 1 ? 0 : currentSlide + 1)
-     console.log(currentSlide)
   }
   const previousSlide = () => {
      setCurrentSlide(currentSlide === 0 ? length - 1 : currentSlide - 1)
@@ -24,7 +23,6 @@ const ImageSlider = ({ listing, hoveredOver, cname, userListingRendered}) => {
 
   const handleCardClick = () => {
     history.push(`/listings/${listing.id}`)
-    // return (<Redirect to={`/api/listings/${listing.id}`} />)
   }
   return (
     <div className={'single-listing-container'}>

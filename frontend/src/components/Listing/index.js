@@ -3,7 +3,6 @@ import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
 import { getListingsThunk } from '../../store/listing';
-// import { getImagesThunk } from '../../store/images.js';
 
 import './Listing.css'
 import Card from '../Card';

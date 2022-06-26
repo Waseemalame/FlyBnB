@@ -3,9 +3,6 @@ import './ProfileButton.css'
 const ProfileButton = ({ user }) => {
   return (
     <div>
-      {/* {user && (
-        <img className='profile-icon-button' src={user.profileImg} alt="user-profile" />
-      )} */}
       {user?.profileImg ? (
 
           <img className='profile-icon-button' src={user.profileImg} alt="user-profile" />
