@@ -1,9 +1,32 @@
 import React from 'react'
+import { useState } from 'react'
+import Card from '../Card'
+import EditListingModal from '../EditListingModal'
+import './UserListingsPage.css'
+const UserListingsPage = ({ listings, user }) => {
+  const [cname, setCname] = useState('')
+  const [userListingRendered, setUserListingRendered] = useState(true)
+  const userListings = listings.filter(listing => listing.userId === user.id)
+  console.log(userListings)
 
-const UserListingsPage = () => {
+  const editListing = () => {
+
+  }
+
   return (
-    <div>
-      helloL
+    <div className='user-listings'>
+      {userListings.map((listing) => (
+
+          <div className="user-listing">
+            <Card userListingRendered={userListingRendered} listing={listing} cname={cname}/>
+            <div className="user-listing-btns">
+              <EditListingModal />
+              {/* <button onClick={editListing} className='edit-listing'>Edit</button> */}
+              <button className='delete-listing'>Delete</button>
+            </div>
+          </div>
+
+      ))}
     </div>
   )
 }
