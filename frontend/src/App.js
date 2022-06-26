@@ -71,7 +71,7 @@ function App() {
       </Route>
       <Route path="/:username/listings">
         <Navigation user={sessionUser} />
-        <UserListingsPage />
+        <UserListingsPage listings={listings} user={sessionUser} />
       </Route>
 
     </Switch>
