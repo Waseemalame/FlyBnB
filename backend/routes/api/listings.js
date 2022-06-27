@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const router = express.Router();
 
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Listing, Image } = require('../../db/models');
+const { User, Listing, Image, Category } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -94,6 +94,65 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
         url: imageUrl
       })
     }
+}))
+
+router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
+  console.log('re .params.ID')
+  console.log('re .params.ID')
+  console.log('re .params.ID')
+  console.log('re .params.ID')
+  console.log('re .params.ID')
+  console.log(req.params.id)
+    const {
+      userId,
+      title,
+      categoryId,
+      type,
+      guests,
+      beds,
+      bedrooms,
+      baths,
+      amenities,
+      price,
+      cleaningFee,
+      serviceFee,
+      city,
+      state,
+      country,
+      images
+     } = req.body
+     console.log(images)
+     console.log('images')
+    const newListing = await Listing.update({
+      userId,
+      title,
+      categoryId,
+      type,
+      guests,
+      beds,
+      bedrooms,
+      baths,
+      amenities,
+      price,
+      cleaningFee,
+      serviceFee,
+      city,
+      state,
+      country
+    }, {where: {
+      categoryId
+    }})
+
+    for (let i = 0; i < images.length; i++) {
+      const imageUrl = images[i];
+      await Image.update({
+        listingId: req.params.id,
+        url: imageUrl
+      }, {where: {listingId: req.params.id}})
+    }
+    res.json(newListing);
+    // res.json(newImage)
+
 }))
 
 
