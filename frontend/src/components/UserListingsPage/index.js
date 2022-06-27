@@ -19,8 +19,7 @@ const UserListingsPage = ({ listings, user }) => {
           <div className="user-listing">
             <Card userListingRendered={userListingRendered} listing={listing} cname={cname}/>
             <div className="user-listing-btns">
-              <EditListingModal />
-              {/* <button onClick={editListing} className='edit-listing'>Edit</button> */}
+              <EditListingModal listing={listing} />
               <button className='delete-listing'>Delete</button>
             </div>
           </div>
