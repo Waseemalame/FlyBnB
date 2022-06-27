@@ -4,6 +4,7 @@ import { LOAD_IMAGES } from './images';
 const GET_LISTINGS = 'listings/getListings';
 const ADD_LISTING = 'listings/addListing'
 const GET_ONE_LISTING = 'listings/getOneListing'
+const EDIT_LISTING = 'listings/editListing'
 
 const getListings = (listings) => {
   return {
@@ -25,6 +26,11 @@ const getOneListing = (listing) => {
     listing
   }
 }
+
+export const editListing = updatedListing => ({
+  type: EDIT_LISTING,
+  updatedListing
+});
 
 export const getListingsThunk = () => async dispatch => {
   const res = await fetch('/api/listings')
@@ -54,6 +60,20 @@ export const addListingThunk = (data) => async dispatch => {
   return res;
 
 }
+
+export const editListingThunk = (data) => async dispatch => {
+  console.log(data)
+  const res = await csrfFetch(`/api/listings/${data.id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  })
+
+  dispatch(editListing(data))
+  return res;
+
+}
+
+
 
 
 
