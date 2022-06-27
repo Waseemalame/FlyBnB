@@ -18,13 +18,15 @@ function Categories({ categories }) {
   const rightArrow = document.querySelector(".categories-right")
 
   const catScroll = () => {
-
     const catContainer = document.querySelector('.categories-container')
-    if(window.scrollY > 22.7){
-      catContainer.style.boxShadow = 'rgba(0, 0, 0, 0.08) 0px 4px 12px';
-    }
-    if(window.scrollY < 22.7){
-      catContainer.style.boxShadow = 'none'
+    if(catContainer){
+
+      if(window.scrollY > 22.7){
+        catContainer.style.boxShadow = 'rgba(0, 0, 0, 0.08) 0px 4px 12px';
+      }
+      if(window.scrollY < 22.7){
+        catContainer.style.boxShadow = 'none'
+      }
     }
   }
 
