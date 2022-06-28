@@ -12,7 +12,7 @@ function EditListingModal({ listing }) {
       {showModal && (
         <div className="edit-form-modal">
           <Modal onClose={() => setShowModal(false)}>
-            <EditListingForm listing={listing} />
+            <EditListingForm setShowModal={setShowModal} listing={listing} />
           </Modal>
         </div>
       )}

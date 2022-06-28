@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { AmenitiesData, AmenitiesIcons } from "../HostForm/AmenitiesData";
 import { useEffect } from "react";
 import './EditListingForm.css'
-import { editListingThunk } from "../../store/listing";
+import { editListingThunk, getListingsThunk } from "../../store/listing";
+import { useHistory } from "react-router-dom";
 
-function EditListingForm({ listing }) {
+function EditListingForm({ listing, setShowModal }) {
+  const listings = useSelector(state => Object.values(state.listings))
 
   const dispatch = useDispatch();
 
@@ -46,13 +48,21 @@ function EditListingForm({ listing }) {
   const updateCountry = (e) => setCountry(e.target.value);
 
   const [images, setImages] = useState([])
+  // console.log(listing.Images[1].url)
+  // console.log(listing.Images)
+  // console.log('sdfaljsdhfkljasdhf')
+  // console.log('sdfaljsdhfkljasdhf')
+  // console.log('sdfaljsdhfkljasdhf')
+  // console.log('sdfaljsdhfkljasdhf')
+  // console.log('sdfaljsdhfkljasdhf')
+  const [image1, setImage1] = useState(listing.Images ? listing?.Images[1]?.url : '');
+  const [image2, setImage2] = useState(listing.Images ? listing?.Images[1]?.url : '');
+  const [image3, setImage3] = useState(listing.Images ? listing?.Images[1]?.url : '');
+  const [image4, setImage4] = useState(listing.Images ? listing?.Images[1]?.url : '');
+  const [image5, setImage5] = useState(listing.Images ? listing?.Images[1]?.url : '');
+  const [image6, setImage6] = useState(listing.Images ? listing?.Images[1]?.url : '');
 
-  const [image1, setImage1] = useState(listing?.Images[1]?.url || '');
-  const [image2, setImage2] = useState(listing?.Images[2]?.url || '');
-  const [image3, setImage3] = useState(listing?.Images[3]?.url || '');
-  const [image4, setImage4] = useState(listing?.Images[4]?.url || '');
-  const [image5, setImage5] = useState(listing?.Images[5]?.url || '');
-  const [image6, setImage6] = useState(listing?.Images[6]?.url || '');
+  // const [images, setImages] = useState([{ url: '' },{ url: '' }]);
 
   const user = useSelector(state => state.session.user)
 
@@ -79,14 +89,18 @@ function EditListingForm({ listing }) {
 
   const types = [ 'Entire home', 'Entire cabin', 'Cabin', 'Entire villa','Tiny Home', 'Bungalow', 'Private room in resort', 'Luxury stay' ]
   types.sort();
+  // useEffect(() => {
+  //   dispatch(getListingsThunk())
+
+  // }, [dispatch])
   useEffect(() => {
     for(let el of selectedAmenities){
       amenitiesArray.push(el.innerText)
     }
   }, [amenitiesArray, selectedAmenities, categoryId])
-
+  const history = useHistory();
   useEffect(() => {
-    console.log(image1, image2, image3, image4, image5, image6)
+    // console.log(image1, image2, image3, image4, image5, image6)
     if(image1 !== '') images.push(image1)
     if(image2 !== '') images.push(image2)
     if(image3 !== '') images.push(image3)
@@ -118,7 +132,12 @@ function EditListingForm({ listing }) {
 
     }
     console.log(images)
-    await dispatch(editListingThunk(data))
+    let newListing;
+    newListing = await dispatch(editListingThunk(data))
+    // await dispatch(getListingsThunk())
+    setShowModal(false)
+    // history.push(`/`)
+    return newListing
 
   };
   const someArr = Object.entries(categories)

@@ -4,6 +4,7 @@ import { AmenitiesData, AmenitiesIcons } from './AmenitiesData';
 import { Redirect, useHistory } from 'react-router-dom';
 import { addListingThunk } from '../../store/listing';
 import './HostForm.css'
+import ImagesForm from '../ImagesForm';
 const HostForm = ({ categories }) => {
 
   const [title, setTitle] = useState('');
@@ -21,7 +22,7 @@ const HostForm = ({ categories }) => {
   const [cityLocation, setCityLocation] = useState('');
   const [stateLocation, setStateLocation] = useState('');
   const [country, setCountry] = useState('');
-  const [selected, setSelected] = useState(false)
+  const [selected, setSelected] = useState(false);
 
   const updateTitle = (e) => setTitle(e.target.value);
   const updateCategoryId = (e) => setCategoryId(e.target.value);
@@ -38,7 +39,8 @@ const HostForm = ({ categories }) => {
   const updateCity = (e) => setCityLocation(e.target.value);
   const updateState = (e) => setStateLocation(e.target.value);
   const updateCountry = (e) => setCountry(e.target.value);
-
+  const [showImagesForm, setShowImagesForm] = useState(false)
+  const [newListingCreated, setNewListingCreated] = useState(false)
   const [images, setImages] = useState([])
 
   const [image1, setImage1] = useState('');
@@ -82,30 +84,6 @@ const HostForm = ({ categories }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if(image1 !== ''){
-      images.push(image1)
-
-    }
-    if(image2 !== ''){
-      images.push(image2)
-
-    }
-    if(image3 !== ''){
-      images.push(image3)
-
-    }
-    if(image4 !== ''){
-      images.push(image4)
-
-    }
-    if(image5 !== ''){
-      images.push(image5)
-
-    }
-    if(image6 !== ''){
-      images.push(image6)
-
-    }
 
   const data = {
     userId: user.id,
@@ -123,13 +101,15 @@ const HostForm = ({ categories }) => {
     city: cityLocation,
     state: stateLocation,
     country,
-    images
 
   }
 
 
-    await dispatch(addListingThunk(data))
-    history.push('/')
+    const newListing = await dispatch(addListingThunk(data))
+    if(newListing){
+      setNewListingCreated(true)
+      history.push('/')
+    }
   }
   const someArr = Object.entries(categories)
   someArr.forEach(arr => {
@@ -273,44 +253,9 @@ const HostForm = ({ categories }) => {
         placeholder='country'
         type="text" />
       </label>
-      <label className='images-label'>Images
-        <input
-        value={image1}
-        onChange={(e) => setImage1(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image2}
-        onChange={(e) => setImage2(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image3}
-        onChange={(e) => setImage3(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image4}
-        onChange={(e) => setImage4(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image5}
-        onChange={(e) => setImage5(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image6}
-        onChange={(e) => setImage6(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-      </label>
+      {newListingCreated && showImagesForm ? (
+        <ImagesForm />
+      ) : ''}
       <button type="submit">Submit</button>
     </form>
   )

@@ -34,6 +34,12 @@ function App() {
     }
   }, [dispatch, history]);
 
+
+// useEffect(() => {
+//   dispatch(getListingsThunk())
+
+// }, [dispatch])
+
   useEffect(() => {
     if(sessionUser){
       dispatch(getCategoriesThunk())

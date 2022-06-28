@@ -36,7 +36,7 @@ export const getListingsThunk = () => async dispatch => {
   const res = await fetch('/api/listings')
   const listings = await res.json();
   dispatch(getListings(listings));
-  return res;
+  return listings;
 }
 
 export const getFilteredListings = (id) => async dispatch => {
@@ -55,9 +55,10 @@ export const addListingThunk = (data) => async dispatch => {
     method: 'POST',
     body: JSON.stringify(data)
   })
+  const listing = await res.json();
 
-  dispatch(addListing(data))
-  return res;
+  dispatch(addListing(listing))
+  return listing;
 
 }
 
@@ -67,9 +68,10 @@ export const editListingThunk = (data) => async dispatch => {
     method: 'PUT',
     body: JSON.stringify(data)
   })
-
-  dispatch(editListing(data))
-  return res;
+  const editedListing = await res.json();
+  dispatch(editListing(editListing))
+  // dispatch(getListingsThunk(data))
+  return editedListing;
 
 }
 
@@ -83,6 +85,10 @@ const listingsReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_LISTINGS:
       let newState = {};
+      console.log(action.listings)
+      console.log('iodjsfiolsdfj')
+      console.log('iodjsfiolsdfj')
+      console.log('iodjsfiolsdfj')
       action.listings.forEach(listing => {
         newState[listing.id] = listing;
       })
@@ -92,8 +98,18 @@ const listingsReducer = (state = initialState, action) => {
 
       };
       case ADD_LISTING:
+        console.log(state, state[action.listing], action.listing)
         return {
-          ...state
+          ...state,
+          [action.listing.id]: action.listing
+        };
+      case EDIT_LISTING:
+        return {
+          ...state,
+          [action.updatedListing.id]: {
+            ...state[action.updatedListing.id],
+            ...action.updatedListing
+          },
         };
 
       default:

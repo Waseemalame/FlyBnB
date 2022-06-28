@@ -10,9 +10,11 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 router.get('/', asyncHandler(async (req, res) => {
   const listings = await Listing.findAll({
-    include: {
+    include: [{
       model: Image,
-    }
+    },{
+      model: User
+    }]
   });
 
 
@@ -65,7 +67,6 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
       city,
       state,
       country,
-      images
      } = req.body
 
     const newListing = await Listing.create({
@@ -84,16 +85,23 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
       city,
       state,
       country
+    }, {
+      include: [{
+        model: User,
+        where: {userId}
+      }]
     })
 
+    console.log(newListing)
+
     res.json(newListing);
-    for (let i = 0; i < images.length; i++) {
-      const imageUrl = images[i];
-      const newImage = await Image.create({
-        listingId: newListing.id,
-        url: imageUrl
-      })
-    }
+    // for (let i = 0; i < images.length; i++) {
+    //   const imageUrl = images[i];
+    //   const newImage = await Image.create({
+    //     listingId: newListing.id,
+    //     url: imageUrl
+    //   })
+    // }
 }))
 
 router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
@@ -119,10 +127,7 @@ router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
       city,
       state,
       country,
-      images
      } = req.body
-     console.log(images)
-     console.log('images')
     const newListing = await Listing.update({
       userId,
       title,
@@ -139,19 +144,22 @@ router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
       city,
       state,
       country
-    }, {where: {
-      categoryId
-    }})
-
-    for (let i = 0; i < images.length; i++) {
-      const imageUrl = images[i];
-      await Image.update({
-        listingId: req.params.id,
-        url: imageUrl
-      }, {where: {listingId: req.params.id}})
-    }
-    res.json(newListing);
-    // res.json(newImage)
+    }, {
+      include: User,
+      where: {
+        userId
+      }
+     })
+    console.log(req.body.images)
+    // for (let i = 0; i < images.length; i++) {
+    //   const imageUrl = images[i];
+    //   const newImg = await Image.update({
+    //     listingId: newListing.id,
+    //     url: imageUrl
+    //   })
+    //   }
+      return res.json(newListing);
+      // res.json(newImage)
 
 }))
 

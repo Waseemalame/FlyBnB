@@ -8,13 +8,21 @@ const load = (images, listingId) => ({
 });
 
 export const getImages = (listingId) => async (dispatch) => {
-  const response = await fetch(`/api/listings/${listingId}/images`);
+  const response = await fetch(`/api/listing/${listingId}/images`);
 
   if (response.ok) {
     const images = await response.json();
     dispatch(load(images, listingId));
   }
 };
+
+export const createImages = (listingId, data) => async dispatch => {
+  const res = await fetch(`/api/listings/${listingId}/images`, {
+    method: 'post',
+    body: JSON.stringify(data)
+  })
+  console.log(res)
+}
 
 const initialState = {};
 const imagesReducer = (state = initialState, action) => {

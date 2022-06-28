@@ -13,8 +13,8 @@ function CardDetails() {
   const listing = useSelector(state => state.listings[id])
   const dispatch = useDispatch();
 
-
   const sessionUser = useSelector(state => state.session.user)
+  const arrEql = listing.userId === sessionUser.id
   const newAmenities = {};
   const amenitiesValues = Object.values(amenitiesObj)
   amenitiesValues.forEach(val => {
@@ -67,10 +67,10 @@ function CardDetails() {
       </div>
         <div>
           <h2 className='listing-description'>
-            {listing.type} hosted by {sessionUser.username}
+            {listing.type} hosted by {listing.User.username}
           </h2>
           <p className='listing-details'>{listing.guests} guests · {listing.beds} beds · {listing.baths} baths</p>
-          {sessionUser.id === listing.userId ? (
+          {sessionUser.id === listing.User.id ? (
             <button className='edit-listing-btn'>Edit Listing</button>
 
           ) : (

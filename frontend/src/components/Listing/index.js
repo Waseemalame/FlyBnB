@@ -24,7 +24,6 @@ useEffect(() => {
 
 
 
-
   return (
     <div className='listing-container'>
       {listings.map((listing) => (

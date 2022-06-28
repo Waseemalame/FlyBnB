@@ -7,7 +7,7 @@ import './ImageSlider.css'
 const ImageSlider = ({ listing, hoveredOver, cname, userListingRendered}) => {
 
   const [currentSlide, setCurrentSlide] = useState(0)
-  const length = listing.Images.length
+  const length = listing.Images?.length
   const history = useHistory();
 
   const nextSlide = () => {
