@@ -89,11 +89,11 @@ form > button {
   height: 50px;
   margin: 20px auto;
   border-radius: 10px;
-  background-image: linear-gradient(to right, #e22d2d, #4d4b51);
-  color: white;
+  background-image: linear-gradient(to right, #38292942, #4d4b5157);
+  color: rgb(0, 0, 0);
 }
 form > button:hover{
-  color: gold;
+  color: white;
 }
 
 .amenities-label{
