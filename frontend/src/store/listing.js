@@ -5,6 +5,7 @@ const GET_LISTINGS = 'listings/getListings';
 const ADD_LISTING = 'listings/addListing'
 const GET_ONE_LISTING = 'listings/getOneListing'
 const EDIT_LISTING = 'listings/editListing'
+const DELETE_LISTING = 'listings/deleteListing'
 
 const getListings = (listings) => {
   return {
@@ -30,6 +31,10 @@ const getOneListing = (listing) => {
     listing
   }
 }
+export const deleteListing = listing => ({
+  type: DELETE_LISTING,
+  listing
+});
 
 export const getListingsThunk = () => async dispatch => {
   const res = await fetch('/api/listings')
@@ -72,6 +77,17 @@ export const editListingThunk = (data) => async dispatch => {
   return editedListing;
 
 }
+export const deleteListingThunk = (id) => async dispatch => {
+  const response = await csrfFetch(`/api/listings/${id}`, {
+    method: 'DELETE'
+  });
+
+  if (response.ok) {
+    const listing = await response.json();
+    dispatch(deleteListing(listing));
+    return listing;
+  }
+}
 
 
 
@@ -101,6 +117,10 @@ const listingsReducer = (state = initialState, action) => {
           ...action.updatedListing
         },
       };
+      case DELETE_LISTING:
+        const newStateDelete = {...state};
+        delete newStateDelete[action.listingToRemove.id];
+        return newStateDelete;
 
       default:
         return state;

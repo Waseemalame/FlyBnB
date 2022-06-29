@@ -104,11 +104,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
 }))
 
 router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
-  console.log('re .params.ID')
-  console.log('re .params.ID')
-  console.log('re .params.ID')
-  console.log('re .params.ID')
-  console.log('re .params.ID')
+
   console.log(req.params.id)
   const id = req.params.id
     const {
@@ -160,6 +156,16 @@ router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
       // res.json(newImage)
 
 }))
+
+router.delete('/:id(\\d+)', asyncHandler(async function (req, res) {
+  const id = req.params.id
+
+  const listing = await Listing.findByPk(id);
+
+    await listing.destroy();
+    return res.json(listing.id)
+
+}));
 
 
 
