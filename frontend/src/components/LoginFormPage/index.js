@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import * as sessionActions from '../../store/session';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router-dom';
-
+import SingupFormPage from '../SingupFormPage';
 import './LoginFormPage.css'
 
 const LoginFormPage = () => {
@@ -10,6 +10,7 @@ const LoginFormPage = () => {
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState([])
+  const [showSignupForm, setShowSignupForm] = useState(false)
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -30,7 +31,12 @@ const LoginFormPage = () => {
         if (data && data.errors) setErrors(data.errors);
       });
   }
+  const handleDemoUser = () => {
+    dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
+  }
+  const handleSignup = () => {
 
+  }
   return (
     <>
       <form onSubmit={handleSubmit}>
@@ -57,6 +63,14 @@ const LoginFormPage = () => {
           </label>
           <button type="submit">Log In</button>
       </form>
+      <h3>Don't have an account yet? Sign Up Today!</h3>
+      <button onClick={() => setShowSignupForm(true)}>Sign up</button>
+      {showSignupForm && (
+        <SingupFormPage />
+
+      )}
+      <h3>Or just sign in as a demo user!</h3>
+      <button onClick={handleDemoUser}>Demo User</button>
     </>
   )
 }
