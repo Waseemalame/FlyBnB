@@ -4,7 +4,10 @@ import { AmenitiesData, AmenitiesIcons } from './AmenitiesData';
 import { Redirect, useHistory } from 'react-router-dom';
 import { addListingThunk } from '../../store/listing';
 import './HostForm.css'
-const HostForm = ({ categories }) => {
+import ImagesForm from '../ImagesForm';
+const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
+
+  const [showAmenititesForm, setShowAmenititesForm] = useState(false)
 
   const [title, setTitle] = useState('');
   const [categoryId, setCategoryId] = useState('');
@@ -38,6 +41,7 @@ const HostForm = ({ categories }) => {
   const updateCity = (e) => setCityLocation(e.target.value);
   const updateState = (e) => setStateLocation(e.target.value);
   const updateCountry = (e) => setCountry(e.target.value);
+  const [imgUrls, setImgUrls] = useState([ { url: "" }, { url: "" }, { url: "" }, { url: "" }, { url: "" } ])
 
   const [images, setImages] = useState([])
 
@@ -48,7 +52,7 @@ const HostForm = ({ categories }) => {
   const [image5, setImage5] = useState('');
   const [image6, setImage6] = useState('');
 
-
+  const [imagesSubmitted, setImagesSubmitted] = useState(false)
   const dispatch = useDispatch();
 
   let amenitiesArray = [];
@@ -57,7 +61,10 @@ const HostForm = ({ categories }) => {
 
 
   const history = useHistory()
+  useEffect(() => {
+    // console.log(imgUrls)
 
+  }, [imgUrls])
 
   const changeBg = (index) => {
     const amenityDiv = document.getElementById(`amenity-${index - 1}`);
@@ -79,33 +86,12 @@ const HostForm = ({ categories }) => {
     }
   }, [amenitiesArray, selectedAmenities, categoryId])
 
-
+  const addAmenFunc = (e) => {
+    e.preventDefault();
+    setShowAmenititesForm(true)
+  }
   const onSubmit = async (e) => {
     e.preventDefault();
-    if(image1 !== ''){
-      images.push(image1)
-
-    }
-    if(image2 !== ''){
-      images.push(image2)
-
-    }
-    if(image3 !== ''){
-      images.push(image3)
-
-    }
-    if(image4 !== ''){
-      images.push(image4)
-
-    }
-    if(image5 !== ''){
-      images.push(image5)
-
-    }
-    if(image6 !== ''){
-      images.push(image6)
-
-    }
 
   const data = {
     userId: user.id,
@@ -123,13 +109,15 @@ const HostForm = ({ categories }) => {
     city: cityLocation,
     state: stateLocation,
     country,
-    images
+    images: imgUrls
 
   }
 
+    if(imagesSubmitted) {
 
-    await dispatch(addListingThunk(data))
-    history.push('/')
+      await dispatch(addListingThunk(data))
+      history.push('/')
+    }
   }
   const someArr = Object.entries(categories)
   someArr.forEach(arr => {
@@ -137,6 +125,8 @@ const HostForm = ({ categories }) => {
   })
   return (
     <form className='host-form' onSubmit={onSubmit}>
+      {!showImageForm ? (
+        <>
       <label>Title
         <input
         type="text"
@@ -204,14 +194,23 @@ const HostForm = ({ categories }) => {
         min="0"
         type="number" />
       </label>
-      <label className='amenities-label'>Amenities
+      <button onClick={(e) =>{
+        e.preventDefault();
+        showAmenititesForm ? setShowAmenititesForm(false) : setShowAmenititesForm(true)
+
+        return;
+      }
+      }
+      >Add Amenitites</button>
+      {showAmenititesForm && (
+        <label className='amenities-label'>Amenities
         <div className='all-amenities'>
           {AmenitiesData.map((amenity, index) => (
             <>
             <div
             id={'amenity-' + index}
             className="amenity-div"
-            onClick={() => changeBg(index + 1)}
+            onClick={() => setShowAmenititesForm(index + 1)}
             >
                 <img src={AmenitiesIcons[index]} alt="icon" />
                 <div id='amenity-string'>{amenity}</div>
@@ -221,6 +220,9 @@ const HostForm = ({ categories }) => {
         </div>
 
       </label>
+      )
+      }
+
       <label className='price-label'>Price
         <input
         value={price}
@@ -273,44 +275,23 @@ const HostForm = ({ categories }) => {
         placeholder='country'
         type="text" />
       </label>
-      <label className='images-label'>Images
-        <input
-        value={image1}
-        onChange={(e) => setImage1(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image2}
-        onChange={(e) => setImage2(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image3}
-        onChange={(e) => setImage3(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image4}
-        onChange={(e) => setImage4(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image5}
-        onChange={(e) => setImage5(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-        <input
-        value={image6}
-        onChange={(e) => setImage6(e.target.value)}
-        className='image-input'
-        placeholder='image url'
-        type="text" />
-      </label>
+    </>
+      ) : ( <ImagesForm imgUrls={imgUrls} setImgUrls={setImgUrls} setImagesSubmitted={setImagesSubmitted} /> )
+      }
+      <button onClick={(e) =>{
+        e.preventDefault();
+        setShowImageForm(true)
+        return;
+      }
+      }
+      >Add Images</button>
+      <button onClick={(e) =>{
+        e.preventDefault();
+        setShowImageForm(false)
+        return;
+      }
+      }
+      >Back</button>
       <button type="submit">Submit</button>
     </form>
   )

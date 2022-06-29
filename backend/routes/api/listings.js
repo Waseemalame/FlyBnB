@@ -67,6 +67,12 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
       country,
       images
      } = req.body
+     console.log(images)
+     console.log('IMAGESIMAGES')
+     console.log('IMAGESIMAGES')
+     console.log('IMAGESIMAGES')
+     console.log('IMAGESIMAGES')
+     console.log('IMAGESIMAGES')
 
     const newListing = await Listing.create({
       userId,
@@ -88,7 +94,8 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
 
     res.json(newListing);
     for (let i = 0; i < images.length; i++) {
-      const imageUrl = images[i];
+      const imageUrl = images[i].url;
+
       const newImage = await Image.create({
         listingId: newListing.id,
         url: imageUrl
