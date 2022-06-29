@@ -2,3 +2,25 @@
   position: relative;
   z-index: 0;
 }
+.edit-listing-form{
+  display: flex;
+  flex-direction: column;
+  /* margin: 20px 150px; */
+  text-align: center;
+
+  /* overflow-y: scroll; */
+  /* max-height: fit-content; */
+  top: 20em;
+  /* float: right; */
+  /* position: absolute; */
+  /* width: 25vw;
+  left: 50vw; */
+  margin: 2em auto;
+
+}
+.edit-listing-form > label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1em;
+}

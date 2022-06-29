@@ -103,6 +103,63 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
     }
 }))
 
+router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
+  console.log('re .params.ID')
+  console.log('re .params.ID')
+  console.log('re .params.ID')
+  console.log('re .params.ID')
+  console.log('re .params.ID')
+  console.log(req.params.id)
+  const id = req.params.id
+    const {
+      userId,
+      title,
+      categoryId,
+      type,
+      guests,
+      beds,
+      bedrooms,
+      baths,
+      amenities,
+      price,
+      cleaningFee,
+      serviceFee,
+      city,
+      state,
+      country,
+     } = req.body
+    await Listing.update({
+      userId,
+      title,
+      categoryId,
+      type,
+      guests,
+      beds,
+      bedrooms,
+      baths,
+      amenities,
+      price,
+      cleaningFee,
+      serviceFee,
+      city,
+      state,
+      country
+    }, {
+      where: { id }
+    })
+    console.log(req.body.images)
+    // for (let i = 0; i < images.length; i++) {
+    //   const imageUrl = images[i];
+    //   const newImg = await Image.update({
+    //     listingId: newListing.id,
+    //     url: imageUrl
+    //   })
+    //   }
+    const newListing = await Listing.findByPk(id)
+      return res.json(newListing);
+      // res.json(newImage)
+
+}))
 
 
 

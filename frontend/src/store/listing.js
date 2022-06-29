@@ -4,6 +4,7 @@ import { LOAD_IMAGES } from './images';
 const GET_LISTINGS = 'listings/getListings';
 const ADD_LISTING = 'listings/addListing'
 const GET_ONE_LISTING = 'listings/getOneListing'
+const EDIT_LISTING = 'listings/editListing'
 
 const getListings = (listings) => {
   return {
@@ -18,6 +19,10 @@ const addListing = (listing) => {
     listing
   }
 }
+export const editListing = updatedListing => ({
+  type: EDIT_LISTING,
+  updatedListing
+});
 
 const getOneListing = (listing) => {
   return {
@@ -54,6 +59,19 @@ export const addListingThunk = (data) => async dispatch => {
   return res;
 
 }
+export const editListingThunk = (data) => async dispatch => {
+  console.log(data)
+  const res = await csrfFetch(`/api/listings/${data.id}`, {
+    method: 'PUT',
+    body: JSON.stringify(data)
+  })
+  const editedListing = await res.json();
+  console.log(editedListing)
+  dispatch(editListing(editedListing))
+  // dispatch(getListingsThunk(data))
+  return editedListing;
+
+}
 
 
 
@@ -75,6 +93,14 @@ const listingsReducer = (state = initialState, action) => {
         return {
           ...state
         };
+      case EDIT_LISTING:
+      return {
+        ...state,
+        [action.updatedListing.id]: {
+          ...state[action.updatedListing.id],
+          ...action.updatedListing
+        },
+      };
 
       default:
         return state;

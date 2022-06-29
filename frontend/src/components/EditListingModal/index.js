@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Modal } from '../../context/Modal';
 import EditListingForm from '../EditListingForm';
 
-function EditListingModal() {
+function EditListingModal({ listing }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -11,7 +11,7 @@ function EditListingModal() {
       <button onClick={() => setShowModal(true)}>Edit</button>
       {showModal && (
         <Modal onClose={() => setShowModal(false)}>
-          <EditListingForm />
+          <EditListingForm listing={listing} setShowModal={setShowModal} />
         </Modal>
       )}
     </>
