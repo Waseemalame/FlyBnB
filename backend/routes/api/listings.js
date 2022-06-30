@@ -3,7 +3,7 @@ const asyncHandler = require('express-async-handler');
 const router = express.Router();
 
 const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Listing, Image } = require('../../db/models');
+const { User, Listing, Image, Review } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -47,6 +47,24 @@ router.get('/:id/images', async(req, res) => {
   })
   res.json(images)
 })
+
+router.get('/:id/reviews', asyncHandler(async function(req, res) {
+  const id = req.params.id
+  console.log(id)
+  const reviews = await Review.findAll({
+    where: {
+      listingId: id
+    },
+    include: User
+  });
+  console.log(reviews)
+  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
+  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
+  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
+  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
+  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
+  return res.json(reviews);
+}));
 
 router.post('/', requireAuth, asyncHandler(async function (req, res) {
     const {
