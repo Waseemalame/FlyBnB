@@ -69,23 +69,18 @@ export const addListingThunk = (data) => async dispatch => {
 }
 
 export const editListingThunk = (data) => async dispatch => {
-  console.log(data)
   const res = await csrfFetch(`/api/listings/${data.id}`, {
     method: 'PUT',
     body: JSON.stringify(data)
   })
   const editedListing = await res.json();
-  console.log(editedListing)
   dispatch(editListing(editedListing))
   // dispatch(getListingsThunk(data))
   return editedListing;
 
 }
 export const deleteListingThunk = (data) => async dispatch => {
-  console.log('WE INSIDE THE THUNK')
-  console.log('WE INSIDE THE THUNK')
-  console.log('WE INSIDE THE THUNK')
-  console.log('WE INSIDE THE THUNK')
+
   const res = await csrfFetch(`/api/listings/${data.id}`, {
     method: 'delete',
   })
@@ -132,6 +127,14 @@ const listingsReducer = (state = initialState, action) => {
           )
         }
       };
+      case ADD_REVIEW:
+      return {
+        ...state,
+        [action.review.listingId]: {
+          ...state[action.review.listingId],
+          reviews: [...state[action.review.listingId].reviews, action.review.id]
+        }
+      };
       case ADD_LISTING:
         return {
           ...state
@@ -145,7 +148,6 @@ const listingsReducer = (state = initialState, action) => {
         },
       };
       case DELETE_LISTING:
-        console.log(state[action.listingId])
         const deleteState = { ...state };
         delete deleteState[action.listingId];
         return deleteState;

@@ -5,10 +5,11 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
 import { getOneListingThunk } from '../../store/listing';
 import { amenitiesObj } from '../HostForm/AmenitiesData';
-import { getListingsReviews, removeReviewThunk } from '../../store/reviews';
+import { createReview, getListingsReviews, removeReviewThunk } from '../../store/reviews';
 import './CardDetails.css'
 
 function CardDetails() {
+  const [reviewContent, setReviewContent] = useState('')
   const { id } = useParams();
   const listing = useSelector(state => state.listings[id])
   const dispatch = useDispatch();
@@ -18,10 +19,19 @@ function CardDetails() {
     return listing.reviews.map(reviewId => state.reviews[reviewId]);
   });
 
-
   useEffect(() => {
     dispatch(getListingsReviews(listing.id))
   }, [dispatch, listing.id])
+
+  const handleReviewSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      content: reviewContent,
+      listingId: listing.id,
+      userId: sessionUser.id
+    }
+    dispatch(createReview(data))
+  }
 
   const sessionUser = useSelector(state => state.session.user)
   const newAmenities = {};
@@ -99,8 +109,18 @@ function CardDetails() {
           ))}
         </div>
         <div className="reviews-container">
+        <button>Click me to create review!</button>
+              <form onSubmit={handleReviewSubmit}>
+                <input type="text"
+                value={reviewContent}
+                onChange={(e) => setReviewContent(e.target.value)}
+                placeholder="enter your review"
+                 />
+                 <button type='submit'>Submit Review</button>
+              </form>
           {reviews ? reviews.map(review => (
             <div>
+
               <div>{review?.content}</div>
               {review?.userId === sessionUser.id && (
                 <button onClick={() => {

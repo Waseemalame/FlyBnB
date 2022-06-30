@@ -14,7 +14,6 @@ const UserListingsPage = ({ listings, user }) => {
 
   }
   const deleteListing = async (listing) => {
-    console.log(listing, 'LISTING BITCH BITE ME BVITCH')
     await dispatch(deleteListingThunk(listing))
   }
   return (
@@ -25,7 +24,6 @@ const UserListingsPage = ({ listings, user }) => {
             <Card userListingRendered={userListingRendered} listing={listing} cname={cname}/>
             <div className="user-listing-btns">
               <EditListingModal listing={listing} />
-              {/* <button onClick={editListing} className='edit-listing'>Edit</button> */}
               <button onClick={async() => {
                 await dispatch(deleteListingThunk(listing))
                 return listing;

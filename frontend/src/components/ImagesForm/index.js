@@ -5,24 +5,20 @@ import { useDispatch } from 'react-redux'
 
 const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
   const dispatch = useDispatch();
-  // const [imgUrls, setImgUrls] = useState([ { url: "" }, { url: "" }, { url: "" }, { url: "" }, { url: "" } ])
 
   const imgInputChange = (e, i) => {
     e.preventDefault();
-    // console.log(e.target.value, 'asdfdsssssssssss')
     let newImgVals = [...imgUrls];
     newImgVals[i][e.target.name] = e.target.value;
     setImgUrls(newImgVals);
   }
   const handleImageSubmit = (e, i) => {
     e.preventDefault();
-    console.log('hihih')
     setImagesSubmitted(true)
 
 
   }
 
-  // imgUrls.map(el => console.log(el.url))
   return (
     <>
       {imgUrls.map((img, i) => (

@@ -28,22 +28,29 @@ const remove = (reviewId, listingId) => ({
 
 
 export const getListingsReviews = (id) => async dispatch => {
-  console.log('REVIEWS REDUCVER')
   const res = await fetch(`/api/listings/${id}/reviews`)
   if(res.ok){
     const reviews = await res.json();
-    console.log(reviews)
 
-    console.log('REVIEWS REDUCVER')
-    console.log('REVIEWS REDUCVER')
-    console.log('REVIEWS REDUCVER')
     dispatch(load(reviews, id))
     return reviews;
   }
 }
+export const createReview = (data) => async (dispatch) => {
+
+  const response = await csrfFetch(`/api/listings/${data.listingId}/reviews`, {
+    method: 'POST',
+    body: JSON.stringify(data)
+  });
+
+
+    const newReview = await response.json()
+    dispatch(add(newReview))
+    return newReview
+
+}
 
 export const removeReviewThunk = (reviewId, listingId) => async dispatch => {
-  // console.log('data', data)
   const res = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: 'DELETE'
   })
@@ -66,6 +73,11 @@ const reviewsReducer = (state = initialState, action) => {
         ...state,
         ...newReviews
       }
+    case ADD_REVIEW:
+      return {
+        ...state,
+        [action.review.id]: action.review
+      };
     case UPDATE_REVIEW:
     return {
       ...state,

@@ -50,19 +50,13 @@ router.get('/:id/images', async(req, res) => {
 
 router.get('/:id/reviews', asyncHandler(async function(req, res) {
   const id = req.params.id
-  console.log(id)
   const reviews = await Review.findAll({
     where: {
       listingId: id
     },
     include: User
   });
-  console.log(reviews)
-  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
-  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
-  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
-  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
-  console.log('data get reviews!!!!!!!!!!!!!!!!!!!!!')
+
   return res.json(reviews);
 }));
 
@@ -85,12 +79,6 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
       country,
       images
      } = req.body
-     console.log(images)
-     console.log('IMAGESIMAGES')
-     console.log('IMAGESIMAGES')
-     console.log('IMAGESIMAGES')
-     console.log('IMAGESIMAGES')
-     console.log('IMAGESIMAGES')
 
     const newListing = await Listing.create({
       userId,
@@ -122,12 +110,7 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
 }))
 
 router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
-  console.log('re .params.ID')
-  console.log('re .params.ID')
-  console.log('re .params.ID')
-  console.log('re .params.ID')
-  console.log('re .params.ID')
-  console.log(req.params.id)
+
   const id = req.params.id
     const {
       userId,
@@ -165,25 +148,32 @@ router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
     }, {
       where: { id }
     })
-    console.log(req.body.images)
-    // for (let i = 0; i < images.length; i++) {
-    //   const imageUrl = images[i];
-    //   const newImg = await Image.update({
-    //     listingId: newListing.id,
-    //     url: imageUrl
-    //   })
-    //   }
+
     const newListing = await Listing.findByPk(id)
       return res.json(newListing);
-      // res.json(newImage)
 
 }))
 router.delete('/:id', asyncHandler(async function (req, res) {
   const id = req.params.id
-  console.log(id)
   const listing = await Listing.findByPk(id)
   listing.destroy();
   res.json(listing)
+}))
+
+router.post('/:id/reviews', requireAuth, asyncHandler(async function (req, res) {
+  const {
+    content,
+    userId,
+    listingId
+   } = req.body;
+  const review = await Review.create({
+    content,
+    userId,
+    listingId
+  })
+  const newReview = await Review.findByPk(review.id, {include: User})
+  return res.json(newReview);
+
 }))
 
 

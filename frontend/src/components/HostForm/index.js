@@ -62,7 +62,6 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
 
   const history = useHistory()
   useEffect(() => {
-    // console.log(imgUrls)
 
   }, [imgUrls])
 
