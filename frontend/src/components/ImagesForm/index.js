@@ -24,7 +24,7 @@ const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
 
   // imgUrls.map(el => console.log(el.url))
   return (
-    <form>
+    <>
       {imgUrls.map((img, i) => (
         <input
         placeholder='Image Url'
@@ -38,7 +38,7 @@ const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
       ))}
 
       <div onClick={handleImageSubmit}>Submit Images</div>
-    </form>
+    </>
   )
 }
 
