@@ -1,5 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { deleteListingThunk } from '../../store/listing'
 import Card from '../Card'
 import EditListingModal from '../EditListingModal'
 import './UserListingsPage.css'
@@ -7,11 +9,14 @@ const UserListingsPage = ({ listings, user }) => {
   const [cname, setCname] = useState('')
   const [userListingRendered, setUserListingRendered] = useState(true)
   const userListings = listings.filter(listing => listing.userId === user.id)
-
+  const dispatch = useDispatch();
   const editListing = () => {
 
   }
-
+  const deleteListing = async (listing) => {
+    console.log(listing, 'LISTING BITCH BITE ME BVITCH')
+    await dispatch(deleteListingThunk(listing))
+  }
   return (
     <div className='user-listings'>
       {userListings.map((listing) => (
@@ -21,7 +26,11 @@ const UserListingsPage = ({ listings, user }) => {
             <div className="user-listing-btns">
               <EditListingModal listing={listing} />
               {/* <button onClick={editListing} className='edit-listing'>Edit</button> */}
-              <button className='delete-listing'>Delete</button>
+              <button onClick={async() => {
+                await dispatch(deleteListingThunk(listing))
+                return listing;
+              }
+              } className='delete-listing'>Delete</button>
             </div>
           </div>
 

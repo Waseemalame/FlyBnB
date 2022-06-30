@@ -6,7 +6,7 @@ const GET_LISTINGS = 'listings/getListings';
 const ADD_LISTING = 'listings/addListing'
 const GET_ONE_LISTING = 'listings/getOneListing'
 const EDIT_LISTING = 'listings/editListing'
-
+const DELETE_LISTING  = 'listings/deleteListing'
 const getListings = (listings) => {
   return {
     type: GET_LISTINGS,
@@ -29,6 +29,13 @@ const getOneListing = (listing) => {
   return {
     type: GET_ONE_LISTING,
     listing
+  }
+}
+const deleteOneListing = (listingId) => {
+  return {
+
+    type: DELETE_LISTING,
+    listingId
   }
 }
 
@@ -60,6 +67,7 @@ export const addListingThunk = (data) => async dispatch => {
   return res;
 
 }
+
 export const editListingThunk = (data) => async dispatch => {
   console.log(data)
   const res = await csrfFetch(`/api/listings/${data.id}`, {
@@ -73,6 +81,22 @@ export const editListingThunk = (data) => async dispatch => {
   return editedListing;
 
 }
+export const deleteListingThunk = (data) => async dispatch => {
+  console.log('WE INSIDE THE THUNK')
+  console.log('WE INSIDE THE THUNK')
+  console.log('WE INSIDE THE THUNK')
+  console.log('WE INSIDE THE THUNK')
+  const res = await csrfFetch(`/api/listings/${data.id}`, {
+    method: 'delete',
+  })
+  if(res.ok){
+    const { id: deletedItemId } = await res.json();
+    dispatch(deleteOneListing(data.id))
+    return deletedItemId;
+  }
+
+}
+
 
 
 
@@ -110,6 +134,11 @@ const listingsReducer = (state = initialState, action) => {
           ...action.updatedListing
         },
       };
+      case DELETE_LISTING:
+        console.log(state[action.listingId])
+        const deleteState = { ...state };
+        delete deleteState[action.listingId];
+        return deleteState;
 
       default:
         return state;
