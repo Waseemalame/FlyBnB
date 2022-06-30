@@ -5,6 +5,7 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
 import { getOneListingThunk } from '../../store/listing';
 import { amenitiesObj } from '../HostForm/AmenitiesData';
+import { getListingsReviews } from '../../store/reviews';
 import './CardDetails.css'
 
 function CardDetails() {
@@ -13,6 +14,15 @@ function CardDetails() {
   const listing = useSelector(state => state.listings[id])
   const dispatch = useDispatch();
 
+  const reviews = useSelector((state) => {
+    if (!listing.reviews) return null;
+    return listing.reviews.map(reviewId => state.reviews[reviewId]);
+  });
+
+
+  useEffect(() => {
+    dispatch(getListingsReviews(listing.id))
+  }, [dispatch, listing.id])
 
   const sessionUser = useSelector(state => state.session.user)
   const newAmenities = {};
@@ -30,6 +40,9 @@ function CardDetails() {
 
   const newAmenitiesArr = Object.values(newAmenities)
 
+  if (!reviews) {
+    return null;
+  }
   return (
 
     <div className="card-details-container">
@@ -85,6 +98,11 @@ function CardDetails() {
               <div className='amenity-name'>{amenity.name}</div>
             </div>
           ))}
+        </div>
+        <div className="reviews-container">
+          {reviews ? reviews.map(review => (
+            <div>{review.content}</div>
+          )) : 'No rewiews have been'}
         </div>
     </div>
   )
