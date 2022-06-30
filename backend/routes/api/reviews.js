@@ -13,6 +13,12 @@ const { handleValidationErrors } = require('../../utils/validation');
 //   const reviews = await Review.findAll({})
 
 // })
+router.delete("/:id", asyncHandler(async function (req, res) {
+  const id = req.params.id;
+  const review = await Review.findByPk(id);
+  review.destroy();
+  return res.json({ id });
+}));
 
 
 module.exports = router;

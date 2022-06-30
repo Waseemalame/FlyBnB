@@ -14,6 +14,8 @@ psql -c "create user <userName_app> password '<password>' createdb"
 npx dotenv sequelize db:drop
 npx dotenv sequelize db:create
 
+npx dotenv sequelize db:migrate
+npx dotenv sequelize db:seed:all
 
 // Sequelize commands //
 
@@ -23,8 +25,6 @@ sudo service postgresql restart
 
 npx dotenv sequelize db:seed:undo:all
 npx dotenv sequelize db:migrate:undo
-npx dotenv sequelize db:migrate
-npx dotenv sequelize db:seed:all
 
 alternatively:
     npx sequelize db:drop

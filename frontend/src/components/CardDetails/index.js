@@ -5,11 +5,10 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
 import { getOneListingThunk } from '../../store/listing';
 import { amenitiesObj } from '../HostForm/AmenitiesData';
-import { getListingsReviews } from '../../store/reviews';
+import { getListingsReviews, removeReviewThunk } from '../../store/reviews';
 import './CardDetails.css'
 
 function CardDetails() {
-
   const { id } = useParams();
   const listing = useSelector(state => state.listings[id])
   const dispatch = useDispatch();
@@ -101,7 +100,14 @@ function CardDetails() {
         </div>
         <div className="reviews-container">
           {reviews ? reviews.map(review => (
-            <div>{review.content}</div>
+            <div>
+              <div>{review?.content}</div>
+              {review?.userId === sessionUser.id && (
+                <button onClick={() => {
+                  dispatch(removeReviewThunk(review.id, listing.id))
+                }}>Delete Me if u own me</button>
+              )}
+            </div>
           )) : 'No rewiews have been'}
         </div>
     </div>

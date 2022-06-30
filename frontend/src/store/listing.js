@@ -1,6 +1,6 @@
 import { csrfFetch } from './csrf';
 import { LOAD_IMAGES } from './images';
-import { LOAD_REVIEWS } from './reviews';
+import { LOAD_REVIEWS, REMOVE_REVIEW, ADD_REVIEW, UPDATE_REVIEW } from './reviews';
 
 const GET_LISTINGS = 'listings/getListings';
 const ADD_LISTING = 'listings/addListing'
@@ -120,6 +120,16 @@ const listingsReducer = (state = initialState, action) => {
         [action.listingId]: {
           ...state[action.listingId],
           reviews: action.reviews.map(review => review.id)
+        }
+      };
+      case REMOVE_REVIEW:
+      return {
+        ...state,
+        [action.listingId]: {
+          ...state[action.listingId],
+          reviews: state[action.listingId].reviews.filter(
+            (reviewId) => reviewId !== action.reviewId
+          )
         }
       };
       case ADD_LISTING:

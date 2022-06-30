@@ -44,7 +44,7 @@ function App() {
 
     <Switch>
       <Route path="/login">
-        <Navigation user={sessionUser} />
+        {/* <Navigation user={sessionUser} /> */}
         <LoginFormPage />
       </Route>
       <Route path="/signup">

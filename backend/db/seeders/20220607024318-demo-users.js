@@ -8,7 +8,7 @@ module.exports = {
     {
       email: 'demo@user.io',
       username: 'Demo-lition',
-      profileImg: '',
+      profileImg: 'https://a0.muscache.com/im/pictures/user/bbee0d2b-03be-4d66-8ced-fd65bcfcd805.jpg?aki_policy=profile_medium',
       hashedPassword: bcrypt.hashSync('password')
     },
     {
