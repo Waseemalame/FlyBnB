@@ -3,6 +3,7 @@ import sessionReducer from './session';
 import categoriesReducer from './category';
 import listingsReducer from './listing';
 import imagesReducer from './images';
+import reviewsReducer from './reviews';
 import thunk from 'redux-thunk';
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   categories: categoriesReducer,
   listings: listingsReducer,
   images: imagesReducer,
+  reviews: reviewsReducer,
 });
 
 let enhancer;

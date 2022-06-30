@@ -1,5 +1,6 @@
 import { csrfFetch } from './csrf';
 import { LOAD_IMAGES } from './images';
+import { LOAD_REVIEWS } from './reviews';
 
 const GET_LISTINGS = 'listings/getListings';
 const ADD_LISTING = 'listings/addListing'
@@ -88,6 +89,14 @@ const listingsReducer = (state = initialState, action) => {
       return {
         ...newState,
 
+      };
+      case LOAD_REVIEWS:
+      return {
+        ...state,
+        [action.listingId]: {
+          ...state[action.listingId],
+          reviews: action.reviews.map(review => review.id)
+        }
       };
       case ADD_LISTING:
         return {
