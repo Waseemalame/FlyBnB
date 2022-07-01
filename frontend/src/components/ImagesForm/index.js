@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux'
 
 const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
   const dispatch = useDispatch();
-
+  const [validationErrorsImages, setValidationErrorsImages] = useState([])
+  const errors = [];
   const imgInputChange = (e, i) => {
     e.preventDefault();
     let newImgVals = [...imgUrls];
@@ -14,13 +15,33 @@ const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
   }
   const handleImageSubmit = (e, i) => {
     e.preventDefault();
-    setImagesSubmitted(true)
+    if(validationErrorsImages.length === 0){
+
+      setImagesSubmitted(true)
+    }
 
 
   }
+  useEffect(() => {
+    imgUrls.forEach(img => {
+      if(!img.url) {
+        errors.push('image field cannot be left blank')
+        // return;
+      }
+    })
+  }, [imgUrls])
+
+
 
   return (
     <>
+
+      <ul className="create-listing-errors">
+        {validationErrorsImages.map((error) => (
+          <li key={error}>{error}</li>
+        ))}
+      </ul>
+      <h3>All 5 image fields must be complete</h3><br></br>
       {imgUrls.map((img, i) => (
         <input
         placeholder='Image Url'
@@ -33,7 +54,7 @@ const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
 
       ))}
 
-      <div onClick={handleImageSubmit}>Submit Images</div>
+      {/* <div onClick={handleImageSubmit}>Submit Images</div> */}
     </>
   )
 }

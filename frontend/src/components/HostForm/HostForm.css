@@ -16,13 +16,14 @@
   display: flex;
   flex-direction: column;
   /* place-content: center; */
-  margin-top: 25px;
+  margin-top: 10px;
 }
 .all-amenities{
   display: flex;
   flex-wrap: wrap;
   font-size: 10px;
   justify-content: center;
+
 }
 
 .amenity-div{
@@ -78,6 +79,8 @@ form > label{
 }
 form > label > input, select {
   margin-top: 10px;
+  border-radius: 10px;
+  padding: 5px;
 }
 form > button {
   background-color: transparent;
@@ -97,11 +100,16 @@ form > button:hover{
 }
 
 .amenities-label{
-  padding-top: 100px;
+  /* padding-top: 100px; */
 }
 .price-label{
-  padding-top: 100px;
+  /* padding-top: 100px; */
 }
 .images-label{
   padding-top: 100px;
+}
+
+.create-listing-errors{
+  color: red;
+  /* list-style: none; */
 }

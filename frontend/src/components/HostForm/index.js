@@ -25,6 +25,9 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
   const [stateLocation, setStateLocation] = useState('');
   const [country, setCountry] = useState('');
   const [selected, setSelected] = useState(false)
+  const [imgUrls, setImgUrls] = useState([ { url: "" }, { url: "" }, { url: "" }, { url: "" }, { url: "" } ])
+  const [validationErrors, setValidationErrors] = useState([]);
+  const [attemptedSubmit, setAttemptedSubmit] = useState(false);
 
   const updateTitle = (e) => setTitle(e.target.value);
   const updateCategoryId = (e) => setCategoryId(e.target.value);
@@ -41,7 +44,6 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
   const updateCity = (e) => setCityLocation(e.target.value);
   const updateState = (e) => setStateLocation(e.target.value);
   const updateCountry = (e) => setCountry(e.target.value);
-  const [imgUrls, setImgUrls] = useState([ { url: "" }, { url: "" }, { url: "" }, { url: "" }, { url: "" } ])
 
   const [images, setImages] = useState([])
 
@@ -84,6 +86,25 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
       amenitiesArray.push(el.innerText)
     }
   }, [amenitiesArray, selectedAmenities, categoryId])
+  const errors = [];
+  useEffect(() => {
+    if(!title) errors.push('Title cannot be empty');
+    if(!categoryId) errors.push('Must choose a category');
+    if(!type) errors.push('Must choose a type');
+    if(!price) errors.push('Must include a price');
+    if(!cityLocation) errors.push('Must include city');
+    if(!country) errors.push('Must include country');
+    // if(!imagesSubmitted) errors.push('Must add 5 images')
+
+      // imgUrls.forEach(img => {
+      //   if(!img.url) {
+      //     errors.push('image field cannot be left blank')
+      //     // return;
+      //   }
+      // })
+
+    setValidationErrors(errors)
+  }, [title, categoryId, type, imgUrls, cityLocation, country, imagesSubmitted, price])
 
   const addAmenFunc = (e) => {
     e.preventDefault();
@@ -91,6 +112,7 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
   }
   const onSubmit = async (e) => {
     e.preventDefault();
+    setAttemptedSubmit(true)
 
   const data = {
     userId: user.id,
@@ -112,11 +134,11 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
 
   }
 
-    if(imagesSubmitted) {
+
 
       await dispatch(addListingThunk(data))
       history.push('/')
-    }
+
   }
   const someArr = Object.entries(categories)
   someArr.forEach(arr => {
@@ -126,6 +148,14 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
     <form className='host-form' onSubmit={onSubmit}>
       {!showImageForm ? (
         <>
+
+          <ul className="create-listing-errors">
+          {validationErrors.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+
+
       <label>Title
         <input
         type="text"
@@ -277,21 +307,30 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
     </>
       ) : ( <ImagesForm imgUrls={imgUrls} setImgUrls={setImgUrls} setImagesSubmitted={setImagesSubmitted} /> )
       }
-      <button onClick={(e) =>{
-        e.preventDefault();
-        setShowImageForm(true)
-        return;
-      }
-      }
-      >Add Images</button>
-      <button onClick={(e) =>{
-        e.preventDefault();
-        setShowImageForm(false)
-        return;
-      }
-      }
-      >Back</button>
-      <button type="submit">Submit</button>
+      {!showImageForm && (
+        <button onClick={(e) =>{
+          e.preventDefault();
+          setShowImageForm(true)
+          return;
+        }
+        }
+        >Add Images</button>
+
+      )}
+      {showImageForm && (
+        <button onClick={(e) =>{
+          e.preventDefault();
+          setShowImageForm(false)
+          return;
+        }
+        }
+        >Back</button>
+
+      )}
+      {showImageForm && (
+
+      <button disabled={validationErrors.length > 0} type="submit">Submit</button>
+      )}
     </form>
   )
 }
