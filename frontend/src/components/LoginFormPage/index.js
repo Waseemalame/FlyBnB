@@ -10,7 +10,7 @@ const LoginFormPage = () => {
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState([])
-  const [showSignupForm, setShowSignupForm] = useState(false)
+  const [showSignupForm, setShowSignupForm] = useState(true)
   const dispatch = useDispatch();
 
   const history = useHistory();
@@ -38,40 +38,46 @@ const LoginFormPage = () => {
 
   }
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-          <ul>
-            {errors.map((error, idx) => <li key={idx}>{error}</li>)}
-          </ul>
-          <label>
-            Username or Email
-            <input
-             type="text"
-             value={credential}
-             onChange={(e) => setCredential(e.target.value)}
-             required
-              />
-          </label>
-          <label>
-            Password
-            <input
-             type="password"
-             value={password}
-             onChange={(e) => setPassword(e.target.value)}
-             required
-              />
-          </label>
-          <button type="submit">Log In</button>
-      </form>
-      <h3>Don't have an account yet? Sign Up Today!</h3>
-      <button onClick={() => setShowSignupForm(true)}>Sign up</button>
-      {showSignupForm && (
-        <SingupFormPage />
 
-      )}
-      <h3>Or just sign in as a demo user!</h3>
-      <button onClick={handleDemoUser}>Demo User</button>
-    </>
+      <div className="login-form-container">
+        <form className='login-form' onSubmit={handleSubmit}>
+            <ul>
+              {errors.map((error, idx) => <li key={idx}>{error}</li>)}
+            </ul>
+            <label>
+              Username or Email
+              <input
+               type="text"
+               value={credential}
+               onChange={(e) => setCredential(e.target.value)}
+               required
+                />
+            </label>
+            <label>
+              Password
+              <input
+               type="password"
+               value={password}
+               onChange={(e) => setPassword(e.target.value)}
+               required
+                />
+            </label>
+            <button className='login-submit-btn' type="submit">Log In</button>
+        </form>
+        <h2 className='signup-header'>Don't have an account yet? Sign Up Today!</h2>
+        <button className='signup-btn' onClick={() =>
+        {
+          if(showSignupForm === true) setShowSignupForm(false)
+          else setShowSignupForm(true)
+        }
+        }>Sign up</button>
+        {showSignupForm && (
+          <SingupFormPage />
+        )}
+        {/* <h3>Or just sign in as a demo user!</h3> */}
+        <button className='demo-user-btn' onClick={handleDemoUser}>Demo User</button>
+      </div>
+
   )
 }
 

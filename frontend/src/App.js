@@ -14,6 +14,7 @@ import { getListingsThunk } from "./store/listing";
 import { getCategoriesThunk } from "./store/category";
 import FilteredListings from "./components/FilteredListings";
 import UserListingsPage from "./components/UserListingsPage";
+import LoginNavigation from "./components/LoginNavigation";
 function App() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -45,6 +46,7 @@ function App() {
     <Switch>
       <Route path="/login">
         {/* <Navigation user={sessionUser} /> */}
+        <LoginNavigation />
         <LoginFormPage />
       </Route>
       <Route path="/signup">

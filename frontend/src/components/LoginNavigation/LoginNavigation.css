@@ -1,0 +1,9 @@
+.login-nav-container {
+  position: sticky;
+  background-color: white;
+  top: .1rem;
+}
+.login-nav-logo{
+  width: 100px;
+  margin-left: 2rem;
+}

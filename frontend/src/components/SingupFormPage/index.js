@@ -47,7 +47,7 @@ const SingupFormPage = () => {
              required
               />
           </label>
-          <label>
+          {/* <label>
             First Name
             <input
              type="text"
@@ -64,7 +64,7 @@ const SingupFormPage = () => {
              onChange={(e) => setLastName(e.target.value)}
              required
               />
-          </label>
+          </label> */}
           <label>
             Email
             <input
@@ -80,15 +80,6 @@ const SingupFormPage = () => {
              type="text"
              value={profileImg}
              onChange={(e) => setProfileImg(e.target.value)}
-             required
-              />
-          </label>
-          <label>
-            LinkedIn
-            <input
-             type="text"
-             value={linkedIn}
-             onChange={(e) => setLinkedIn(e.target.value)}
              required
               />
           </label>
@@ -110,7 +101,7 @@ const SingupFormPage = () => {
              required
               />
           </label>
-          <button type="submit">Sign up</button>
+          <button className="signup-submit" type="submit">Sign up</button>
       </form>
     </>
   )
