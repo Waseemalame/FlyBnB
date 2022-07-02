@@ -31,6 +31,7 @@ function CardDetails() {
       userId: sessionUser.id
     }
     dispatch(createReview(data))
+    setReviewContent('')
   }
 
   const sessionUser = useSelector(state => state.session.user)
@@ -92,12 +93,7 @@ function CardDetails() {
             {listing.type} hosted by {sessionUser.username}
           </h2>
           <p className='listing-details'>{listing.guests} guests · {listing.beds} beds · {listing.baths} baths</p>
-          {sessionUser.id === listing.userId ? (
-            <button className='edit-listing-btn'>Edit Listing</button>
 
-          ) : (
-            ''
-          )}
         </div>
         <h2>What this place has to offer:</h2>
         <div className="amenities-section">
@@ -109,26 +105,44 @@ function CardDetails() {
           ))}
         </div>
         <div className="reviews-container">
-        <button>Click me to create review!</button>
-              <form onSubmit={handleReviewSubmit}>
-                <input type="text"
+              <form className='review-form' onSubmit={handleReviewSubmit}>
+                <input
+                className='review-input'
+                 type="text"
                 value={reviewContent}
                 onChange={(e) => setReviewContent(e.target.value)}
                 placeholder="enter your review"
                  />
-                 <button type='submit'>Submit Review</button>
+                 <button className='submit-review-btn' type='submit'>Submit Review</button>
               </form>
-          {reviews ? reviews.map(review => (
-            <div>
+            <h2>User reviews below</h2><br></br><br></br>
+          <div className="reviews-display">
+            {reviews ? reviews.map(review => (
+              <>
+                {review && (
+                  <div className='review-content-delete-btn'>
+                    <div className="user-review-img"
+                    style={{ backgroundImage: `url(${review.User.profileImg})` }}
+                    >
+                      {/* <img className='user-review-img' src={review?.User ? review?.User?.profileImg : ''} alt="" /> */}
+                    </div>
+                    <div className='review-username'>{review?.User?.username}:</div>
+                    <div className='review-content'>{review?.content}</div>
+                  </div>
 
-              <div>{review?.content}</div>
-              {review?.userId === sessionUser.id && (
-                <button onClick={() => {
-                  dispatch(removeReviewThunk(review.id, listing.id))
-                }}>Delete Me if u own me</button>
-              )}
-            </div>
-          )) : 'No rewiews have been'}
+                )}
+                {review?.userId === sessionUser.id && (
+                  <button
+                  className='delete-review-btn'
+                   onClick={() => {
+                    dispatch(removeReviewThunk(review.id, listing.id))
+                  }}>
+                    <img src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png" alt=''/>
+                  </button>
+                )}
+              </>
+            )) : 'No rewiews have been'}
+          </div>
         </div>
     </div>
   )

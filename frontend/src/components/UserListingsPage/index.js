@@ -18,6 +18,13 @@ const UserListingsPage = ({ listings, user }) => {
   }
   return (
     <div className='user-listings'>
+      {userListings.length === 0 && (
+        <div>
+          <br></br>
+          <br></br>
+          <h2>You have not created any listings yet!</h2>
+        </div>
+      )}
       {userListings.map((listing) => (
 
           <div className="user-listing">

@@ -113,3 +113,10 @@ form > button:hover{
   color: red;
   /* list-style: none; */
 }
+
+.images-form-container{
+  margin-top: 10rem;
+  /* margin: 20px; */
+  display: flex;
+  flex-direction: column;
+}

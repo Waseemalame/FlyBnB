@@ -45,47 +45,28 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
   const updateState = (e) => setStateLocation(e.target.value);
   const updateCountry = (e) => setCountry(e.target.value);
 
-  const [images, setImages] = useState([])
-
-  const [image1, setImage1] = useState('');
-  const [image2, setImage2] = useState('');
-  const [image3, setImage3] = useState('');
-  const [image4, setImage4] = useState('');
-  const [image5, setImage5] = useState('');
-  const [image6, setImage6] = useState('');
-
   const [imagesSubmitted, setImagesSubmitted] = useState(false)
   const dispatch = useDispatch();
 
-  let amenitiesArray = [];
+  // let amenitiesArray = [];
+  const [amenitiesState, setAmenitiesState] = useState([])
 
   const user = useSelector(state => state.session.user)
 
-
+  const amenitiesArray = [];
   const history = useHistory()
   useEffect(() => {
+    // setAmenitiesState(amenitiesArray)
+  }, [amenitiesArray])
 
-  }, [imgUrls])
 
-  const changeBg = (index) => {
-    const amenityDiv = document.getElementById(`amenity-${index - 1}`);
-    if(amenityDiv.classList.contains('selected')){
-      amenityDiv.classList.remove('selected')
-      return;
-    }
-    amenityDiv.classList.add("selected")
-    amenitiesArray.push(amenityDiv.innerText)
-  }
-  let selectedAmenities = document.querySelectorAll('.selected')
+  // console.log(selectedAmenities)
 
 
   const types = [ 'Entire home', 'Entire cabin', 'Cabin', 'Entire villa','Tiny Home', 'Bungalow', 'Private room in resort', 'Luxury stay' ]
   types.sort();
-  useEffect(() => {
-    for(let el of selectedAmenities){
-      amenitiesArray.push(el.innerText)
-    }
-  }, [amenitiesArray, selectedAmenities, categoryId])
+
+
   const errors = [];
   useEffect(() => {
     if(!title) errors.push('Title cannot be empty');
@@ -96,23 +77,56 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
     if(!country) errors.push('Must include country');
     // if(!imagesSubmitted) errors.push('Must add 5 images')
 
-      // imgUrls.forEach(img => {
+    // imgUrls.forEach(img => {
       //   if(!img.url) {
-      //     errors.push('image field cannot be left blank')
-      //     // return;
-      //   }
-      // })
+        //     errors.push('image field cannot be left blank')
+        //     // return;
+        //   }
+        // })
 
-    setValidationErrors(errors)
-  }, [title, categoryId, type, imgUrls, cityLocation, country, imagesSubmitted, price])
+        setValidationErrors(errors)
+      }, [title, categoryId, type, imgUrls, cityLocation, country, imagesSubmitted, price])
 
-  const addAmenFunc = (e) => {
-    e.preventDefault();
-    setShowAmenititesForm(true)
+      const addAmenFunc = (e) => {
+        e.preventDefault();
+        setShowAmenititesForm(true)
+      }
+  let selectedAmenities;
+  const changeBg = (e, index) => {
+    console.log(e.target.innerText)
+    // amenities.push(e.target.innerText)
+    // console.log(amenities)
+    // setAmenities([].concat(e.target.innerText))
+    // console.log(amenities)
+
+    // console.log('hihihihi')
+    const amenityDiv = document.getElementById(`amenity-${index - 1}`);
+    if(amenityDiv.classList.contains(`selected`)){
+      amenityDiv.classList.remove(`selected`)
+      return;
+    } else if (!amenityDiv.classList.contains('selected')){
+      amenityDiv.classList.add("selected")
+
+    }
+
+
+
+
   }
+  // let newArr = []
+
   const onSubmit = async (e) => {
     e.preventDefault();
     setAttemptedSubmit(true)
+    selectedAmenities = document.querySelectorAll('.selected')
+
+    for( let el of selectedAmenities ){
+
+      amenitiesArray.push(el.innerText)
+
+    }
+    console.log(selectedAmenities)
+
 
   const data = {
     userId: user.id,
@@ -133,6 +147,7 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
     images: imgUrls
 
   }
+  console.log(amenitiesArray, 'amentities Array ~!!!!!!')
 
 
 
@@ -146,7 +161,7 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
   })
   return (
     <form className='host-form' onSubmit={onSubmit}>
-      {!showImageForm ? (
+
         <>
 
           <ul className="create-listing-errors">
@@ -239,7 +254,13 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
             <div
             id={'amenity-' + index}
             className="amenity-div"
-            onClick={() => setShowAmenititesForm(index + 1)}
+            value={amenity}
+            onClick={(e) => {
+              // console.log(e.target.value)
+              // amenitiesArray.push(e.target.innerText)
+              // console.log(amenitiesArray, 'inside onlcick')
+              changeBg(e, index + 1)
+            }}
             >
                 <img src={AmenitiesIcons[index]} alt="icon" />
                 <div id='amenity-string'>{amenity}</div>
@@ -305,26 +326,28 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
         type="text" />
       </label>
     </>
-      ) : ( <ImagesForm imgUrls={imgUrls} setImgUrls={setImgUrls} setImagesSubmitted={setImagesSubmitted} /> )
-      }
+
       {!showImageForm && (
         <button onClick={(e) =>{
           e.preventDefault();
           setShowImageForm(true)
-          return;
+          // return;
         }
         }
         >Add Images</button>
 
       )}
       {showImageForm && (
-        <button onClick={(e) =>{
-          e.preventDefault();
-          setShowImageForm(false)
-          return;
-        }
-        }
-        >Back</button>
+        <div>
+          <ImagesForm imgUrls={imgUrls} setImgUrls={setImgUrls} setImagesSubmitted={setImagesSubmitted} />
+          <button onClick={(e) =>{
+            e.preventDefault();
+            setShowImageForm(false)
+            return;
+          }
+          }
+          >Back</button>
+        </div>
 
       )}
       {showImageForm && (

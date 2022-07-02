@@ -76,16 +76,15 @@
   width: 643px;
 }
 .amenities-box{
-
-  width: 90px;
-  height: 60px;
+  min-width: 80px;
+  min-height: 80px;
   border: lightgray solid 1px;
   border-radius: 5px;
   text-align: center;
   padding: 5px;
   margin: 5px;
   margin-top: 20px;
-  line-height: 10px;
+  line-height: 15px;
   transition-duration: 400ms;
   transition-timing-function: ease;
   display: flex;
@@ -94,7 +93,9 @@
   position: relative;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
-
+.amenity-name{
+  padding: 10px;
+}
 
 .amenity-icon{
   margin-bottom: 10px;
@@ -131,4 +132,67 @@
   top: 84vh;
   /* top: 90%; */
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.submit-review-btn{
+  height: 40px;
+
+}
+.review-form{
+  display: flex;
+
+  align-items: center;
+  justify-content: space-around;
+  width: 20rem;
+}
+.review-input{
+  border-radius: 10px;
+  padding: 5px;
+}
+.delete-review-btn{
+  background-color: transparent;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  /* width: 80px; */
+  /* height: 40px; */
+  position: absolute;
+  /* right: 0; */
+  /* top: 0; */
+  left: 15rem;
+  margin-top: -40px;
+}
+.review-content-delete-btn{
+  display: flex;
+
+  /* max-width: 20rem; */
+
+  /* justify-content: space-around; */
+  position: relative;
+}
+.review-content{
+  position: absolute;
+  left: 9rem;
+  top: .3rem;
+}
+.reviews-display{
+  max-height: min-content;
+  position: relative;
+  width: 300px;
+}
+.reviews-display > * {
+  margin-bottom: 40px;
+}
+.user-review-img{
+  width: 28px;
+  height: 28px;
+  border-radius: 20px;
+  background-size: contain;
+  position: absolute;
+  left: 0;
+}
+.review-username{
+  position: absolute;
+  left: 2.5rem;
+  top: .3rem;
 }

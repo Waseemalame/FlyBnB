@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-
+import './ImagesForm.css'
 const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
   const dispatch = useDispatch();
   const [validationErrorsImages, setValidationErrorsImages] = useState([])
@@ -34,28 +34,28 @@ const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
 
 
   return (
-    <>
 
-      <ul className="create-listing-errors">
-        {validationErrorsImages.map((error) => (
-          <li key={error}>{error}</li>
+
+      <>
+        <ul className="create-listing-errors">
+          {validationErrorsImages.map((error) => (
+            <li key={error}>{error}</li>
+          ))}
+        </ul>
+        <h3 className='images-header'>Images</h3><br></br>
+        {imgUrls.map((img, i) => (
+          <input
+          placeholder='Image Url'
+          name='url'
+          type="text"
+          value={img.url}
+          onChange={e => imgInputChange(e, i)}
+          required
+          />
         ))}
-      </ul>
-      <h3>All 5 image fields must be complete</h3><br></br>
-      {imgUrls.map((img, i) => (
-        <input
-        placeholder='Image Url'
-        name='url'
-        type="text"
-        value={img.url}
-        onChange={e => imgInputChange(e, i)}
-        required
-        />
+        {/* <div onClick={handleImageSubmit}>Submit Images</div> */}
+      </>
 
-      ))}
-
-      {/* <div onClick={handleImageSubmit}>Submit Images</div> */}
-    </>
   )
 }
 
