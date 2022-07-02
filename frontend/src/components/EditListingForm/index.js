@@ -5,14 +5,14 @@ import { AmenitiesData, AmenitiesIcons } from "../HostForm/AmenitiesData";
 import './EditListingForm.css'
 import { editListingThunk, getListingsThunk } from "../../store/listing";
 import { useHistory } from "react-router-dom";
-
+import { useEffect } from "react";
 function EditListingForm({ listing, setShowModal }) {
 
   const listings = useSelector(state => Object.values(state.listings))
 
   const dispatch = useDispatch();
 
-  const [errors, setErrors] = useState([]);
+  // const [errors, setErrors] = useState([]);
 
   const [title, setTitle] = useState(listing.title);
   const [categoryId, setCategoryId] = useState(listing?.categoryId);
@@ -30,7 +30,7 @@ function EditListingForm({ listing, setShowModal }) {
   const [stateLocation, setStateLocation] = useState(listing.state);
   const [country, setCountry] = useState(listing.country);
   const [selected, setSelected] = useState(false)
-
+  const [editFormValidations, setEditFormValidations] = useState([]);
   const updateTitle = (e) => setTitle(e.target.value);
   const updateCategoryId = (e) => setCategoryId(e.target.value);
   const updateType = (e) => setType(e.target.value);
@@ -54,9 +54,20 @@ function EditListingForm({ listing, setShowModal }) {
   const categories = useSelector(state => {
     return Object.values(state.categories)
   })
+  const errors = [];
+  useEffect(() => {
+    if(!title) errors.push('Title cannot be empty');
+    if(!categoryId) errors.push('Must choose a category');
+    if(!type) errors.push('Must choose a type');
+    if(price <= 0) errors.push('Must include a price');
+    if(!cityLocation) errors.push('Must include city');
+    if(!country) errors.push('Must include country');
+
+        setEditFormValidations(errors)
+      }, [title, categoryId, type, cityLocation, country, price])
   const handleSubmit = async(e) => {
     e.preventDefault();
-    setErrors([]);
+    setEditFormValidations([]);
 
     const data = {
       id: listing.id,
@@ -104,11 +115,12 @@ function EditListingForm({ listing, setShowModal }) {
   return (
     <form className='edit-listing-form' onSubmit={handleSubmit}>
     <h3>Edit Listing</h3>
-    {/* <ul>
-      {errors.map((error, idx) => (
+    <h5 className="amenities-note">Note: Editing your listing will require you to re-enter your amenities</h5>
+    <ul className="edit-listing-errors">
+      {editFormValidations.map((error, idx) => (
         <li key={idx}>{error}</li>
       ))}
-    </ul> */}
+    </ul>
     <label>Title
       <textarea
       type="text"
@@ -247,7 +259,7 @@ function EditListingForm({ listing, setShowModal }) {
       placeholder='country'
       type="text" />
     </label>
-    <button type="submit">Submit</button>
+    <button disabled={editFormValidations.length > 0} type="submit">Submit</button>
   </form>
   );
 }

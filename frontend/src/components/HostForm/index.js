@@ -75,14 +75,6 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
     if(!price) errors.push('Must include a price');
     if(!cityLocation) errors.push('Must include city');
     if(!country) errors.push('Must include country');
-    // if(!imagesSubmitted) errors.push('Must add 5 images')
-
-    // imgUrls.forEach(img => {
-      //   if(!img.url) {
-        //     errors.push('image field cannot be left blank')
-        //     // return;
-        //   }
-        // })
 
         setValidationErrors(errors)
       }, [title, categoryId, type, imgUrls, cityLocation, country, imagesSubmitted, price])

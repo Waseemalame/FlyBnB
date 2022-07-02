@@ -2,3 +2,12 @@
   border-radius: 10px;
   padding: .5em;
 }
+.edit-listing-errors{
+  color: red;
+
+}
+.amenities-note{
+  color: gray;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
