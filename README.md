@@ -1,6 +1,8 @@
 # FlyBnB
 FlyBnB is an AirBnB clone. The backend was built using PostgreSQL, Sequelize and Express. The front end was developed with React and Redux. No CSS libraries were used in this project.
 
+Live Link: https://fly-bnb.herokuapp.com/login
+
 ## Login/Landing Page
 ![image](https://user-images.githubusercontent.com/73668892/176992266-ad274f80-4a87-435b-976c-d8aee52c586b.png)
 
