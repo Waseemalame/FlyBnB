@@ -72,7 +72,7 @@ function Navigation({ user }) {
               {hamburgerDropDown && (
                 <div className='menu-dropdown-container' onMouseLeave={() => mouseLeave()}>
                   <div onClick={manageListings} className='btn-container'><button className='btn-options'>Manage Listings</button></div>
-                  <div className='btn-container'><button className='btn-options'>Trips</button></div>
+                  {/* <div className='btn-container'><button className='btn-options'>Trips</button></div> */}
                   <div className='btn-container'><button className='btn-options' onClick={logoutClick}>Logout</button></div>
                 </div>
               )}

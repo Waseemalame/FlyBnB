@@ -24,7 +24,7 @@
 }
 
 .nav-middle{
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   max-width: 200px;
@@ -77,7 +77,11 @@
   cursor: pointer;
 }
 .nav-right-text{
-  margin-right: 5px;
+  margin-left: -28px;
+  position: absolute;
+  left: 50%;
+  /* margin-right: 25rem; */
+
 }
 .nav-right-text{
   cursor: pointer;
