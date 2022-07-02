@@ -13,7 +13,8 @@ function CardDetails() {
   const { id } = useParams();
   const listing = useSelector(state => state.listings[id])
   const dispatch = useDispatch();
-
+  const [reviewValidationErrors, setReviewValidationErrors] = useState([])
+  const [showErrors, setShowErrors] = useState(false)
   const reviews = useSelector((state) => {
     if (!listing.reviews) return null;
     return listing.reviews.map(reviewId => state.reviews[reviewId]);
@@ -22,16 +23,27 @@ function CardDetails() {
   useEffect(() => {
     dispatch(getListingsReviews(listing.id))
   }, [dispatch, listing.id])
+  const errors = []
+  useEffect(() => {
+    if(!reviewContent) errors.push('review body cannot be left blank')
+    setReviewValidationErrors(errors)
+  }, [reviewContent]);
 
   const handleReviewSubmit = (e) => {
     e.preventDefault();
+    if(reviewValidationErrors.length > 0){
+      setShowErrors(true)
+      return;
+    }
     const data = {
       content: reviewContent,
       listingId: listing.id,
       userId: sessionUser.id
     }
-    dispatch(createReview(data))
-    setReviewContent('')
+    dispatch(createReview(data));
+    setReviewContent('');
+    setShowErrors(false);
+    setReviewValidationErrors([]);
   }
 
   const sessionUser = useSelector(state => state.session.user)
@@ -105,6 +117,13 @@ function CardDetails() {
           ))}
         </div>
         <div className="reviews-container">
+              {showErrors && (
+              <ul className="review-listing-errors">
+                 {reviewValidationErrors.map((error, idx) => (
+                   <li key={idx}>{error}</li>
+                 ))}
+              </ul>
+              )}
               <form className='review-form' onSubmit={handleReviewSubmit}>
                 <input
                 className='review-input'

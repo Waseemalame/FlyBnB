@@ -159,8 +159,8 @@
   position: absolute;
   /* right: 0; */
   /* top: 0; */
-  left: 15rem;
-  margin-top: -40px;
+  left: 25rem;
+  margin-top: -65px;
 }
 .review-content-delete-btn{
   display: flex;
@@ -174,14 +174,19 @@
   position: absolute;
   left: 9rem;
   top: .3rem;
+  word-wrap: break-word;
+  max-width: 250px;
+
 }
 .reviews-display{
   max-height: min-content;
   position: relative;
-  width: 300px;
+  max-width: 300px;
+
 }
 .reviews-display > * {
-  margin-bottom: 40px;
+  margin-bottom: 60px;
+  max-width: 300px;
 }
 .user-review-img{
   width: 28px;
@@ -195,4 +200,9 @@
   position: absolute;
   left: 2.5rem;
   top: .3rem;
+}
+
+.review-listing-errors{
+  color: red;
+  margin-top: 1rem;
 }
