@@ -10,9 +10,12 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 router.get('/', asyncHandler(async (req, res) => {
   const listings = await Listing.findAll({
-    include: {
+    include: [{
       model: Image,
-    }
+    },
+    {
+      model: User,
+    }]
   });
 
 
