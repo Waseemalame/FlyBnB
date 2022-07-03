@@ -4,7 +4,7 @@ FlyBnB is an AirBnB clone. The backend was built using PostgreSQL, Sequelize and
 Live Link: https://fly-bnb.herokuapp.com/login
 
 ## Login/Landing Page
-![image](https://user-images.githubusercontent.com/73668892/176992266-ad274f80-4a87-435b-976c-d8aee52c586b.png)
+![image](https://user-images.githubusercontent.com/73668892/177061789-76350e3d-cd62-44a9-a21e-ae3b1a617b2e.png)
 
 ## Listings Page
 
