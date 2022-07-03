@@ -56,6 +56,8 @@ psql flybnb_db -c 'SELECT * FROM "Users"' ---> to check if users have been succe
 
 psql flybnb_db -c '\d "Listings"'
 psql flybnb_db -c 'SELECT * FROM "Listings"'
+psql flybnb_db -c 'SELECT * FROM "Reviews"'
+psql flybnb_db -c 'SELECT * FROM "Images"'
 
 // HEROKU COMMANDS //
 heroku restart && heroku pg:reset DATABASE --confirm fly-bnb && heroku run npm run sequelize db:migrate && heroku run npm run sequelize db:seed:all
