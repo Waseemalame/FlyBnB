@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/Waseemalame/FlyBnB/issues"
   },
-  "homepage": "https://github.com/Waseemalame/FlyBnB#readme"
+  "homepage": "https://github.com/Waseemalame/FlyBnB#readme",
+  "dependencies": {
+    "heroku": "^7.60.2"
+  }
 }
