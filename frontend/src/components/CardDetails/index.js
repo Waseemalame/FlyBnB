@@ -102,7 +102,7 @@ function CardDetails() {
       </div>
         <div>
           <h2 className='listing-description'>
-            {listing.type} hosted by {sessionUser.username}
+            {listing.type} hosted by {listing.User.username}
           </h2>
           <p className='listing-details'>{listing.guests} guests · {listing.beds} beds · {listing.baths} baths</p>
 
