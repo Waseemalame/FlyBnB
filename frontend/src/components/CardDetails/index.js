@@ -9,6 +9,7 @@ import { createReview, getListingsReviews, removeReviewThunk } from '../../store
 import './CardDetails.css'
 
 function CardDetails() {
+  const [reviewsEmpty, setReviewsEmpty] = useState(false)
   const [reviewContent, setReviewContent] = useState('')
   const { id } = useParams();
   const listing = useSelector(state => state.listings[id])
@@ -19,7 +20,12 @@ function CardDetails() {
     if (!listing.reviews) return null;
     return listing.reviews.map(reviewId => state.reviews[reviewId]);
   });
-
+  const filteredReviews = reviews?.filter(review => review !== undefined)
+  // useEffect(() => {
+  //   console.log(filteredReviews)
+    
+  // }, [reviews])
+  
   useEffect(() => {
     dispatch(getListingsReviews(listing.id))
   }, [dispatch, listing.id])
@@ -61,10 +67,13 @@ function CardDetails() {
   })
 
   const newAmenitiesArr = Object.values(newAmenities)
-
+  const removeReviewFunc = async (reviewId, listingId) => {
+    await dispatch(removeReviewThunk(reviewId, listingId))
+  }
   if (!reviews) {
     return null;
   }
+
   return (
 
     <div className="card-details-container">
@@ -134,7 +143,10 @@ function CardDetails() {
                  />
                  <button className='submit-review-btn' type='submit'>Submit Review</button>
               </form>
-            <h2>User reviews below</h2><br></br><br></br>
+              {filteredReviews.length === 0 ? (
+                <h2 className='reviews-header'>Be the first to post a review!</h2>
+              ): <h2 className='reviews-header'>User reviews below</h2> }
+                
           <div className="reviews-display">
             {reviews ? reviews.map(review => (
               <>
@@ -154,13 +166,13 @@ function CardDetails() {
                   <button
                   className='delete-review-btn'
                    onClick={() => {
-                    dispatch(removeReviewThunk(review.id, listing.id))
+                    removeReviewFunc(review.id, listing.id)
                   }}>
                     <img src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png" alt=''/>
                   </button>
                 )}
               </>
-            )) : 'No rewiews have been'}
+            )) : ''}
           </div>
         </div>
     </div>

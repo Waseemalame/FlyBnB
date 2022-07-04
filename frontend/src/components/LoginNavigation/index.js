@@ -5,7 +5,7 @@ const LoginNavigation = () => {
   return (
     <div className='login-nav-container'>
       <div className="login-nav-left">
-        <img className='login-nav-logo' src="https://1000logos.net/wp-content/uploads/2017/08/Airbnb-logo.jpg" alt="logo" />
+        <img className='login-nav-logo' src="https://media.discordapp.net/attachments/949432407461855244/993630127529414766/flybnb.png" alt="logo" />
 
       </div>
       <div className="login-nav-mid">

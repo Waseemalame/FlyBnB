@@ -19,23 +19,17 @@ const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
 
       setImagesSubmitted(true)
     }
-
-
   }
+
   useEffect(() => {
     imgUrls.forEach(img => {
       if(!img.url) {
         errors.push('image field cannot be left blank')
-        // return;
       }
     })
   }, [imgUrls])
 
-
-
   return (
-
-
       <>
         <ul className="create-listing-errors">
           {validationErrorsImages.map((error) => (
@@ -43,19 +37,19 @@ const ImagesForm = ({ imgUrls, setImgUrls, setImagesSubmitted }) => {
           ))}
         </ul>
         <h3 className='images-header'>Images</h3><br></br>
-        {imgUrls.map((img, i) => (
-          <input
-          placeholder='Image Url'
-          name='url'
-          type="text"
-          value={img.url}
-          onChange={e => imgInputChange(e, i)}
-          required
-          />
-        ))}
-        {/* <div onClick={handleImageSubmit}>Submit Images</div> */}
+        <div class="img-inputs">
+          {imgUrls.map((img, i) => (
+            <input
+            placeholder='Image Url'
+            name='url'
+            type="text"
+            value={img.url}
+            onChange={e => imgInputChange(e, i)}
+            required
+            />
+          ))}
+        </div>
       </>
-
   )
 }
 

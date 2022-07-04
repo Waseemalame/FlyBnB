@@ -50,11 +50,11 @@ function Navigation({ user }) {
         <div className="nav-left">
         {user ? (
         <NavLink to="/">
-          <img className='nav-logo' src="https://1000logos.net/wp-content/uploads/2017/08/Airbnb-logo.jpg" alt="logo" />
+          <img className='nav-logo' src="https://media.discordapp.net/attachments/949432407461855244/993630127529414766/flybnb.png" alt="logo" />
         </NavLink>
 
         ) : (
-          <img className='nav-logo' src="https://1000logos.net/wp-content/uploads/2017/08/Airbnb-logo.jpg" alt="logo" />
+          <img className='nav-logo' src="https://media.discordapp.net/attachments/949432407461855244/993630127529414766/flybnb.png" alt="logo" />
         )}
 
         </div>

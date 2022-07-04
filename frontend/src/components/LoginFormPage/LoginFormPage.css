@@ -47,8 +47,8 @@
 }
 .demo-user-btn{
   position: fixed;
-  top: .5rem;
-  right: 2rem;
+  top: 1rem;
+  right: 10rem;
   background-color: #ff5a5f;
   border: none;
   border-radius: 10px;

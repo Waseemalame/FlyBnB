@@ -86,26 +86,16 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
   let selectedAmenities;
   const changeBg = (e, index) => {
     console.log(e.target.innerText)
-    // amenities.push(e.target.innerText)
-    // console.log(amenities)
-    // setAmenities([].concat(e.target.innerText))
-    // console.log(amenities)
 
-    // console.log('hihihihi')
     const amenityDiv = document.getElementById(`amenity-${index - 1}`);
     if(amenityDiv.classList.contains(`selected`)){
       amenityDiv.classList.remove(`selected`)
       return;
     } else if (!amenityDiv.classList.contains('selected')){
       amenityDiv.classList.add("selected")
-
     }
-
-
-
-
   }
-  // let newArr = []
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -139,7 +129,6 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
     images: imgUrls
 
   }
-  console.log(amenitiesArray, 'amentities Array ~!!!!!!')
 
 
 
@@ -239,7 +228,7 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
       }
       >Add Amenitites</button>
       {showAmenititesForm && (
-        <label className='amenities-label'>Amenities
+        <label className='amenities-label'>
         <div className='all-amenities'>
           {AmenitiesData.map((amenity, index) => (
             <>
@@ -248,9 +237,6 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
             className="amenity-div"
             value={amenity}
             onClick={(e) => {
-              // console.log(e.target.value)
-              // amenitiesArray.push(e.target.innerText)
-              // console.log(amenitiesArray, 'inside onlcick')
               changeBg(e, index + 1)
             }}
             >
@@ -338,7 +324,7 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
             return;
           }
           }
-          >Back</button>
+          ></button>
         </div>
 
       )}

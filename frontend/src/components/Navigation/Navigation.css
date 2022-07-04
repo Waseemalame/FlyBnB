@@ -21,6 +21,7 @@
 .nav-logo{
   width: 100px;
   /* margin-left: 20px; */
+  margin-top: .5rem;
 }
 
 .nav-middle{
@@ -79,7 +80,7 @@
 .nav-right-text{
   margin-left: -28px;
   position: absolute;
-  left: 50%;
+  left: 49%;
   /* margin-right: 25rem; */
 
 }

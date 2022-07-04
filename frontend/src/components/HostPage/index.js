@@ -13,10 +13,7 @@ const HostPage = ({ categories }) => {
           <HostForm categories={categories} showImageForm={showImageForm} setShowImageForm={setShowImageForm} />
         </div>
       </div>
-      {/* <div className="host-btns">
-        <div className="back-btn">Back</div>
-        <div className="next-btn">Next</div>
-      </div> */}
+
     </div>
   )
 }
