@@ -2,8 +2,9 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+  margin-bottom: 10vh;
   align-items: center;
   justify-content: center;
   z-index: -100;
-  min-height: min-content;
+  /* min-height: min-content; */
 }
