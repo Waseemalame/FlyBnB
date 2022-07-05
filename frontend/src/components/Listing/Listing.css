@@ -5,4 +5,5 @@
   align-items: center;
   justify-content: center;
   z-index: -100;
+  min-height: min-content;
 }
