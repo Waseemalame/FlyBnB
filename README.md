@@ -17,3 +17,18 @@ FlyBnB requires users to register and create an account before entering the site
 
 * Search Bar
 * Google Maps
+
+## Downloading the App
+* Clone this repository with the command git clone git@github.com:Waseemalame/FlyBnB.git
+
+* Install all packages in both the frontend and backend folders npm install
+
+* Create a new .env file in the backend to access the database. Follow the example .env in the backend.
+
+* Setup a PSQL user to match your .env file.
+
+* Migrate and seed the database using the following script in the backend npm run reset
+
+* Run npm start in both the backend and front end folders.
+
+* Navigate your browser to localhost:3000
