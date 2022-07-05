@@ -7,7 +7,7 @@
   border-radius: 20px;
   width: 20rem;
   /* overflow-y: scroll; */
-  height: 27rem;
+  height: 35rem;
 
 }
 .signup-form label{
@@ -27,5 +27,11 @@
   width: 80px;
   height: 40px;
   /* position: absolute; */
+
+}
+.signup-errors{
+  /* background-color: black; */
+  color: red;
+  
 
 }
