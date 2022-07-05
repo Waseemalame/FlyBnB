@@ -1,8 +1,8 @@
 .footer-container{
     background-color: white;
-    height: 5rem;
+    max-height: 3rem;
     position: sticky;
-    bottom: -600px;
+    bottom: -800px;
     /* top: 0; */
     left: 0;
     right: 0;
