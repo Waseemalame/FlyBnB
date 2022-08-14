@@ -19,7 +19,7 @@ FlyBnB requires users to register and create an account before entering the site
 * Google Maps
 
 ## Downloading the App
-* Clone this repository with the command git clone 'git@github.com:Waseemalame/FlyBnB.git'
+* Clone this repository with the command git ```clone git@github.com:Waseemalame/FlyBnB.git```
 
 * Install all packages in both the frontend and backend folders npm install
 
