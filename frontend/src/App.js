@@ -67,6 +67,7 @@ function App() {
         <Navigation user={sessionUser} />
         <Categories categories={categories} />
         <FilteredListings listings={listings} />
+        <Footer />
       </Route>
       <Route path="/hosting">
         <Navigation user={sessionUser} />
@@ -77,7 +78,7 @@ function App() {
         <UserListingsPage listings={listings} user={sessionUser} />
       </Route>
 
-      
+
     </Switch>
   );
 }
