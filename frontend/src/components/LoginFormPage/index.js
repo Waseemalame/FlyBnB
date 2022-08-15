@@ -33,6 +33,9 @@ const LoginFormPage = () => {
   }
   const handleDemoUser = () => {
     dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
+    return (
+      <Redirect to="/" />
+    )
   }
   const handleSignup = () => {
 
