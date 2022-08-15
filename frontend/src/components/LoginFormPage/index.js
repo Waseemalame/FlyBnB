@@ -32,6 +32,9 @@ const LoginFormPage = () => {
       });
   }
   const handleDemoUser = () => {
+    let myItem = document.querySelector('.login-form-container')
+    myItem.innerText = 'WAITITI'
+    console.log(myItem)
     dispatch(sessionActions.login({ credential: 'Demo-lition', password: 'password' }))
     return (
       <Redirect to="/" />
