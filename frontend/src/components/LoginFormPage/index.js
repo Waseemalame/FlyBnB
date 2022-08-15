@@ -75,7 +75,7 @@ const LoginFormPage = () => {
           <SingupFormPage />
         )}
         {/* <h3>Or just sign in as a demo user!</h3> */}
-        <button className='demo-user-btn' onClick={handleDemoUser}>Demo User</button>
+        <button className='demo-user-btn' onClick={handleDemoUser} onTouchStart={handleDemoUser}>Demo User</button>
       </div>
 
   )
