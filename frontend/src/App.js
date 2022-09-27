@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory, useLocation, useParams } from "react-router-dom";
 import Categories from "./components/Categories";
 import Listing from "./components/Listing";
 import LoginFormPage from "./components/LoginFormPage";
@@ -16,8 +16,10 @@ import FilteredListings from "./components/FilteredListings";
 import UserListingsPage from "./components/UserListingsPage";
 import LoginNavigation from "./components/LoginNavigation";
 import Footer from "./components/Footer";
+
 function App() {
   const dispatch = useDispatch();
+  const [path, setPath] = React.useState(window.location.pathname);
   const [isLoaded, setIsLoaded] = useState(false);
   const history = useHistory();
   const listings = useSelector(state => Object.values(state.listings))
@@ -28,6 +30,7 @@ function App() {
   const categories = useSelector(state => {
     return Object.values(state.categories)
   })
+
 
   useEffect(() => {
     dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
@@ -41,6 +44,9 @@ function App() {
       dispatch(getCategoriesThunk())
     }
   }, [dispatch, sessionUser]);
+
+
+
 
   return isLoaded && (
 
@@ -70,7 +76,6 @@ function App() {
         <Footer />
       </Route>
       <Route path="/hosting">
-        <Navigation user={sessionUser} />
         <HostPage categories={categories} />
       </Route>
       <Route path="/:username/listings">
