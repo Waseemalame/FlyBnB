@@ -12,13 +12,13 @@
   padding-right: 80px; */
   /* box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px; */
   border-bottom: 1px solid rgba(211, 211, 211, 0.363);
-  padding-left: 100px;
-  padding-right: 100px;
+  padding-left: 60px;
+  padding-right: 60px;
 
 }
 
 .nav-logo{
-  width: 100px;
+  width: 90px;
   /* margin-left: 20px; */
   margin-top: .5rem;
 }
@@ -79,7 +79,8 @@
 .nav-right-text{
   margin-left: -28px;
   position: absolute;
-  left: 49%;
+  left: 47.5%;
+  top: 35px;
   /* margin-right: 25rem; */
 
 }

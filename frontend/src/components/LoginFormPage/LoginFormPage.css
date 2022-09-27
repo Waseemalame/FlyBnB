@@ -19,7 +19,7 @@
   background-image: url('https://images.unsplash.com/photo-1622266234556-faab3e09f67b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1169&q=80');
   background-size: cover;
   background-repeat: no-repeat;
-  height: 100vh;
+  height: 150vh;
 }
 .signup-header{
   /* color: rgb(255, 255, 255); */
@@ -49,7 +49,7 @@
 .demo-user-btn{
   position: fixed;
   top: 1rem;
-  right: 10rem;
+  right: 2rem;
   background-color: #ff5a5f;
   border: none;
   border-radius: 10px;
@@ -62,5 +62,43 @@
 }
 .login-form-errors{
   color: red;
-  margin-right: 2rem;
+  /* margin-right: 2rem; */
+  position: absolute;
+  /* width: 50%; */
+  top: 25%;
+  left: 40%;
+  /* text-align: center; */
+}
+
+@media screen and (max-width: 800px) {
+  .login-form{
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .login-form > *:not(.login-submit-btn){
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .login-form > .credentials-label{
+    margin-top: 60px;
+  }
+  .signup-header{
+    width: 300px;
+    text-align: center;
+  }
+  .login-form-errors{
+    color: red;
+    position: absolute;
+    top: 18%;
+    left: 5em;
+  }
+  .login-form-container{
+
+    /* background-size: contain; */
+    /* object-fit: cover; */
+    background-position: left 30% top 80%;
+    /* background-position: 60% 40%; */
+    /* height: 150vh; */
+  }
 }
