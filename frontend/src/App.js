@@ -19,7 +19,6 @@ import Footer from "./components/Footer";
 
 function App() {
   const dispatch = useDispatch();
-  const [path, setPath] = React.useState(window.location.pathname);
   const [isLoaded, setIsLoaded] = useState(false);
   const history = useHistory();
   const listings = useSelector(state => Object.values(state.listings))
