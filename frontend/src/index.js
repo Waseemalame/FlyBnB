@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { ModalProvider } from './context/Modal';
-
-import './index.css';
+import MultiContextProvider from './context/MultiContext';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { restoreCSRF, csrfFetch } from './store/csrf';
@@ -12,6 +11,7 @@ import configureStore from './store';
 
 import * as sessionActions from './store/session';
 
+import './index.css';
 const store = configureStore();
 
 if (process.env.NODE_ENV !== 'production') {
@@ -30,11 +30,13 @@ if (process.env.NODE_ENV !== 'production') {
 function Root() {
   return (
     <Provider store={store}>
-      <ModalProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ModalProvider>
+      <MultiContextProvider>
+        <ModalProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ModalProvider>
+      </MultiContextProvider>
     </Provider>
   );
 }
