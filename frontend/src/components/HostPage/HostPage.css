@@ -122,10 +122,20 @@
 }
 
 /* MAP SECTION */
-.address-section{
-  /* border: 1px solid black; */
-  margin-top: -1.3em;
+
+.map-container{
+  width: 100%;
+  height: 84.9vh;
+
 }
+
+
+.address-section{
+  overflow-y: hidden;
+  margin-top: -1.3em;
+  position: relative;
+}
+/*
 .mapboxgl-map{
   min-height: 40em;
   padding-top: -1em;
@@ -133,4 +143,67 @@
 
 .mapboxgl-control-container{
   display: none;
+} */
+.location-form-container{
+  position: absolute;
+  top: 4em;
+  bottom: 2em;
+  left: 4em;
+  right: 4em;
+  z-index: 1000;
+  background-color: white;
+  border-radius: 15px;
+}
+.location-header{
+  text-align: center;
+  padding-top: 1em;
+  font-weight: 600;
+}
+.location-form-inner{
+  border: 1px solid #CAC1C1;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 40px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+.location-form-inner > div{
+  color: gray;
+  font-size: 10px;
+}
+.street-div{
+  padding: 5px;
+  border-bottom: 1px solid #CAC1C1;
+}
+.street-input{
+  border: none;
+  outline: none;
+  margin-top: 10px;
+  width: 100%;
+}
+.city-div, .state-div{
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #CAC1C1;
+  padding: 5px;
+
+}
+.city-input, .state-input{
+  margin-top: 5px;
+  border: none;
+  outline: none;
+}
+.country-div{
+  display: flex;
+  flex-direction: column;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 5px;
+}
+.country-input{
+  margin-top: 5px;
+  border: none;
+  outline: none;
 }
