@@ -1,20 +1,46 @@
 import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import Geocode from "react-geocode";
 import { useMultiContext } from '../../context/MultiContext'
+
 import HostForm from '../HostForm'
 import NewHostForm from '../HostForm/NewHostForm'
 import './HostPage.css'
 const HostPage = ({ categories }) => {
-  const { typesForm, setTypesForm, categoriesForm, setCategoriesForm, mapForm, setMapForm } = useMultiContext()
+  Geocode.setApiKey("AIzaSyCeFO0R7H2nTlWn4AMMcRcFSeUr7ndzqug");
+
+  const { typesForm, setTypesForm,
+          categoriesForm, setCategoriesForm,
+          mapForm, setMapForm, latLng, setLatLng,
+           closeAddrForm, setCloseAddrForm,
+           address, setAddress,
+           city, setCity,
+           state, setState,
+           country, setCountry } = useMultiContext()
+
   const [showBackBtn, setShowBackBtn] = useState(false);
   const [showImageForm, setShowImageForm] = useState(false)
-
   const body = document.querySelector('body')
+
+  const rightPage = document.querySelector('.right-page')
+
   useEffect(() => {
     body.style.overflowY = 'hidden'
+
     return () => body.style.overflowY = 'scroll'
   }, []);
+
+
+  useEffect(() => {
+    if(rightPage){
+      if(mapForm){
+        rightPage.style.overflowY = 'hidden'
+      } else {
+        rightPage.style.overflowY = 'scroll'
+      }
+    }
+  });
 
   useEffect(() => {
       if(typesForm){
@@ -24,13 +50,46 @@ const HostPage = ({ categories }) => {
       }
   }, [typesForm]);
 
-  const handleNext = () => {
+  const getFullAddress = async() => {
+    if(address && city && country){
+    const res = await Geocode.fromAddress(`${address} ${city}, ${state}`)
+    const { lat, lng } = res.results[0].geometry.location;
+    console.log(lat, lng)
+    setLatLng({
+      lat: lat,
+      lng: lng
+    })
+  }
+}
+
+
+  const handleNext = async() => {
     if(typesForm){
       setTypesForm(false)
       setCategoriesForm(true)
     } else if(categoriesForm){
       setCategoriesForm(false)
       setMapForm(true)
+      setCloseAddrForm(false)
+    }
+    if(mapForm){
+      // if address form is closed
+      if(closeAddrForm){
+        console.log('ad is closed')
+        setCloseAddrForm(false)
+        setMapForm(false)
+
+      } else {
+        await getFullAddress()
+
+        setCloseAddrForm(true)
+        console.log('closed')
+      }
+      if(latLng){
+        console.log(latLng)
+      } else{
+        console.log('none')
+      }
     }
   }
   const handleBack = () => {
@@ -38,8 +97,13 @@ const HostPage = ({ categories }) => {
       setCategoriesForm(false)
       setTypesForm(true)
     } else if(mapForm){
-      setMapForm(false)
-      setCategoriesForm(true)
+      if(closeAddrForm){
+        setCloseAddrForm(false)
+
+      } else {
+        setMapForm(false)
+        setCategoriesForm(true)
+      }
     }
   }
   return (
@@ -52,6 +116,9 @@ const HostPage = ({ categories }) => {
                 )}
                 {categoriesForm && (
                   <div className='left-header'>Please select a category for your home</div>
+                )}
+                {mapForm && (
+                  <div className='left-header'>Where's your place located?</div>
                 )}
             </div>
             <div className="right-page">
