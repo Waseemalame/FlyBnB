@@ -51,6 +51,14 @@
 .types{
 
 }
+/* .chosen{
+  background-color: rgba(211, 211, 211, 0.505);
+  outline: 2px solid black;
+} */
+.type-validation{
+  color: red;
+  text-align: center;
+}
 .type-select{
   border: 1px solid lightgray;
   width: 15em;
@@ -66,10 +74,15 @@
   transition-duration: 100ms;
   transition-timing-function: ease;
 }
-.type-select:focus{
+.type-checked{
   background-color: rgba(211, 211, 211, 0.505);
   outline: 2px solid black;
 }
+.cat-checked{
+  background-color: rgba(211, 211, 211, 0.505);
+  outline: 2px solid black;
+}
+
 .next-page{
   border-top: 2px solid gray;
   grid-column-start: 2;
@@ -128,22 +141,16 @@
   height: 84.9vh;
 
 }
-
+.gmnoprint{
+  display: none;
+}
 
 .address-section{
   overflow-y: hidden;
   margin-top: -1.3em;
   position: relative;
 }
-/*
-.mapboxgl-map{
-  min-height: 40em;
-  padding-top: -1em;
-}
 
-.mapboxgl-control-container{
-  display: none;
-} */
 .location-form-container{
   position: absolute;
   top: 4em;
