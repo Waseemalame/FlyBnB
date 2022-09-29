@@ -1,9 +1,8 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useMultiContext } from '../../context/MultiContext';
-
 const AddressForm = ({ address, setAddress, city, setCity, state, setState, country, setCountry }) => {
-  const { latLng, setLatLng } = useMultiContext()
+  const { addrErrors } = useMultiContext()
 
   return (
     <div className='location-form-container'>
@@ -42,7 +41,9 @@ const AddressForm = ({ address, setAddress, city, setCity, state, setState, coun
           type="text" />
         </div>
       </div>
-      <button>submit</button>
+      <div className="address-errors">
+        {addrErrors[0]}
+      </div>
     </div>
   )
 }

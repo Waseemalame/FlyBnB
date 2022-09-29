@@ -15,7 +15,8 @@ const NewHostForm = () => {
         address, setAddress,
         city, setCity,
         state, setState,
-        country, setCountry
+        country, setCountry,
+        errorValidations, setErrorValidations
        } = useMultiContext()
 
   const [title, setTitle] = useState('');
@@ -36,21 +37,47 @@ const NewHostForm = () => {
   const [attemptedSubmit, setAttemptedSubmit] = useState(false);
   const [lngLat, setLngLat] = useState({});
 
-  const chosenType = document.getElementById(`type-${type}`)
-  const chosenCategory = document.getElementById(`category-${categoryId}`)
   const types = [ 'Entire home', 'Entire cabin', 'Cabin', 'Entire villa','Tiny Home', 'Bungalow', 'Private room in resort', 'Luxury stay' ]
   types.sort();
 
 
   useEffect(() => {
-    if(chosenType) chosenType.focus()
-    if(chosenCategory) chosenCategory.focus()
+    const chosenType = document.getElementById(`type-${type}`)
+    const chosenCategory = document.getElementById(`category-${categoryId}`)
+    if(chosenType) chosenType.classList.add('type-checked')
+    const allChecked = document.querySelectorAll('.type-checked')
+    if(allChecked){
+      allChecked.forEach(el => {
+        el.classList.remove('type-checked')
+      })
+    }
+    if(chosenType) chosenType.classList.add('type-checked')
+    const allCatChecked = document.querySelectorAll('.cat-checked')
+    if(allCatChecked){
+      allCatChecked.forEach(el => {
+        el.classList.remove('cat-checked')
+      })
+    }
+    if(chosenCategory) chosenCategory.classList.add('cat-checked')
   });
+  useEffect(() => {
+    let errors = []
+    if(typesForm){
+      if(!type) errors.push('A type is required *')
+    }
+    if(categoriesForm){
+      if(!categoryId) errors.push('A category is required *')
+    }
+    setErrorValidations(errors)
+  }, [type, typesForm, categoriesForm, categoryId]);
 
   return (
       <form className='newhost-form'>
         {typesForm && (
           <div>
+            {errorValidations.length > 0 && (
+              <div className='type-validation'>{errorValidations[0]}</div>
+            )}
             <div className="types">
               {types.map((type, i) => (
                 <div
@@ -66,6 +93,9 @@ const NewHostForm = () => {
         )}
         {categoriesForm && (
           <div>
+            {errorValidations.length > 0 && (
+              <div className='type-validation'>{errorValidations[0]}</div>
+            )}
             {categories.map((category, i) => (
               <div
                   id={`category-${category.id}`}

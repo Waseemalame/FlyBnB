@@ -17,12 +17,13 @@ const HostPage = ({ categories }) => {
            address, setAddress,
            city, setCity,
            state, setState,
-           country, setCountry } = useMultiContext()
+           country, setCountry,
+           addrErrors, setAddrErrors,
+           errorValidations, setErrorValidations } = useMultiContext()
 
   const [showBackBtn, setShowBackBtn] = useState(false);
   const [showImageForm, setShowImageForm] = useState(false)
   const body = document.querySelector('body')
-
   const rightPage = document.querySelector('.right-page')
 
   useEffect(() => {
@@ -49,21 +50,32 @@ const HostPage = ({ categories }) => {
         setShowBackBtn(true)
       }
   }, [typesForm]);
+  useEffect(() => {
+    console.log(errorValidations)
+  }, [errorValidations]);
 
+  let errors = []
   const getFullAddress = async() => {
-    if(address && city && country){
-    const res = await Geocode.fromAddress(`${address} ${city}, ${state}`)
-    const { lat, lng } = res.results[0].geometry.location;
-    console.log(lat, lng)
-    setLatLng({
-      lat: lat,
-      lng: lng
-    })
-  }
+
+
+    try{
+
+      const res = await Geocode.fromAddress(`${address} ${city}`)
+      const { lat, lng } = res.results[0].geometry.location;
+      setLatLng({
+        lat: lat,
+        lng: lng
+      })
+    }
+    catch (e){
+      setAddrErrors(errors)
+      return 'error'
+    }
+
 }
 
-
   const handleNext = async() => {
+    if(errorValidations.length > 0) return
     if(typesForm){
       setTypesForm(false)
       setCategoriesForm(true)
@@ -80,10 +92,18 @@ const HostPage = ({ categories }) => {
         setMapForm(false)
 
       } else {
-        await getFullAddress()
+        console.log(addrErrors.length)
+        if(!address || !city || !country){
+          errors.push('street, city, and country is required')
+          setAddrErrors(errors)
+          return
+        }
+        const res = await getFullAddress()
 
-        setCloseAddrForm(true)
-        console.log('closed')
+        if(res !== 'error'){
+
+          setCloseAddrForm(true)
+        }
       }
       if(latLng){
         console.log(latLng)
@@ -101,6 +121,7 @@ const HostPage = ({ categories }) => {
         setCloseAddrForm(false)
 
       } else {
+        console.log('hihfdidhsfisdhfsdif')
         setMapForm(false)
         setCategoriesForm(true)
       }

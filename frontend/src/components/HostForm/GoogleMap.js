@@ -22,11 +22,17 @@ const GMap = () => {
     if (Object.values(latLng).length > 1){
 
       return (
-        <GoogleMap zoom={10} center={{lat: lat, lng: lng}} mapContainerClassName="map-container" />
+        <GoogleMap zoom={10} center={{lat: lat, lng: lng}} mapContainerClassName="map-container" stylers= {{ visibility: 'off' }}>
+          <Marker key="marker_1"
+                  position={{
+                    lat: lat,
+                    lng: lng
+                          }}/>
+        </GoogleMap>
         )
       } else {
         return (
-          <GoogleMap zoom={10} center={{lat: 44, lng: -80}} mapContainerClassName="map-container" />
+          <GoogleMap zoom={10} center={{lat: 44, lng: -80}} mapContainerClassName="map-container"></GoogleMap>
         )
       }
 
