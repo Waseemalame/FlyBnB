@@ -7,6 +7,7 @@ const { User, Listing, Image, Review } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
+const { singlePublicFileUpload, singleMulterUpload, multiplePublicFileUpload } = require('../../awsS3');
 
 router.get('/', asyncHandler(async (req, res) => {
   const listings = await Listing.findAll({
@@ -63,7 +64,7 @@ router.get('/:id/reviews', asyncHandler(async function(req, res) {
   return res.json(reviews);
 }));
 
-router.post('/', requireAuth, asyncHandler(async function (req, res) {
+router.post('/', requireAuth, singleMulterUpload("image"), asyncHandler(async function (req, res) {
     const {
       userId,
       title,
@@ -80,8 +81,8 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
       city,
       state,
       country,
-      images
      } = req.body
+     const images = await singlePublicFileUpload(req.file)
 
     const newListing = await Listing.create({
       userId,
@@ -100,16 +101,19 @@ router.post('/', requireAuth, asyncHandler(async function (req, res) {
       state,
       country
     })
+    setTokenCookie(res, newListing);
+    return res.json({
+      newListing,
+    });
+    // res.json(newListing);
+    // for (let i = 0; i < images.length; i++) {
+    //   const imageUrl = images[i].url;
 
-    res.json(newListing);
-    for (let i = 0; i < images.length; i++) {
-      const imageUrl = images[i].url;
-
-      const newImage = await Image.create({
-        listingId: newListing.id,
-        url: imageUrl
-      })
-    }
+    //   const newImage = await Image.create({
+    //     listingId: newListing.id,
+    //     url: imageUrl
+    //   })
+    // }
 }))
 
 router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
