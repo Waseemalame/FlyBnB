@@ -9,6 +9,7 @@ import GMap from './GoogleMap';
 import InfoForm from './InfoForm';
 import AmenitiesForm from './AmenitiesForm';
 import ImageForm from './ImageForm';
+import PriceForm from './PriceForm/PriceForm';
 const NewHostForm = () => {
 
   const categories = useSelector(state => Object.values(state.categories))
@@ -132,13 +133,14 @@ const NewHostForm = () => {
           {infoForm && (
             <InfoForm />
           )}
-          {amenitiesForm && (
-            <AmenitiesForm />
-          )}
-          {imageForm && (
-            <ImageForm />
+            <AmenitiesForm amenitiesForm={amenitiesForm}/>
 
-          )}
+
+
+            <ImageForm />
+            <PriceForm />
+
+
 
       </form>
   )

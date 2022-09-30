@@ -29,7 +29,9 @@ const HostPage = () => {
           infoForm, setInfoForm,
           amenitiesForm, setAmenitiesForm,
           amenities, setAmenities,
-          imageForm, setImageForm } = useMultiContext()
+          imageForm, setImageForm,
+          images, setImages,
+          priceForm, setPriceForm } = useMultiContext()
 
   const [showBackBtn, setShowBackBtn] = useState(false);
   const [showImageForm, setShowImageForm] = useState(false)
@@ -41,7 +43,14 @@ const HostPage = () => {
 
     return () => body.style.overflowY = 'scroll'
   }, []);
+  useEffect(() => {
+    if(imageForm){
+      rightPage.style.overflowY = 'hidden'
 
+      return () => rightPage.style.overflowY = 'scroll'
+    }
+
+  }, []);
 
 
   useEffect(() => {
@@ -94,7 +103,7 @@ const HostPage = () => {
       setMapForm(true)
       setCloseAddrForm(false)
     }
-    if(mapForm){
+     else if(mapForm){
       // if address form is closed
       if(closeAddrForm){
         console.log('ad is closed')
@@ -116,15 +125,20 @@ const HostPage = () => {
         }
       }
     }
-    if(infoForm){
+    else if(infoForm){
       setInfoForm(false)
       setAmenitiesForm(true)
     }
-    if(amenitiesForm){
+    else if(amenitiesForm){
       setAmenitiesForm(false)
       setImageForm(true)
-      console.log(type, categoryId, guests, baths, beds, bedrooms, city, state, country, amenities)
 
+    }
+    else if(imageForm){
+      console.log(images, 'images')
+      console.log(type, categoryId, guests, baths, beds, bedrooms, city, state, country, amenities)
+      setImageForm(false)
+      setPriceForm(true)
     }
   }
 
@@ -157,6 +171,10 @@ const HostPage = () => {
       setAmenitiesForm(true)
       setImageForm(false)
     }
+    if(priceForm){
+      setPriceForm(false)
+      setImageForm(true)
+    }
   }
   return (
     <div class="host-page-container">
@@ -172,6 +190,10 @@ const HostPage = () => {
                 {mapForm && (
                   <div className='left-header'>Where's your place located?</div>
                 )}
+                {imageForm && (
+                  <div className='left-header'>Where's your place located?</div>
+                )}
+
             </div>
             <div className="right-page">
             <NewHostForm />
