@@ -10,6 +10,7 @@ import InfoForm from './InfoForm';
 import AmenitiesForm from './AmenitiesForm';
 import ImageForm from './ImageForm';
 import PriceForm from './PriceForm/PriceForm';
+import TitleForm from './TitleForm/TitleForm';
 const NewHostForm = () => {
 
   const categories = useSelector(state => Object.values(state.categories))
@@ -25,10 +26,10 @@ const NewHostForm = () => {
         errorValidations, setErrorValidations,
         infoForm, setInfoForm,
         amenitiesForm, setAmenitiesForm,
-        imageForm, setImageForm
+        imageForm, setImageForm,
+        title, setTitle,
        } = useMultiContext()
 
-  const [title, setTitle] = useState('');
 
   const [price, setPrice] = useState(0);
   const [amenities, setAmenities] = useState([]);
@@ -139,7 +140,7 @@ const NewHostForm = () => {
 
             <ImageForm />
             <PriceForm />
-
+            <TitleForm />
 
 
       </form>
