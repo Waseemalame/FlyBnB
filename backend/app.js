@@ -22,6 +22,7 @@ app.use(morgan('dev'));
 /* cookie-parser middleware for parsing cookies */
 /* express.json middleware for parsing JSON bodies of requests with Content-Type of application/json */
 app.use(cookieParser());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 /* Security Middleware */
