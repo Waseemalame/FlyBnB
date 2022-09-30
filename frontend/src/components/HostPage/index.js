@@ -31,7 +31,8 @@ const HostPage = () => {
           amenities, setAmenities,
           imageForm, setImageForm,
           images, setImages,
-          priceForm, setPriceForm } = useMultiContext()
+          priceForm, setPriceForm,
+          titleForm, setTitleForm, title, setTitle } = useMultiContext()
 
   const [showBackBtn, setShowBackBtn] = useState(false);
   const [showImageForm, setShowImageForm] = useState(false)
@@ -109,7 +110,7 @@ const HostPage = () => {
         console.log('ad is closed')
         setCloseAddrForm(false)
         setMapForm(false)
-        setInfoForm(true)
+        setTitleForm(true)
 
       } else {
         console.log(addrErrors.length)
@@ -124,6 +125,10 @@ const HostPage = () => {
           setCloseAddrForm(true)
         }
       }
+    }
+    else if(titleForm){
+        setInfoForm(true)
+        setTitleForm(false)
     }
     else if(infoForm){
       setInfoForm(false)
@@ -158,10 +163,14 @@ const HostPage = () => {
         setCategoriesForm(true)
       }
     }
-    if(infoForm){
-      setInfoForm(false)
+    if(titleForm){
+      setTitleForm(false)
       setMapForm(true)
       closeAddrForm(false)
+    }
+    if(infoForm){
+      setInfoForm(false)
+      setTitleForm(true)
     }
     if(amenitiesForm){
       setAmenitiesForm(false)
@@ -189,6 +198,9 @@ const HostPage = () => {
                 )}
                 {mapForm && (
                   <div className='left-header'>Where's your place located?</div>
+                  )}
+                {titleForm && (
+                  <div className='left-header'>Let's give your place a name</div>
                 )}
                 {infoForm && (
                   <div className='left-header'>Add information for your home</div>
