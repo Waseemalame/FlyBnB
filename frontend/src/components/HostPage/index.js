@@ -32,6 +32,10 @@ const HostPage = () => {
           imageForm, setImageForm,
           images, setImages,
           priceForm, setPriceForm,
+          price, setPrice,
+          cleaningFee, setCleaningFee,
+          serviceFee, setServiceFee,
+
           titleForm, setTitleForm, title, setTitle } = useMultiContext()
 
   const [showBackBtn, setShowBackBtn] = useState(false);
@@ -136,14 +140,17 @@ const HostPage = () => {
     }
     else if(amenitiesForm){
       setAmenitiesForm(false)
-      setImageForm(true)
+      setPriceForm(true)
 
     }
     else if(imageForm){
       console.log(images, 'images')
       console.log(type, categoryId, guests, baths, beds, bedrooms, city, state, country, amenities)
       setImageForm(false)
-      setPriceForm(true)
+    }
+    else if (priceForm){
+      setImageForm(true)
+      setPriceForm(false)
     }
   }
 
@@ -177,13 +184,37 @@ const HostPage = () => {
       setInfoForm(true)
     }
     if(imageForm){
-      setAmenitiesForm(true)
+      // setAmenitiesForm(true)
+      setPriceForm(true)
       setImageForm(false)
     }
     if(priceForm){
       setPriceForm(false)
-      setImageForm(true)
+      setAmenitiesForm(true)
     }
+  }
+
+  // Submit Listing Function
+  const handleSubmitListing = async() => {
+    const data = {
+      type,
+      categoryId,
+      address,
+      city,
+      state,
+      country,
+      title,
+      guests,
+      beds,
+      bedrooms,
+      baths,
+      amenities,
+      price,
+      cleaningFee,
+      serviceFee,
+      images,
+    }
+    console.log(data)
   }
   return (
     <div class="host-page-container">
@@ -223,7 +254,12 @@ const HostPage = () => {
               {showBackBtn && (
                 <button onClick={handleBack} className="back-button" type='button'>Back</button>
               )}
-                <button onClick={handleNext} className="next-button" type='button'>Next</button>
+                {!imageForm ? (
+                  <button onClick={handleNext} className="next-button" type='button'>Next</button>
+
+                ) :(
+                  <button onClick={handleSubmitListing} className="submit-button" type='button'>Submit</button>
+                )}
             </div>
     </div>
   )
