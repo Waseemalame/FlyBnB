@@ -1,3 +1,27 @@
 .price-form-container{
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+  /* margin-bottom: 1em; */
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+.price-form-container > label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-size: 30px;
+  margin-top: 1em;
+}
+.price-form-container > label > input{
+  padding: 1em;
+  border-radius: 20px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  /* border: none; */
 }
