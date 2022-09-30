@@ -1,0 +1,71 @@
+.amenitites-form-container{
+  position: absolute;
+  top: 1em;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.amenity-header{
+  text-align: left;
+  margin-top: 1em;
+  margin-left: 4em;
+  margin-bottom: 1em;
+  font-size: 20px;
+  caret-color: transparent;
+}
+.all-amenity-options{
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  flex-wrap: wrap;
+  padding-bottom: 3em;
+}
+.amenity-checkbox{
+  display: none;
+}
+.amenity-option{
+  border: 1px solid black;
+  width: 10em;
+  height: 9em;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  /* margin-right: .5em;
+  margin-left: .5em; */
+  cursor: pointer;
+  caret-color: transparent;
+  user-select: none;
+}
+
+input[type=checkbox]:checked + label {
+  border-radius: 10px;
+  background-color: rgba(128, 128, 128, 0.433);
+}
+label:checked{
+  border-radius: 10px;
+  background-color: rgba(128, 128, 128, 0.433);
+}
+.amen-clicked{
+  background-color: blue;
+}
+/* .amenity-checked{
+  border-radius: 10px;
+  background-color: purple;
+} */
+.clicked-label{
+  border-radius: 10px;
+  background-color: rgba(128, 128, 128, 0.433);
+}
+.amenity-label{
+  /* background-color: blue; */
+}
+.selected{
+
+  outline: 1px solid lightblue;
+  background-color: rgba(173, 216, 230, 0.61);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+
+}

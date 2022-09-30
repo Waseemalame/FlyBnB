@@ -6,26 +6,29 @@ import { useMultiContext } from '../../context/MultiContext';
 import AddressForm from './AddressForm';
 import "../HostPage/HostPage.css"
 import GMap from './GoogleMap';
+import InfoForm from './InfoForm';
+import AmenitiesForm from './AmenitiesForm';
+import ImageForm from './ImageForm';
 const NewHostForm = () => {
 
   const categories = useSelector(state => Object.values(state.categories))
   const { typesForm, setTypesForm,
         categoriesForm, setCategoriesForm, mapForm, setMapForm,
         closeAddrForm, setCloseAddrForm,
+        type, setType,
+        categoryId, setCategoryId,
         address, setAddress,
         city, setCity,
         state, setState,
         country, setCountry,
-        errorValidations, setErrorValidations
+        errorValidations, setErrorValidations,
+        infoForm, setInfoForm,
+        amenitiesForm, setAmenitiesForm,
+        imageForm, setImageForm
        } = useMultiContext()
 
   const [title, setTitle] = useState('');
-  const [categoryId, setCategoryId] = useState('');
-  const [type, setType] = useState('');
-  const [guests, setGuests] = useState(0);
-  const [beds, setBeds] = useState(0);
-  const [bedrooms, setBedrooms] = useState(0);
-  const [baths, setBaths] = useState(0);
+
   const [price, setPrice] = useState(0);
   const [amenities, setAmenities] = useState([]);
   const [cleaningFee, setCleaningFee] = useState(0);
@@ -125,6 +128,16 @@ const NewHostForm = () => {
                 ) : ''}
               <GMap />
             </div>
+          )}
+          {infoForm && (
+            <InfoForm />
+          )}
+          {amenitiesForm && (
+            <AmenitiesForm />
+          )}
+          {imageForm && (
+            <ImageForm />
+
           )}
 
       </form>
