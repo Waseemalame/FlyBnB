@@ -4,10 +4,21 @@ import { useEffect } from 'react'
 import { useMultiContext } from '../../context/MultiContext'
 import { amenitiesObj } from './AmenitiesData'
 import "./AmenitiesForm.css"
-const AmenitiesForm = () => {
+const AmenitiesForm = ({ amenitiesForm }) => {
+const amenitiesFormContainer = document.querySelector('.amenitites-form-container')
+const { setAmenities, amenityRef } = useMultiContext()
+const amenityOptions = Object.values(amenitiesObj)
+  useEffect(() => {
+    if(amenitiesFormContainer){
 
-  const { amenities, setAmenities, checkedLabels, setCheckedLabels, amenityRef } = useMultiContext()
-  const amenityOptions = Object.values(amenitiesObj)
+      if(amenitiesForm){
+
+        amenitiesFormContainer.style.display = ''
+      } else {
+        amenitiesFormContainer.style.display = 'none'
+      }
+    }
+  }, [amenitiesFormContainer, amenitiesForm]);
 
   const handleChange = (e) => {
     const allAmenities = document.querySelectorAll('input[type="checkbox"]:checked + label')
@@ -25,7 +36,6 @@ const AmenitiesForm = () => {
     }
     setAmenities(amenitySelection)
   }
-
   return (
     <div ref={amenityRef} className='amenitites-form-container'>
       <div className="amenity-header">Do you have any standout amenities?</div>
