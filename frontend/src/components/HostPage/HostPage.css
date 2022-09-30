@@ -24,6 +24,7 @@
   grid-row-end: 2;
   overflow-y: scroll;
   padding-top: 20px;
+  position: relative;
 }
 .left-header{
   color: white;

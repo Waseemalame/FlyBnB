@@ -7,19 +7,29 @@ import { useMultiContext } from '../../context/MultiContext'
 import HostForm from '../HostForm'
 import NewHostForm from '../HostForm/NewHostForm'
 import './HostPage.css'
-const HostPage = ({ categories }) => {
+const HostPage = () => {
   Geocode.setApiKey("AIzaSyCeFO0R7H2nTlWn4AMMcRcFSeUr7ndzqug");
 
   const { typesForm, setTypesForm,
           categoriesForm, setCategoriesForm,
           mapForm, setMapForm, latLng, setLatLng,
-           closeAddrForm, setCloseAddrForm,
-           address, setAddress,
-           city, setCity,
-           state, setState,
-           country, setCountry,
-           addrErrors, setAddrErrors,
-           errorValidations, setErrorValidations } = useMultiContext()
+          closeAddrForm, setCloseAddrForm,
+          type, setType,
+          categoryId, setCategoryId,
+          address, setAddress,
+          city, setCity,
+          state, setState,
+          country, setCountry,
+          guests, setGuests,
+          beds, setBeds,
+          bedrooms, setBedrooms,
+          baths, setBaths,
+          addrErrors, setAddrErrors,
+          errorValidations, setErrorValidations,
+          infoForm, setInfoForm,
+          amenitiesForm, setAmenitiesForm,
+          amenities, setAmenities,
+          imageForm, setImageForm } = useMultiContext()
 
   const [showBackBtn, setShowBackBtn] = useState(false);
   const [showImageForm, setShowImageForm] = useState(false)
@@ -31,6 +41,7 @@ const HostPage = ({ categories }) => {
 
     return () => body.style.overflowY = 'scroll'
   }, []);
+
 
 
   useEffect(() => {
@@ -50,9 +61,7 @@ const HostPage = ({ categories }) => {
         setShowBackBtn(true)
       }
   }, [typesForm]);
-  useEffect(() => {
-    console.log(errorValidations)
-  }, [errorValidations]);
+
 
   let errors = []
   const getFullAddress = async() => {
@@ -78,6 +87,7 @@ const HostPage = ({ categories }) => {
     if(errorValidations.length > 0) return
     if(typesForm){
       setTypesForm(false)
+
       setCategoriesForm(true)
     } else if(categoriesForm){
       setCategoriesForm(false)
@@ -90,6 +100,7 @@ const HostPage = ({ categories }) => {
         console.log('ad is closed')
         setCloseAddrForm(false)
         setMapForm(false)
+        setInfoForm(true)
 
       } else {
         console.log(addrErrors.length)
@@ -101,22 +112,29 @@ const HostPage = ({ categories }) => {
         const res = await getFullAddress()
 
         if(res !== 'error'){
-
           setCloseAddrForm(true)
         }
       }
-      if(latLng){
-        console.log(latLng)
-      } else{
-        console.log('none')
-      }
+    }
+    if(infoForm){
+      setInfoForm(false)
+      setAmenitiesForm(true)
+    }
+    if(amenitiesForm){
+      setAmenitiesForm(false)
+      setImageForm(true)
+      console.log(type, categoryId, guests, baths, beds, bedrooms, city, state, country, amenities)
+
     }
   }
+
+
   const handleBack = () => {
     if(categoriesForm){
       setCategoriesForm(false)
       setTypesForm(true)
-    } else if(mapForm){
+    }
+    if(mapForm){
       if(closeAddrForm){
         setCloseAddrForm(false)
 
@@ -125,6 +143,19 @@ const HostPage = ({ categories }) => {
         setMapForm(false)
         setCategoriesForm(true)
       }
+    }
+    if(infoForm){
+      setInfoForm(false)
+      setMapForm(true)
+      closeAddrForm(false)
+    }
+    if(amenitiesForm){
+      setAmenitiesForm(false)
+      setInfoForm(true)
+    }
+    if(imageForm){
+      setAmenitiesForm(true)
+      setImageForm(false)
     }
   }
   return (
