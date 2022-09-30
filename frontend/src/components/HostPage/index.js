@@ -190,8 +190,17 @@ const HostPage = () => {
                 {mapForm && (
                   <div className='left-header'>Where's your place located?</div>
                 )}
+                {infoForm && (
+                  <div className='left-header'>Add information for your home</div>
+                )}
+                {amenitiesForm && (
+                  <div className='left-header'>Add amenities</div>
+                )}
                 {imageForm && (
                   <div className='left-header'>Where's your place located?</div>
+                )}
+                {priceForm && (
+                  <div className='left-header'>Add price details for your guests</div>
                 )}
 
             </div>
