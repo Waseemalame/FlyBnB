@@ -58,9 +58,57 @@ export const getOneListingThunk = (id) => async dispatch => {
 }
 
 export const addListingThunk = (data) => async dispatch => {
+  console.log(data)
+  const {
+    user,
+    userId,
+    type,
+    categoryId,
+    address,
+    city,
+    state,
+    country,
+    title,
+    guests,
+    beds,
+    bedrooms,
+    baths,
+    amenities,
+    price,
+    cleaningFee,
+    serviceFee,
+    images,
+  } = data
+  const formData = new FormData()
+  formData.append('type', type)
+  formData.append('userId', userId)
+  formData.append('user', user)
+  formData.append('city', city)
+  formData.append('categoryId', categoryId)
+  formData.append('address', address)
+  formData.append('state', state)
+  formData.append('country', country)
+  formData.append('title', title)
+  formData.append('guests', guests)
+  formData.append('beds', beds)
+  formData.append('bedrooms', bedrooms)
+  formData.append('baths', baths)
+  formData.append('price', price)
+  formData.append('cleaningFee', cleaningFee)
+  formData.append('serviceFee', serviceFee)
+  formData.append('amenities', amenities)
+
+  if (images && images.length !== 0) {
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+  }
   const res = await csrfFetch('/api/listings', {
     method: 'POST',
-    body: JSON.stringify(data)
+    headers: {
+      "Content-Type":"multipart/form-data"
+  },
+    body: formData
   })
 
   dispatch(addListing(data))
@@ -75,7 +123,6 @@ export const editListingThunk = (data) => async dispatch => {
   })
   const editedListing = await res.json();
   dispatch(editListing(editedListing))
-  // dispatch(getListingsThunk(data))
   return editedListing;
 
 }
