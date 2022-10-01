@@ -48,7 +48,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       baths: {
-        type: Sequelize.INTEGER
+        type: Sequelize.NUMERIC
       },
       amenities: {
         type: Sequelize.ARRAY(Sequelize.STRING)
