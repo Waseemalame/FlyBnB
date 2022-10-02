@@ -1,0 +1,22 @@
+.user-review-img{
+  width: 28px;
+  height: 28px;
+  border-radius: 20px;
+  background-size: contain;
+  /* position: absolute; */
+  left: 0;
+}
+.review-content{
+  display: flex;
+  align-items: center;
+}
+.review-content >*:not(:first-child){
+  margin-left: 10px;
+}
+.delete-review-btn{
+  border: none;
+  background-color: transparent;
+}
+.delete-review-btn:hover{
+
+}
