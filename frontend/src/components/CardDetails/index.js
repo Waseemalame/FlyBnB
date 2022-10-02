@@ -7,6 +7,7 @@ import { getOneListingThunk } from '../../store/listing';
 import { amenitiesObj } from '../HostForm/AmenitiesData';
 import { createReview, getListingsReviews, removeReviewThunk } from '../../store/reviews';
 import './CardDetails.css'
+import Reservations from '../Reservations';
 
 function CardDetails() {
   const [reviewsEmpty, setReviewsEmpty] = useState(false)
@@ -23,34 +24,15 @@ function CardDetails() {
   const filteredReviews = reviews?.filter(review => review !== undefined)
   // useEffect(() => {
   //   console.log(filteredReviews)
-    
+
   // }, [reviews])
-  
+
   useEffect(() => {
     dispatch(getListingsReviews(listing.id))
   }, [dispatch, listing.id])
   const errors = []
-  useEffect(() => {
-    if(!reviewContent) errors.push('review body cannot be left blank')
-    setReviewValidationErrors(errors)
-  }, [reviewContent]);
 
-  const handleReviewSubmit = (e) => {
-    e.preventDefault();
-    if(reviewValidationErrors.length > 0){
-      setShowErrors(true)
-      return;
-    }
-    const data = {
-      content: reviewContent,
-      listingId: listing.id,
-      userId: sessionUser.id
-    }
-    dispatch(createReview(data));
-    setReviewContent('');
-    setShowErrors(false);
-    setReviewValidationErrors([]);
-  }
+
 
   const sessionUser = useSelector(state => state.session.user)
   const newAmenities = {};
@@ -87,9 +69,8 @@ function CardDetails() {
         )}
         <div className="listing-country">{listing?.country}</div>
       </div>
+
       <div className='image-section'>
-
-
         {listing?.Images.map((image, index) => {
           if(index === 0){
             return (
@@ -109,6 +90,7 @@ function CardDetails() {
         }
 
       </div>
+
         <div>
           <h2 className='listing-description'>
             {listing.type} hosted by {listing.User.username}
@@ -117,6 +99,10 @@ function CardDetails() {
 
         </div>
         <h2>What this place has to offer:</h2>
+        <div className="amens-and-reservations">
+        <div className='listing-details-reservations'>
+          <Reservations />
+      </div>
         <div className="amenities-section">
           {newAmenitiesArr.map(amenity => (
             <div className="amenities-box">
@@ -125,56 +111,8 @@ function CardDetails() {
             </div>
           ))}
         </div>
-        <div className="reviews-container">
-              {showErrors && (
-              <ul className="review-listing-errors">
-                 {reviewValidationErrors.map((error, idx) => (
-                   <li key={idx}>{error}</li>
-                 ))}
-              </ul>
-              )}
-              <form className='review-form' onSubmit={handleReviewSubmit}>
-                <input
-                className='review-input'
-                 type="text"
-                value={reviewContent}
-                onChange={(e) => setReviewContent(e.target.value)}
-                placeholder="enter your review"
-                 />
-                 <button className='submit-review-btn' type='submit'>Submit Review</button>
-              </form>
-              {filteredReviews.length === 0 ? (
-                <h2 className='reviews-header'>Be the first to post a review!</h2>
-              ): <h2 className='reviews-header'>User reviews below</h2> }
-                
-          <div className="reviews-display">
-            {reviews ? reviews.map(review => (
-              <>
-                {review && (
-                  <div className='review-content-delete-btn'>
-                    <div className="user-review-img"
-                    style={{ backgroundImage: `url(${review.User.profileImg})` }}
-                    >
-                      {/* <img className='user-review-img' src={review?.User ? review?.User?.profileImg : ''} alt="" /> */}
-                    </div>
-                    <div className='review-username'>{review?.User?.username}:</div>
-                    <div className='review-content'>{review?.content}</div>
-                  </div>
-
-                )}
-                {review?.userId === sessionUser.id && (
-                  <button
-                  className='delete-review-btn'
-                   onClick={() => {
-                    removeReviewFunc(review.id, listing.id)
-                  }}>
-                    <img src="https://img.icons8.com/ios-glyphs/30/000000/filled-trash.png" alt=''/>
-                  </button>
-                )}
-              </>
-            )) : ''}
-          </div>
         </div>
+
     </div>
   )
 }

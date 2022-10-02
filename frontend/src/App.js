@@ -16,6 +16,7 @@ import FilteredListings from "./components/FilteredListings";
 import UserListingsPage from "./components/UserListingsPage";
 import LoginNavigation from "./components/LoginNavigation";
 import Footer from "./components/Footer";
+import ListingDetails from "./components/ListingDetails";
 
 function App() {
   const dispatch = useDispatch();
@@ -66,7 +67,7 @@ function App() {
       </Route>
       <Route path="/listings/:id">
         <Navigation user={sessionUser} />
-        <CardDetails />
+        <ListingDetails />
       </Route>
       <Route path='/filtered-listings/categories/:id'>
         <Navigation user={sessionUser} />
