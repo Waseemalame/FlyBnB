@@ -16,6 +16,7 @@ export default function MultiContextProvider(props){
   const [country, setCountry] = useState('');
   const [addrErrors, setAddrErrors] = useState([]);
   const [errorValidations, setErrorValidations] = useState([])
+  const [imageErrors, setImageErrors] = useState([]);
   const [infoForm, setInfoForm] = useState(false);
   const [guests, setGuests] = useState(0);
   const [beds, setBeds] = useState(0);
@@ -59,6 +60,7 @@ export default function MultiContextProvider(props){
       closeAddrForm, setCloseAddrForm,
       addrErrors, setAddrErrors,
       errorValidations, setErrorValidations,
+      imageErrors, setImageErrors,
       infoForm, setInfoForm,
       amenitiesForm, setAmenitiesForm,
       checkedLabels, setCheckedLabels,
