@@ -1,0 +1,61 @@
+.res-container{
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  border: 1px solid black;
+  width: 25em;
+  /* margin: 0 auto; */
+  position: sticky;
+  top: 200px;
+  /* left: 500px; */
+  /* right: 1000px; */
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: orange; */
+}
+.amens-and-reservations{
+  /* display: flex; */
+  /* flex-direction: row-reverse; */
+  /* justify-content: space-between; */
+  /* border: 1px solid black; */
+  /* min-width: 100%; */
+  /* max-width: 50em; */
+  /* display: inline; */
+}
+.listing-details-reservations{
+  background-color: blue;
+  /* max-width: 50vw; */
+  /* position: relative; */
+  display: flex;
+  justify-content: center;
+  /* justify-content: flex-end; */
+}
+.res-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.res-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.checkin-checkout{
+  display: flex;
+  justify-content: space-around;
+  border: 1px solid black;
+}
+.guests{
+  display: flex;
+  align-items: center;
+}
+
+.calendar-btn{
+  padding-left: 1em;
+  padding-right: 1em;
+  border: none;
+  cursor: pointer;
+  color: white;
+  background-color: #FF385C;
+}
