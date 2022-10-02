@@ -32,12 +32,12 @@ alternatively:
     npx sequelize db:migrate
     npx sequelize db:seed:all
 
-
+// GENERATE MODELS
 npx sequelize model:generate --name User --attributes username:string,email:string,firstName:string,lastName:string,linkedIn:string,hashedPassword:string
 npx sequelize model:generate --name Listing --attributes userId:integer,title:string,city:string,state:string,country:string,categoryId:string,type:string,guests:integer,beds:integer,bedrooms:integer,baths:integer,amenities:string,price:numeric,cleaningFee:integer,serviceFee:integer
 npx sequelize model:generate --name Category --attributes name:string
 npx sequelize model:generate --name Image --attributes listingId:integer,url:string
-npx sequelize model:generate --name Booking --attributes listingId:integer,userId:integer,startDate:date,endDate:date,finalPrice:integer
+npx sequelize model:generate --name Reservation --attributes listingId:integer,userId:integer,startDate:date,endDate:date,numDays:integer,finalPrice:integer,numGuests:integer
 npx sequelize model:generate --name Review --attributes userId:integer,listingId:integer,content:text
 
 
@@ -48,6 +48,7 @@ npx sequelize seed:generate --name demo-listings
 npx sequelize seed:generate --name demo-categories
 npx sequelize seed:generate --name demo-images
 npx sequelize seed:generate --name demo-reviews
+npx sequelize seed:generate --name demo-reservations
 
 
 psql flybnb_db -c '\d "Users"' ---> to check the Users table schema in Postgres
