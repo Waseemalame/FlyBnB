@@ -2,13 +2,17 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Geocode from "react-geocode";
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { useMultiContext } from '../../context/MultiContext'
+import { addListingThunk } from '../../store/listing';
 
 import HostForm from '../HostForm'
 import NewHostForm from '../HostForm/NewHostForm'
 import './HostPage.css'
 const HostPage = () => {
   Geocode.setApiKey("AIzaSyCeFO0R7H2nTlWn4AMMcRcFSeUr7ndzqug");
+  const user = useSelector(state => state.session.user)
 
   const { typesForm, setTypesForm,
           categoriesForm, setCategoriesForm,
@@ -26,6 +30,7 @@ const HostPage = () => {
           baths, setBaths,
           addrErrors, setAddrErrors,
           errorValidations, setErrorValidations,
+          imageErrors, setImageErrors,
           infoForm, setInfoForm,
           amenitiesForm, setAmenitiesForm,
           amenities, setAmenities,
@@ -42,6 +47,9 @@ const HostPage = () => {
   const [showImageForm, setShowImageForm] = useState(false)
   const body = document.querySelector('body')
   const rightPage = document.querySelector('.right-page')
+
+  const dispatch = useDispatch()
+  const history = useHistory()
 
   useEffect(() => {
     body.style.overflowY = 'hidden'
@@ -196,7 +204,16 @@ const HostPage = () => {
 
   // Submit Listing Function
   const handleSubmitListing = async() => {
+    if(imageErrors.length > 0) return;
+    let amenArr = Object.values(amenities).map(amenity => amenity.name)
+    let imageArr = []
+    if (images && images.length !== 0) {
+      for (let i = 0; i < images.length; i++) {
+        imageArr.push(images[i]);
+      }
+    }
     const data = {
+      userId: user.id,
       type,
       categoryId,
       address,
@@ -208,13 +225,15 @@ const HostPage = () => {
       beds,
       bedrooms,
       baths,
-      amenities,
+      amenities: amenArr,
       price,
       cleaningFee,
       serviceFee,
       images,
     }
     console.log(data)
+    dispatch(addListingThunk(data))
+    history.push('/')
   }
   return (
     <div class="host-page-container">
@@ -243,7 +262,11 @@ const HostPage = () => {
                   <div className='left-header'>Where's your place located?</div>
                 )}
                 {priceForm && (
-                  <div className='left-header'>Add price details for your guests</div>
+                  <div className='video-box-div'>
+                  <video className='video-box' controls>
+                  <source src="https://a0.muscache.com/v/9c/d4/9cd47434-c6bd-58ec-90b7-b50aa7dba461/9cd47434c6bd58ec90b7b50aa7dba461_4000k_1.mp4?imformat=h265" type="video/mp4"></source>
+                  </video>
+                  </div>
                 )}
 
             </div>

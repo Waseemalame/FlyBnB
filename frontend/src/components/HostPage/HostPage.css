@@ -1,21 +1,11 @@
 
 
 .host-page-container{
-  /* margin-top: 6em; */
-  /* margin-top: 3.8em; */
-  /* background-color: blue; */
-  /* position: relative; */
-  /* height: 80vh; */
-  /* min-height: 100vh; */
-  /* height: 90vh; */
-  /* margin-top: 1em; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 80% 15%;
   height: 106vh;
   position: relative;
-  /* justify-content: center;
-  align-items: center; */
 }
 
 .right-page{
@@ -41,21 +31,22 @@
   text-align: left;
   user-select: none;
 }
-
-
-.newhost-form{
-
-  /* max-height: 20em; */
-  /* height: 100%; */
-
+.video-box-div{
+  position: relative;
+  min-width: 100%;
+  min-height: 100%;
 }
-.types{
-
+.video-box{
+  min-width: 50vw;
+  max-height: 100vh;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
 }
-/* .chosen{
-  background-color: rgba(211, 211, 211, 0.505);
-  outline: 2px solid black;
-} */
+
 .type-validation{
   color: red;
   text-align: center;
@@ -112,8 +103,6 @@
   margin-left: 100px;
   margin-top: 30px;
   margin-bottom: 30px;
-  /* width: 50px; */
-  /* height: 100px; */
 }
 .back-button{
   border: none;
