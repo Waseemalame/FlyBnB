@@ -11,7 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     guests: DataTypes.INTEGER,
     beds: DataTypes.INTEGER,
     bedrooms: DataTypes.INTEGER,
-    baths: DataTypes.INTEGER,
+    baths: DataTypes.NUMERIC,
     amenities: DataTypes.ARRAY(DataTypes.STRING),
     price: DataTypes.NUMERIC,
     cleaningFee: DataTypes.INTEGER,

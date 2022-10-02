@@ -7,7 +7,7 @@ const { User, Listing, Image, Review } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { singlePublicFileUpload, singleMulterUpload, multiplePublicFileUpload } = require('../../awsS3');
+const { singlePublicFileUpload, singleMulterUpload, multiplePublicFileUpload, multipleMulterUpload } = require('../../awsS3');
 
 router.get('/', asyncHandler(async (req, res) => {
   const listings = await Listing.findAll({
@@ -64,7 +64,7 @@ router.get('/:id/reviews', asyncHandler(async function(req, res) {
   return res.json(reviews);
 }));
 
-router.post('/', requireAuth, singleMulterUpload("image"), asyncHandler(async function (req, res) {
+router.post('/', requireAuth, multipleMulterUpload("images"), asyncHandler(async function (req, res) {
     const {
       userId,
       title,
@@ -81,39 +81,40 @@ router.post('/', requireAuth, singleMulterUpload("image"), asyncHandler(async fu
       city,
       state,
       country,
+      images
      } = req.body
-     const images = await singlePublicFileUpload(req.file)
-
+    const allImgs = await multiplePublicFileUpload(req.files);
+    const newArr = amenities.split(',')
     const newListing = await Listing.create({
       userId,
       title,
       categoryId,
-      type,
       guests,
+      type,
       beds,
       bedrooms,
       baths,
-      amenities,
       price,
       cleaningFee,
       serviceFee,
       city,
       state,
-      country
+      country,
+      amenities: newArr,
+      images
     })
-    setTokenCookie(res, newListing);
+
+    for (let i = 0; i < allImgs.length; i++) {
+      const imageUrl = allImgs[i];
+
+      const newImage = await Image.create({
+        listingId: newListing.id,
+        url: imageUrl
+      })
+    }
     return res.json({
       newListing,
     });
-    // res.json(newListing);
-    // for (let i = 0; i < images.length; i++) {
-    //   const imageUrl = images[i].url;
-
-    //   const newImage = await Image.create({
-    //     listingId: newListing.id,
-    //     url: imageUrl
-    //   })
-    // }
 }))
 
 router.put('/:id', requireAuth, asyncHandler(async function (req, res) {
