@@ -37,7 +37,7 @@
 }
 .details-images > *:hover {
   transition-duration: 500ms;
-  /* background-color: rgba(0, 0, 0, 0.271); */
+  background-color: rgba(0, 0, 0, 0.271);
   background-blend-mode: darken;
 }
 .first-img{
@@ -70,26 +70,21 @@
 .details-images >:nth-child(3){
   border: 2px solid black;
   border-top-right-radius: 10px;
-  /* border-bottom-right-radius: 10px; */
 }
 .details-images >:nth-child(5){
   border: 2px solid black;
   border-bottom-right-radius: 10px;
 }
-.reservations-section{
-  /* margin: 0 auto; */
-  /* background-color: blue; */
-  /* width: 400px; */
-  /* display: flex; */
-  /* align-items: center; */
-  /* justify-content: flex-end; */
+.details-reservations{
   position: sticky;
   top: 200px;
 }
 .amenities-section{
   display: flex;
-  /* background-color: yellow; */
   height: 10em;
+}
+.details-info{
+
 }
 .details-bottom{
   display: flex;
