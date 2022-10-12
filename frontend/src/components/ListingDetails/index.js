@@ -68,13 +68,21 @@ const ListingDetails = () => {
 
 
 
-      <div className="details-info">
 
-      </div>
       <div className="details-bottom">
 
-        <div className="amenities-and-reviews">
-          <div className="details-amenities">
+        <div className="amenities-info-reviews">
+
+          <div className="info-amenities">
+
+            <div className="details-info">
+              <h2 className='details-description'>
+                {listing.type} hosted by {listing.User.username}
+              </h2>
+              <p className='listing-details'>{listing.guests} guests · {listing.beds} beds · {listing.baths} baths</p>
+            </div>
+
+            <div className='amenities-header'>What this place has to offer</div>
             <div className="amenities-section">
                 {newAmenitiesArr.map(amenity => (
                   <div className="amenities-box">
@@ -83,6 +91,7 @@ const ListingDetails = () => {
                   </div>
                 ))}
             </div>
+
           </div>
 
           <div className="details-reviews">
@@ -90,8 +99,8 @@ const ListingDetails = () => {
           </div>
         </div>
 
-        <div className="reservations-section">
-          <Reservations />
+        <div className="details-reservations">
+            <Reservations listing={listing}/>
         </div>
       </div>
 
