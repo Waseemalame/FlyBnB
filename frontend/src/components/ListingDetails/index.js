@@ -82,6 +82,7 @@ const ListingDetails = () => {
               <p className='listing-details'>{listing.guests} guests · {listing.beds} beds · {listing.baths} baths</p>
             </div>
 
+            <div className='amenities-header'>What this place has to offer</div>
             <div className="amenities-section">
                 {newAmenitiesArr.map(amenity => (
                   <div className="amenities-box">
@@ -99,7 +100,7 @@ const ListingDetails = () => {
         </div>
 
         <div className="details-reservations">
-            <Reservations />
+            <Reservations listing={listing}/>
         </div>
       </div>
 

@@ -5,6 +5,7 @@ export const MultiContext = createContext()
 export const useMultiContext = () => useContext(MultiContext)
 
 export default function MultiContextProvider(props){
+  // HOST FORM VARIABLES
   const [typesForm, setTypesForm] = useState(true);
   const [categoriesForm, setCategoriesForm] = useState(false);
   const [mapForm, setMapForm] = useState(false);
@@ -39,6 +40,9 @@ export default function MultiContextProvider(props){
   const amenityRef = useRef()
   const imagesRef = useRef()
 
+  // LISTING DETAILS VARIABLES
+  const [numReviews, setNumReviews] = useState(0);
+
   return (
     <MultiContext.Provider
     value={{
@@ -72,7 +76,8 @@ export default function MultiContextProvider(props){
       serviceFee, setServiceFee,
       priceForm, setPriceForm,
       titleForm, setTitleForm,
-      title, setTitle
+      title, setTitle,
+      numReviews, setNumReviews
     }}
     >
       {props.children}
