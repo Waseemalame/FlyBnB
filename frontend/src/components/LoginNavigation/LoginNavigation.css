@@ -1,7 +1,12 @@
 .login-nav-container {
-  position: sticky;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: white;
-  top: .1rem;
+  width: 80%;
+  margin: 0 auto;
+  caret-color: transparent;
+  user-select: none;
 }
 .login-nav-logo{
   width: 100px;

@@ -5,7 +5,6 @@ import Categories from "./components/Categories";
 import Listing from "./components/Listing";
 import LoginFormPage from "./components/LoginFormPage";
 import Navigation from "./components/Navigation";
-import SingupFormPage from "./components/SingupFormPage";
 import CardDetails from "./components/CardDetails";
 import Card from "./components/Card";
 import HostPage from "./components/HostPage";
@@ -55,9 +54,6 @@ function App() {
         {/* <Navigation user={sessionUser} /> */}
         <LoginNavigation />
         <LoginFormPage />
-      </Route>
-      <Route path="/signup">
-        <SingupFormPage />
       </Route>
       <Route exact path="/">
         <Navigation user={sessionUser} />
