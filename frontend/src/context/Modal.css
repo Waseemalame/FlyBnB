@@ -22,9 +22,7 @@
 #modal-content {
   position: absolute;
   background-color:white;
-  width: 500px;
-  height: 500px;
+  width: auto;
   z-index: 9000;
-  overflow-y: scroll;
-
+  border-radius: 10px;
 }

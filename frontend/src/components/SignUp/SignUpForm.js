@@ -4,11 +4,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Redirect, Route, useHistory } from 'react-router-dom'
 import isURL from 'validator/lib/isURL'
 
-import './SignupFormPage.css'
 
 import React from 'react'
 
-const SingupFormPage = () => {
+const SignUpForm = () => {
   const [username, setUserName] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -34,7 +33,7 @@ const SingupFormPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if(errors.length > 0) setShowSignupErrors(true)
-    
+
     // if(password !== confirmPassword) setErrors(['Password fields must match']);
 
     return dispatch(sessionActions.signup({ email, username, firstName, lastName, profileImg, password }))
@@ -42,7 +41,7 @@ const SingupFormPage = () => {
   }
 
   return (
-    <>
+    <main className="signup-form-container">
         <form className="signup-form" onSubmit={handleSubmit}>
           {showSignupErrors && (
 
@@ -59,39 +58,12 @@ const SingupFormPage = () => {
              required
               />
           </label>
-          {/* <label>
-            First Name
-            <input
-             type="text"
-             value={firstName}
-             onChange={(e) => setFirstName(e.target.value)}
-             required
-              />
-          </label>
-          <label>
-            Last Name
-            <input
-             type="text"
-             value={lastName}
-             onChange={(e) => setLastName(e.target.value)}
-             required
-              />
-          </label> */}
           <label>
             Email
             <input
              type="text"
              value={email}
              onChange={(e) => setEmail(e.target.value)}
-             required
-              />
-          </label>
-          <label>
-            Profile Image
-            <input
-             type="text"
-             value={profileImg}
-             onChange={(e) => setProfileImg(e.target.value)}
              required
               />
           </label>
@@ -115,8 +87,8 @@ const SingupFormPage = () => {
           </label>
           <button disabled={!setShowSignupErrors} className="signup-submit" type="submit">Sign up</button>
       </form>
-    </>
+    </main>
   )
 }
 
-export default SingupFormPage;
+export default SignUpForm;

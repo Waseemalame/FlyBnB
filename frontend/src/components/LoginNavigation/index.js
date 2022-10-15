@@ -1,6 +1,6 @@
 import './LoginNavigation.css'
 import React from 'react'
-
+import SignUpFormModal from '../SignUp'
 const LoginNavigation = () => {
   return (
     <div className='login-nav-container'>
@@ -11,6 +11,7 @@ const LoginNavigation = () => {
       <div className="login-nav-mid">
       </div>
       <div className="login-nav-right">
+        <SignUpFormModal />
       </div>
     </div>
   )
