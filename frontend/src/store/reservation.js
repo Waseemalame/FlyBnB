@@ -1,6 +1,7 @@
 import { csrfFetch } from "./csrf";
 
 export const LOAD_RESERVATIONS = "reviews/LOAD_RESERVATIONS";
+export const LOAD_USERS_RESERVATIONS = "reviews/LOAD_USERS_RESERVATIONS";
 export const UPDATE_RESERVATION = "reviews/UPDATE_RESERVATION";
 export const ADD_RESERVATION = "reviews/ADD_RESERVATION";
 export const REMOVE_RESERVATION = "reviews/REMOVE_RESERVATION";
@@ -10,6 +11,10 @@ const load = (reservations, listingId) => ({
   reservations,
   listingId
 });
+const loadUsersReservations = (reservations) => ({
+  type: LOAD_USERS_RESERVATIONS,
+  reservations
+})
 const update = (reservation) => ({
   type: UPDATE_RESERVATION,
   reservation
@@ -25,6 +30,14 @@ const remove = (reservationId, listingId) => ({
   reservationId,
   listingId
 });
+
+export const loadReservationsThunk = () => async (dispatch) => {
+  const res = await csrfFetch('/api/reservations')
+  if(res.ok){
+    const reservations = await res.json()
+    dispatch(load(reservations))
+  }
+}
 
 
 export const CreateReservationThunk = (data) => async (dispatch) => {
@@ -45,6 +58,8 @@ export const CreateReservationThunk = (data) => async (dispatch) => {
     const newReservation = await res.json()
     console.log(newReservation)
     dispatch(add(newReservation))
+  } else {
+    return res
   }
 }
 
