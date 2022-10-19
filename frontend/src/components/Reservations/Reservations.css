@@ -23,6 +23,11 @@
 
 
 }
+.reservation-errors{
+  color: red;
+  list-style-type: none;
+  text-align: center;
+}
 .amens-and-reservations{
   /* display: flex; */
   /* flex-direction: row-reverse; */
