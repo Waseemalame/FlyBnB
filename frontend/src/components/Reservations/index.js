@@ -7,6 +7,8 @@ import "./Calendar.css"
 import { useState } from 'react';
 import { useMultiContext } from '../../context/MultiContext';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { CreateReservationThunk } from '../../store/reservation';
 
 const Reservations = ({ listing }) => {
 
@@ -14,10 +16,9 @@ const Reservations = ({ listing }) => {
   const { numReviews } = useMultiContext()
 
 
-  const { price, cleaningFee, serviceFee } = listing
-
+  const { price, cleaningFee, serviceFee, guests: maxGuests } = listing
+  const dispatch = useDispatch()
   const dateFormat = (dateStr) => {
-    console.log(dateStr)
     const day = dateStr.getDate();
     const month = dateStr.getMonth() + 1;
     const year = dateStr.getFullYear();
@@ -29,15 +30,18 @@ const Reservations = ({ listing }) => {
   const futureDate = new Date(day.setDate(day.getDate() + 2));
   const initialCheckOutDate = dateFormat(futureDate)
   const [date, setDate] = useState();
+  const [numGuests, setNumGuests] = useState(0);
   const [checkIn, setCheckIn] = useState(today)
   const [checkOut, setCheckOut] = useState(initialCheckOutDate)
   const [checkInISO, setCheckInISO] = useState(new Date().toISOString().slice(0, 10));
   const [checkOutISO, setCheckOutISO] = useState(futureDate.toISOString().slice(0, 10));
   const [totalPrice, setTotalPrice] = useState((3*price) + cleaningFee + serviceFee);
   const [totalDays, setTotalDays] = useState(3);
+  const [validationErrors, setValidationErrors] = useState([]);
+  const currentUser = useSelector(state => state.session.user)
+
+
   const calcDays = (date1, date2) => {
-    console.log(date1, date2)
-    console.log()
     return Math.round((date2 - date1)/((3600)*24*1000))
   }
 
@@ -52,12 +56,7 @@ const Reservations = ({ listing }) => {
     const days = calcDays(checkInDate, checkOutDate)
     setTotalPrice((days * price) + cleaningFee + serviceFee)
 
-    // const days = countDays(checkInDate, checkOutDate);
     setTotalDays(days);
-    // setPriceBeforeFees(days * price)
-    // setTotalPrice((days * price) + cleaningFee + serviceFee)
-    // setCheckIn(formatDate(checkInDate));
-    // setCheckOut(formatDate(checkOutDate));
 
     setShowCalendar(false);
   }
@@ -66,9 +65,27 @@ const Reservations = ({ listing }) => {
     setShowCalendar(!showCalendar)
   }
 
-  useEffect(() => {
+  const handleGuestsChange = (e) => {
+    setNumGuests(e.target.value)
+  }
 
-  }, [date, checkInISO, checkOutISO]);
+  const handleCreateReservation = async(e) => {
+    e.preventDefault();
+    const data = {
+      startDate: checkInISO,
+      endDate: checkOutISO,
+      userId: currentUser.id,
+      listingId: listing.id,
+      numGuests,
+      numDays: totalDays,
+      finalPrice: totalDays,
+    }
+
+    dispatch(CreateReservationThunk(data))
+
+  }
+
+
   return (
     <div className='res-container'>
       <div className="res-header">
@@ -85,10 +102,13 @@ const Reservations = ({ listing }) => {
             </div>
         )}
         </div>
-        <div className="guests">guests</div>
+        <div className="guests">
+          <p>Guests</p>
+          <input value={numGuests} onChange={handleGuestsChange} type="number" min='0' max={maxGuests} />
+        </div>
       </div>
       <div className="res-calendar">
-        <button className='calendar-btn'>Reserve</button>
+        <button onClick={handleCreateReservation} className='calendar-btn'>Reserve</button>
         <div className='calendar-note'>You won't actually be charged</div>
         </div>
       <div className="res-cost-container">
