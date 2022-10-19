@@ -160,6 +160,8 @@ const HostPage = () => {
       setImageForm(true)
       setPriceForm(false)
     }
+    setAddrErrors([])
+
   }
 
 
