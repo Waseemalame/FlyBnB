@@ -63,4 +63,10 @@ const setTokenCookie = (res, user) => {
   }
 ];
 
-module.exports = { setTokenCookie, restoreUser, requireAuth };
+const currentUser = (req) => {
+  const { token } = req.cookies;
+  let decodedToken = jwt.verify(token, secret);
+  return decodedToken.data;
+};
+
+module.exports = { setTokenCookie, restoreUser, requireAuth, currentUser };
