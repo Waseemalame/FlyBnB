@@ -80,8 +80,14 @@ const Reservations = ({ listing }) => {
       numDays: totalDays,
       finalPrice: totalDays,
     }
+    let errors = []
+    try{
+      await dispatch(CreateReservationThunk(data))
 
-    dispatch(CreateReservationThunk(data))
+    } catch{
+      errors.push('Start date is already reserved*')
+      setValidationErrors(errors)
+    }
 
   }
 
@@ -108,6 +114,15 @@ const Reservations = ({ listing }) => {
         </div>
       </div>
       <div className="res-calendar">
+        {validationErrors.length > 0 && (
+          <ul className='reservation-errors'>
+            {validationErrors.map(error => (
+              <li>
+                {error}
+              </li>
+            ))}
+          </ul>
+        )}
         <button onClick={handleCreateReservation} className='calendar-btn'>Reserve</button>
         <div className='calendar-note'>You won't actually be charged</div>
         </div>
