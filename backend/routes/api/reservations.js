@@ -1,6 +1,6 @@
 const express = require('express')
 const asyncHandler = require('express-async-handler')
-
+const moment = require('moment');
 const { restoreUser, requireAuth, currentUser } = require('../../utils/auth');
 const { User, Listing, Image, Review, Reservation } = require('../../db/models');
 
@@ -12,10 +12,10 @@ const router = express.Router();
 
 router.get('/', asyncHandler(async (_req, res) => {
   const currentUser = currentUser(_req);
-  const bookings = await Reservation.findAll({
+  const reservations = await Reservation.findAll({
     where: { userId: currentUser.id },
   })
-  return res.json(bookings);
+  return res.json(reservations);
 }));
 
 router.post('/', asyncHandler(async function (req, res) {
@@ -28,18 +28,25 @@ router.post('/', asyncHandler(async function (req, res) {
     numDays,
     totalPrice,
   } = req.body;
+  const time = moment().format(startDate)
 
-  const reservation = await Reservation.create({
-    startDate,
-    endDate,
-    userId,
-    listingId,
-    numGuests,
-    numDays,
-    totalPrice,
-  });
+  const reservationSearch = await Reservation.findOne({ where: {startDate: time, listingId}})
+  if(reservationSearch === null){
 
-  return res.json(reservation);
+    const reservation = await Reservation.create({
+      startDate,
+      endDate,
+      userId,
+      listingId,
+      numGuests,
+      numDays,
+      totalPrice,
+    });
+
+    return res.json(reservation);
+  } else {
+    res.status(400).send('Start date is already reserved*');
+  }
 }));
 
 
