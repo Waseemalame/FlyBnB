@@ -43,20 +43,14 @@ const ImageForm = () => {
                 }
         setRows([...rows, ...arr])
   }, []);
-  useEffect(() => {
-    const errors = []
-    if(images.length < 5){
-      errors.push('Atleast 5 images are required*')
-    } else {
-      setImageErrors([])
-    }
-    setImageErrors(errors)
-  }, [images]);
+
+
     const updateFiles = (e) => {
       e.stopPropagation()
       setNumInputs(numInputs + 1)
       const file = e.target.files[0];
       listOfFiles.push(file)
+      console.log(images.length)
       setImages(listOfFiles);
       return
     };
@@ -65,7 +59,10 @@ const ImageForm = () => {
 
   return (
     <>
+    {images.length < 5 && (
+
       <ul className='image-errors'>{imageErrors}</ul>
+    )}
     <div className='image-form-container'>
       {rows}
     </div>
