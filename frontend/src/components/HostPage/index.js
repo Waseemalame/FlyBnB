@@ -57,7 +57,7 @@ const HostPage = () => {
     return () => body.style.overflowY = 'scroll'
   }, []);
   useEffect(() => {
-    if(imageForm){
+    if(imageForm && rightPage){
       rightPage.style.overflowY = 'hidden'
 
       return () => rightPage.style.overflowY = 'scroll'
@@ -85,9 +85,8 @@ const HostPage = () => {
   }, [typesForm]);
 
 
-  let errors = []
   const getFullAddress = async() => {
-
+    const errors = []
 
     try{
 
@@ -106,6 +105,7 @@ const HostPage = () => {
 }
 
   const handleNext = async() => {
+    const errors = []
     if(errorValidations.length > 0) return
     if(typesForm){
       setTypesForm(false)
@@ -125,7 +125,6 @@ const HostPage = () => {
         setTitleForm(true)
 
       } else {
-        console.log(addrErrors.length)
         if(!address || !city || !country){
           errors.push('street, city, and country is required')
           setAddrErrors(errors)
@@ -152,8 +151,6 @@ const HostPage = () => {
 
     }
     else if(imageForm){
-      console.log(images, 'images')
-      console.log(type, categoryId, guests, baths, beds, bedrooms, city, state, country, amenities)
       setImageForm(false)
     }
     else if (priceForm){
@@ -235,7 +232,29 @@ const HostPage = () => {
     }
     console.log(data)
     dispatch(addListingThunk(data))
+    setMapForm(false)
+    setTypesForm(true)
+    setCategoriesForm(false)
+    setImageForm(false)
+    setAmenitiesForm(false)
+    setPriceForm(false)
+    setPrice(0)
+    setTitle('')
+    setType('')
+    setCategoryId('')
+    setState('')
+    setCity('')
+    setCountry('')
+    setAddress('')
+    setBeds(0)
+    setBaths(0)
+    setBedrooms(.5)
+    setCleaningFee(0)
+    setServiceFee(0)
+    setGuests(0)
+    setAmenities([])
     history.push('/')
+
   }
   return (
     <div class="host-page-container">
