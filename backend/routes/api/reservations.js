@@ -10,10 +10,11 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 
-router.get('/', asyncHandler(async (_req, res) => {
-  const currentUser = currentUser(_req);
+router.get('/:id', asyncHandler(async (_req, res) => {
+  const { listingId } = _req
+  const id = _req.params.id;
   const reservations = await Reservation.findAll({
-    where: { userId: currentUser.id },
+    where: { listingId: id },
   })
   return res.json(reservations);
 }));

@@ -1,10 +1,10 @@
 import { csrfFetch } from "./csrf";
 
-export const LOAD_RESERVATIONS = "reviews/LOAD_RESERVATIONS";
-export const LOAD_USERS_RESERVATIONS = "reviews/LOAD_USERS_RESERVATIONS";
-export const UPDATE_RESERVATION = "reviews/UPDATE_RESERVATION";
-export const ADD_RESERVATION = "reviews/ADD_RESERVATION";
-export const REMOVE_RESERVATION = "reviews/REMOVE_RESERVATION";
+export const LOAD_RESERVATIONS = "reservations/LOAD_RESERVATIONS";
+export const LOAD_USERS_RESERVATIONS = "reservations/LOAD_USERS_RESERVATIONS";
+export const UPDATE_RESERVATION = "reservations/UPDATE_RESERVATION";
+export const ADD_RESERVATION = "reservations/ADD_RESERVATION";
+export const REMOVE_RESERVATION = "reservations/REMOVE_RESERVATION";
 
 const load = (reservations, listingId) => ({
   type: LOAD_RESERVATIONS,
@@ -31,11 +31,12 @@ const remove = (reservationId, listingId) => ({
   listingId
 });
 
-export const loadReservationsThunk = () => async (dispatch) => {
-  const res = await csrfFetch('/api/reservations')
+export const loadListingsReservations = (listingId) => async (dispatch) => {
+  const res = await csrfFetch(`/api/reservations/${listingId}`)
   if(res.ok){
     const reservations = await res.json()
-    dispatch(load(reservations))
+    dispatch(load(reservations, listingId))
+    return reservations
   }
 }
 
@@ -67,8 +68,8 @@ const reservationsReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOAD_RESERVATIONS:
       const newReservations = {};
-      action.reviews.forEach(review => {
-        newReservations[review.id] = review;
+      action.reservations.forEach(reservation => {
+        newReservations[reservation.id] = reservation;
       })
       return {
         ...state,

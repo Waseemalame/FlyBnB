@@ -14,9 +14,10 @@ const Reviews = () => {
   const { id } = useParams();
   const listing = useSelector(state => state.listings[id])
   const sessionUser = useSelector(state => state.session.user)
+  const { numReviews, setNumReviews } = useMultiContext()
+
   const dispatch = useDispatch()
 
-  const { setNumReviews } = useMultiContext()
 
   const reviews = useSelector((state) => {
     if (!listing.reviews) return null;
@@ -27,13 +28,14 @@ const Reviews = () => {
   useEffect(() => {
     dispatch(getListingsReviews(listing.id))
   }, [dispatch, listing.id])
-
-
-
   const filteredReviews = reviews?.filter(review => review !== undefined)
-  if(filteredReviews){
-    setNumReviews(filteredReviews.length)
-  }
+  useEffect(() => {
+    if(filteredReviews?.length > 0){
+      setNumReviews(filteredReviews.length)
+    }
+  }, [filteredReviews]);
+
+
 
   const errors = []
 
@@ -67,7 +69,7 @@ const Reviews = () => {
 
   return (
     <div className="reviews-container">
-              {filteredReviews?.length === 0 ? (
+              {numReviews?.length === 0 ? (
                 <h2 className='reviews-header'>Be the first to post a review!</h2>
                 ): <h2 className='reviews-header'>User reviews below</h2> }
                 {showErrors && (
