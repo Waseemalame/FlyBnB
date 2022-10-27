@@ -8,9 +8,7 @@ const InfoForm = () => {
     beds, setBeds,
     bedrooms, setBedrooms,
     baths, setBaths } = useMultiContext()
-    useEffect(() => {
-      console.log(guests, beds, bedrooms, baths)
-    }, [guests, beds, bedrooms, baths]);
+
   const plusGuests = () => {
     if(guests >= 20) return
     setGuests(guests + 1)

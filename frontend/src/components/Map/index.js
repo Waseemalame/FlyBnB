@@ -30,8 +30,6 @@ const MapComponent = () => {
     console.warn(`ERROR(${err.code}): ${err.message}`);
   }
   useEffect(() => {
-    console.log(longitude)
-    console.log(latitude)
     navigator.geolocation.getCurrentPosition(success, error)
   }, [longitude, latitude]);
   // const center = getCenter()

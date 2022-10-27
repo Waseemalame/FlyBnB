@@ -6,17 +6,6 @@ const PriceForm = () => {
   const { price, setPrice, serviceFee, setServiceFee, cleaningFee, setCleaningFee, priceForm, setPriceForm} = useMultiContext()
   const priceFormContainer = document.querySelector('.price-form-container')
 
-  useEffect(() => {
-    if(priceFormContainer){
-
-      if(priceForm){
-        priceFormContainer.style.display = ''
-      } else {
-
-        priceFormContainer.style.display = 'none'
-      }
-    }
-    }, [priceForm, priceFormContainer]);
   return (
     <div className='price-form-container'>
       <label className='price-label'>Price

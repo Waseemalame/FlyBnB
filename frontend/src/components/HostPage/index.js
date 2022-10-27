@@ -6,9 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { useMultiContext } from '../../context/MultiContext'
 import { addListingThunk } from '../../store/listing';
-
 import HostForm from '../HostForm'
 import NewHostForm from '../HostForm/NewHostForm'
+import Form from '../MultiForm';
 import './HostPage.css'
 const HostPage = () => {
   Geocode.setApiKey("AIzaSyCeFO0R7H2nTlWn4AMMcRcFSeUr7ndzqug");
@@ -104,103 +104,6 @@ const HostPage = () => {
 
 }
 
-  const handleNext = async() => {
-    const errors = []
-    if(errorValidations.length > 0) return
-    if(typesForm){
-      setTypesForm(false)
-
-      setCategoriesForm(true)
-    } else if(categoriesForm){
-      setCategoriesForm(false)
-      setMapForm(true)
-      setCloseAddrForm(false)
-    }
-     else if(mapForm){
-      // if address form is closed
-      if(closeAddrForm){
-        console.log('ad is closed')
-        setCloseAddrForm(false)
-        setMapForm(false)
-        setTitleForm(true)
-
-      } else {
-        if(!address || !city || !country){
-          errors.push('street, city, and country is required')
-          setAddrErrors(errors)
-          return
-        }
-        const res = await getFullAddress()
-
-        if(res !== 'error'){
-          setCloseAddrForm(true)
-        }
-      }
-    }
-    else if(titleForm){
-        setInfoForm(true)
-        setTitleForm(false)
-    }
-    else if(infoForm){
-      setInfoForm(false)
-      setAmenitiesForm(true)
-    }
-    else if(amenitiesForm){
-      setAmenitiesForm(false)
-      setPriceForm(true)
-
-    }
-    else if(imageForm){
-      setImageForm(false)
-    }
-    else if (priceForm){
-      setImageForm(true)
-      setPriceForm(false)
-    }
-    setAddrErrors([])
-
-  }
-
-
-  const handleBack = () => {
-    if(categoriesForm){
-      setCategoriesForm(false)
-      setTypesForm(true)
-    }
-    if(mapForm){
-      if(closeAddrForm){
-        setCloseAddrForm(false)
-
-      } else {
-        console.log('hihfdidhsfisdhfsdif')
-        setMapForm(false)
-        setCategoriesForm(true)
-      }
-    }
-    if(titleForm){
-      setTitleForm(false)
-      setMapForm(true)
-      closeAddrForm(false)
-    }
-    if(infoForm){
-      setInfoForm(false)
-      setTitleForm(true)
-    }
-    if(amenitiesForm){
-      setAmenitiesForm(false)
-      setInfoForm(true)
-    }
-    if(imageForm){
-      // setAmenitiesForm(true)
-      setPriceForm(true)
-      setImageForm(false)
-    }
-    if(priceForm){
-      setPriceForm(false)
-      setAmenitiesForm(true)
-    }
-  }
-
   // Submit Listing Function
   const handleSubmitListing = async() => {
     if(imageErrors.length > 0) return;
@@ -230,7 +133,6 @@ const HostPage = () => {
       serviceFee,
       images,
     }
-    console.log(data)
     dispatch(addListingThunk(data))
     setMapForm(false)
     setTypesForm(true)
@@ -292,9 +194,9 @@ const HostPage = () => {
 
             </div>
             <div className="right-page">
-            <NewHostForm />
+            <Form />
             </div>
-            <div className="next-page">
+            {/* <div className="next-page">
               {showBackBtn && (
                 <button onClick={handleBack} className="back-button" type='button'>Back</button>
               )}
@@ -304,7 +206,7 @@ const HostPage = () => {
                 ) :(
                   <button onClick={handleSubmitListing} className="submit-button" type='button'>Submit</button>
                 )}
-            </div>
+            </div> */}
     </div>
   )
 }

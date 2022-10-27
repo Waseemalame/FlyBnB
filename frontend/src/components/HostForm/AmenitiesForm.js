@@ -11,14 +11,12 @@ const amenityOptions = Object.values(amenitiesObj)
   useEffect(() => {
     if(amenitiesFormContainer){
 
-      if(amenitiesForm){
+
 
         amenitiesFormContainer.style.display = ''
-      } else {
-        amenitiesFormContainer.style.display = 'none'
       }
-    }
-  }, [amenitiesFormContainer, amenitiesForm]);
+
+  }, [amenitiesFormContainer]);
 
   const handleChange = (e) => {
     const allAmenities = document.querySelectorAll('input[type="checkbox"]:checked + label')

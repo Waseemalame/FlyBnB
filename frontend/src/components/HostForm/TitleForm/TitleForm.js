@@ -6,15 +6,7 @@ const TitleForm = () => {
 
   const { titleForm, setTitleForm, title, setTitle } = useMultiContext()
   const titleFormContainer = document.querySelector('.title-form-container')
-  useEffect(() => {
-    if(titleFormContainer){
-      if(titleForm){
-        titleFormContainer.style.display = 'flex'
-      } else {
-        titleFormContainer.style.display = 'none'
-      }
-    }
-  }, [titleForm, titleFormContainer]);
+
   return (
     <div className='title-form-container'>
       <label>Create your title
