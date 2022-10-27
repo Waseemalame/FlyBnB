@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
-  margin-bottom: 10vh;
+  padding-bottom: 25vh;
   align-items: center;
   justify-content: center;
   z-index: -100;
