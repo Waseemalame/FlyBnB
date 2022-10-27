@@ -8,16 +8,16 @@ import { useState } from 'react';
 import { useMultiContext } from '../../context/MultiContext';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CreateReservationThunk } from '../../store/reservation';
-
-const Reservations = ({ listing }) => {
-
+import { useHistory } from 'react-router-dom'
+import { CreateReservationThunk, loadListingsReservations } from '../../store/reservation';
+import moment from 'moment'
+const Reservations = ({ listing, dateArray, setDateArray }) => {
+  const reservations = useSelector(state => state.reservations)
   const [showCalendar, setShowCalendar] = useState(false);
   const { numReviews } = useMultiContext()
-
-
   const { price, cleaningFee, serviceFee, guests: maxGuests } = listing
   const dispatch = useDispatch()
+  const history = useHistory()
   const dateFormat = (dateStr) => {
     const day = dateStr.getDate();
     const month = dateStr.getMonth() + 1;
@@ -36,14 +36,39 @@ const Reservations = ({ listing }) => {
   const [checkInISO, setCheckInISO] = useState(new Date().toISOString().slice(0, 10));
   const [checkOutISO, setCheckOutISO] = useState(futureDate.toISOString().slice(0, 10));
   const [totalPrice, setTotalPrice] = useState((3*price) + cleaningFee + serviceFee);
+  const [reservedDays, setReservedDays] = useState({});
   const [totalDays, setTotalDays] = useState(3);
   const [validationErrors, setValidationErrors] = useState([]);
   const currentUser = useSelector(state => state.session.user)
+
+  useEffect(() => {
+    dispatch(loadListingsReservations(listing.id))
+  }, [dispatch, listing]);
+
+  useEffect(() => {
+    const allDates = {}
+    const tempArr = []
+    for(let el in reservations){
+      if(reservations[el].listingId !== listing.id){
+        return
+      }
+      const reservedStart = reservations[el].startDate
+      const reservedEnd = reservations[el].endDate
+      let startDate = moment(reservedStart);
+      let stopDate = moment(reservedEnd);
+      while (startDate <= stopDate) {
+          tempArr.push( moment(startDate).format('YYYY-MM-DD') )
+          startDate = moment(startDate).add(1, 'days');
+      }
+      setDateArray(tempArr);
+    }
+  }, [reservations, listing]);
 
 
   const calcDays = (date1, date2) => {
     return Math.round((date2 - date1)/((3600)*24*1000))
   }
+
 
   const onChange = (date) => {
     setDate(date)
@@ -83,6 +108,7 @@ const Reservations = ({ listing }) => {
     let errors = []
     try{
       await dispatch(CreateReservationThunk(data))
+      history.push(`/`)
 
     } catch{
       errors.push('Start date is already reserved*')
@@ -104,7 +130,7 @@ const Reservations = ({ listing }) => {
           <div onClick={calendarClick} className='checkout'>{checkOut ? checkOut : ''}</div>
           {showCalendar && (
             <div className="calendar-container">
-              <Calendar onChange={onChange} value={date} minDate={new Date()} selectRange />
+              <Calendar tileDisabled={({date}) => dateArray?.includes(moment(date).format('YYYY-MM-DD'))} onChange={onChange} value={date} minDate={new Date()} selectRange />
             </div>
         )}
         </div>

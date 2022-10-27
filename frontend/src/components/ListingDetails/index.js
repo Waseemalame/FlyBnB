@@ -12,10 +12,9 @@ import Reviews from '../Reviews';
 
 const ListingDetails = () => {
   const { id } = useParams();
-
   const listing = useSelector(state => state.listings[id])
+  const [dateArray, setDateArray] = useState();
 
-  const sessionUser = useSelector(state => state.session.user)
 
   const newAmenities = {};
   const amenitiesValues = Object.values(amenitiesObj)
@@ -100,7 +99,7 @@ const ListingDetails = () => {
         </div>
 
         <div className="details-reservations">
-            <Reservations listing={listing}/>
+            <Reservations dateArray={dateArray} setDateArray={setDateArray} listing={listing}/>
         </div>
       </div>
 
