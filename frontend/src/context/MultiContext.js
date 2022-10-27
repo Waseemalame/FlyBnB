@@ -29,7 +29,6 @@ export default function MultiContextProvider(props){
   const [type, setType] = useState('');
   const [checkedLabels, setCheckedLabels] = useState();
   const [imageForm, setImageForm] = useState(false);
-  const [images, setImages] = useState([]);
   const [price, setPrice] = useState(0);
   const [cleaningFee, setCleaningFee] = useState(0);
   const [serviceFee, setServiceFee] = useState(0);
@@ -70,7 +69,6 @@ export default function MultiContextProvider(props){
       checkedLabels, setCheckedLabels,
       amenityRef, imagesRef,
       imageForm, setImageForm,
-      images, setImages,
       price, setPrice,
       cleaningFee, setCleaningFee,
       serviceFee, setServiceFee,

@@ -58,7 +58,6 @@ export const getOneListingThunk = (id) => async dispatch => {
 }
 
 export const addListingThunk = (data) => async dispatch => {
-  console.log(data)
   const {
     user,
     userId,
@@ -98,9 +97,9 @@ export const addListingThunk = (data) => async dispatch => {
   formData.append('serviceFee', serviceFee)
   formData.append('amenities', amenities)
 
-  if (images && images.length !== 0) {
-    for (let i = 0; i < images.length; i++) {
-      formData.append("images", images[i]);
+  if (Object.values(images) && Object.values(images).length !== 0) {
+    for (let i = 0; i < Object.values(images).length; i++) {
+      formData.append("images", Object.values(images)[i]);
     }
   }
   const res = await csrfFetch('/api/listings', {

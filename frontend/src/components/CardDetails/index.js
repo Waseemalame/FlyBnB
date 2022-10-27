@@ -22,10 +22,6 @@ function CardDetails() {
     return listing.reviews.map(reviewId => state.reviews[reviewId]);
   });
   const filteredReviews = reviews?.filter(review => review !== undefined)
-  // useEffect(() => {
-  //   console.log(filteredReviews)
-
-  // }, [reviews])
 
   useEffect(() => {
     dispatch(getListingsReviews(listing.id))

@@ -55,13 +55,6 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
 
   const amenitiesArray = [];
   const history = useHistory()
-  useEffect(() => {
-    // setAmenitiesState(amenitiesArray)
-  }, [amenitiesArray])
-
-
-  // console.log(selectedAmenities)
-
 
   const types = [ 'Entire home', 'Entire cabin', 'Cabin', 'Entire villa','Tiny Home', 'Bungalow', 'Private room in resort', 'Luxury stay' ]
   types.sort();
@@ -85,8 +78,6 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
       }
   let selectedAmenities;
   const changeBg = (e, index) => {
-    console.log(e.target.innerText)
-
     const amenityDiv = document.getElementById(`amenity-${index - 1}`);
     if(amenityDiv.classList.contains(`selected`)){
       amenityDiv.classList.remove(`selected`)
@@ -107,7 +98,6 @@ const HostForm = ({ categories, setShowImageForm, showImageForm }) => {
       amenitiesArray.push(el.innerText)
 
     }
-    console.log(selectedAmenities)
 
 
   const data = {
