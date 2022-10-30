@@ -113,6 +113,9 @@
   color: white;
   padding: .5em;
 }
+.next-button:active, .back-button:active{
+  transform: scale(.95);
+}
 
 .left-page{
   background: linear-gradient(-25deg, rgb(25, 25, 166), rgba(218, 28, 60, 0.977));
