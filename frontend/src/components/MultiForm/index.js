@@ -28,7 +28,7 @@ const Form = ({ page, setPage }) => {
     city, setCity,
     state, setState,
     country, setCountry,
-    errorValidations,
+    errorValidations, setErrorValidations,
     guests, beds, bedrooms, baths,
     title,
     amenities,
@@ -36,11 +36,12 @@ const Form = ({ page, setPage }) => {
     setAddrErrors
    } = useMultiContext()
 
+
   const [images, setImages] = useState({});
   const [latLng, setLatLng] = useState({});
-
   const dispatch = useDispatch();
   const history = useHistory();
+
 
   useEffect(() => {
     if(address && city){
@@ -124,6 +125,7 @@ const Form = ({ page, setPage }) => {
         </button>
         <button
           className='next-button'
+          disabled={errorValidations.length > 0}
           onClick={async() => {
             if (page === FormTitles.length - 1) {
               alert("FORM SUBMITTED");
