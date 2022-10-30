@@ -3,12 +3,21 @@ import { useEffect } from 'react'
 import { useMultiContext } from '../../../context/MultiContext'
 import "./TitleForm.css"
 const TitleForm = () => {
-
-  const { titleForm, setTitleForm, title, setTitle } = useMultiContext()
+  const { titleForm, setTitleForm, title, setTitle, errorValidations, setErrorValidations } = useMultiContext()
   const titleFormContainer = document.querySelector('.title-form-container')
+  useEffect(() => {
+    const errors = []
+    if(!title){
+      errors.push('Title is required')
+    }
+    setErrorValidations(errors)
+  }, [title]);
 
   return (
     <div className='title-form-container'>
+      {errorValidations.length > 0 && (
+        <div className='type-validation'>{errorValidations[0]}</div>
+      )}
       <label>Create your title
         <textarea
         type="text"

@@ -2,9 +2,18 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useMultiContext } from '../../context/MultiContext'
 
-const TypeForm = ({ type, setType, errorValidations }) => {
-
+const TypeForm = ({ type, setType }) => {
+  const { errorValidations, setErrorValidations } = useMultiContext();
   const types = [ 'Entire home', 'Entire cabin', 'Cabin', 'Entire villa','Tiny Home', 'Bungalow', 'Private room in resort', 'Luxury stay' ]
+
+  useEffect(() => {
+    const errors = []
+    if(!type){
+      errors.push('Type is required')
+    }
+    setErrorValidations(errors)
+
+  }, [type]);
 
   useEffect(() => {
     const chosenType = document.getElementById(`type-${type}`)

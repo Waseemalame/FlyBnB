@@ -3,13 +3,19 @@ import { useMultiContext } from '../../context/MultiContext'
 import "./ImageForm.css"
 import OneLabel from './OneLabel'
 const ImageForm = ({ images, setImages}) => {
-  const { imageErrors } = useMultiContext()
-
+  const { errorValidations, setErrorValidations } = useMultiContext()
+  useEffect(() => {
+    const errors = []
+    if (Object.values(images).length < 5){
+      errors.push('Five images are required')
+    }
+    setErrorValidations(errors)
+  }, [images]);
   return (
     <>
-    {Object.values(images) && Object.values(images).length < 5 && (
-      <ul className='image-errors'>{imageErrors}</ul>
-    )}
+      {errorValidations.length > 0 && (
+        <div className='type-validation'>{errorValidations[0]}</div>
+      )}
 
     <div className='image-form-container'>
       <OneLabel index={0} images={images} setImages={setImages}/>

@@ -5,7 +5,12 @@ import { useMultiContext } from '../../context/MultiContext'
 
 const CategoriesForm = () => {
   const categories = useSelector(state => Object.values(state.categories))
-  const { categoryId, setCategoryId } = useMultiContext()
+  const { categoryId, setCategoryId, errorValidations, setErrorValidations } = useMultiContext()
+  useEffect(() => {
+    const errors = []
+    if(!categoryId) errors.push('Category is required')
+    setErrorValidations(errors)
+  }, [categoryId]);
 
   useEffect(() => {
     const chosenCategory = document.getElementById(`category-${categoryId}`)
@@ -21,6 +26,9 @@ const CategoriesForm = () => {
 
   return (
     <>
+    {errorValidations.length > 0 && (
+      <div className='type-validation'>{errorValidations[0]}</div>
+    )}
     {categories.map((category, i) => (
       <div
       id={`category-${category.id}`}

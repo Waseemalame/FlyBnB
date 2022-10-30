@@ -2,8 +2,14 @@ import React from 'react'
 import { useEffect } from 'react';
 import { useMultiContext } from '../../context/MultiContext';
 const AddressForm = ({ address, setAddress, city, setCity, state, setState, country, setCountry }) => {
-  const { addrErrors } = useMultiContext()
-
+  const { addrErrors, errorValidations, setErrorValidations } = useMultiContext()
+  useEffect(() => {
+    const errors = [];
+    if(!address || !city){
+      errors.push('Street address and city are required')
+    }
+    setErrorValidations(errors)
+  }, [address, city]);
   return (
     <div className='location-form-container'>
       <div className='location-header'>Enter your address</div>
@@ -41,9 +47,12 @@ const AddressForm = ({ address, setAddress, city, setCity, state, setState, coun
           type="text" />
         </div>
       </div>
-      <div className="address-errors">
-        {addrErrors[0]}
-      </div>
+      {errorValidations.length > 0 && (
+
+        <div className="address-errors">
+          {errorValidations[0]}
+        </div>
+      )}
     </div>
   )
 }
