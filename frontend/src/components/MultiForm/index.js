@@ -18,7 +18,7 @@ import Geocode from "react-geocode";
 
 import { addListingThunk } from '../../store/listing';
 
-const Form = () => {
+const Form = ({ page, setPage }) => {
 
   const currentUser = useSelector(state => state.session.user)
   const {
@@ -37,7 +37,6 @@ const Form = () => {
    } = useMultiContext()
 
   const [images, setImages] = useState({});
-  const [page, setPage] = useState(0);
   const [latLng, setLatLng] = useState({});
 
   const dispatch = useDispatch();
