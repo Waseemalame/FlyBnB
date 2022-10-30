@@ -94,6 +94,14 @@
   outline: 2px solid black;
 }
 
+.host-nav-logo{
+  position: absolute;
+  top: 1em;
+  z-index: 1000;
+  left: 3em;
+  width: 7em;
+  cursor: pointer;
+}
 
 .next-button, .back-button{
   border: none;
