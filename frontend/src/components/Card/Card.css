@@ -20,6 +20,8 @@
   border-radius: 10px;
   cursor: pointer;
   object-fit: cover;
+  caret-color: transparent;
+  user-select: none;
 }
 
 /* .card-img:focus {

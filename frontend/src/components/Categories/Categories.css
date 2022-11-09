@@ -45,13 +45,14 @@
   /* width: 80px; */
 }
 .single-category{
+  user-select: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   list-style: none;
   text-decoration: none;
-  width: 100px;
+  width: 90px;
 }
 .single-category h5{
   color: black;
